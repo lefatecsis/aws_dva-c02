@@ -1,0 +1,115 @@
+Claro! Aqui está a lista mais enxuta, apenas com os nomes oficiais dos serviços que você precisa revisar:
+
+---
+
+### 🔐 Segurança (Domínio 1)
+- **Amazon S3** (SSE-S3, SSE-KMS, SSE-C)
+- **AWS KMS** (Key Management Service)
+- **AWS Systems Manager Parameter Store**
+- **AWS Secrets Manager**
+- **AWS STS** (Security Token Service)
+- **AWS IAM** (Identity and Access Management)
+
+---
+
+### 🚀 Implantação (Domínio 3)
+- **AWS CodeDeploy** (hooks e rollback)
+- **Application Load Balancer (ALB)**
+- **AWS CloudFormation** (pseudo-parâmetros e funções intrínsecas)
+
+---
+
+### ⚙️ Solução de Problemas e Otimização (Domínio 4)
+- **Amazon DynamoDB** (Scan vs Query)
+- **AWS CodeBuild** (cache no S3)
+- **Amazon CloudWatch** (métricas customizadas)
+
+---
+
+Bons estudos! 🚀
+
+Ótimo! Analisei seu simulado. Vamos ao feedback detalhado.
+
+### Visão Geral do Desempenho
+
+Você acertou 38 de 65 questões, o que representa um **aproveitamento de aproximadamente 58,5%**.
+
+**Análise**: Este resultado indica que você tem um conhecimento intermediário da AWS, mas ainda precisa de estudo direcionado para a certificação. A nota de corte para a prova oficial (DVA-C02) geralmente fica em torno de 70% a 75%. A boa notícia é que você acertou várias questões, mostrando uma base sólida em muitos tópicos.
+
+**Recomendação**: Continue estudando, focando nos seus pontos fracos identificados pela análise. Com um esforço direcionado, você conseguirá ultrapassar a nota de corte.
+
+---
+
+### Análise Detalhada por Domínio (Onde Você Errou)
+
+Para te ajudar a focar seus estudos, separei os erros por domínio, que é a forma como a prova oficial é organizada.
+
+#### 1. Segurança (Domínio 1) - MUITOS ERROS
+
+*   **Pergunta 23** (Criptografia no S3): Você errou a pergunta sobre qual mecanismo de criptografia exige HTTPS. A resposta correta é **SSE-C** (Customer-Provided Keys), pois a chave é enviada na requisição e precisa de proteção em trânsito.
+    *   **Dica de Estudo**: Entenda a diferença entre os 3 tipos de criptografia no S3: **SSE-S3** (gerenciada pela AWS, valor: `AES256`), **SSE-KMS** (gerenciada pelo KMS, valor: `aws:kms`) e **SSE-C** (chave fornecida pelo cliente, obriga HTTPS).
+
+*   **Pergunta 50** (Parâmetros Secretos): A pergunta pedia duas soluções para armazenar strings secretas de forma segura, auditável e com simplicidade. As respostas corretas eram **Armazenar como SecureString no Parameter Store** e **Auditar usando CloudTrail**. Você selecionou incorretamente, mostrando dúvida sobre a melhor prática.
+    *   **Dica de Estudo**: Para cenários de "segredos", a melhor prática na AWS é usar o **AWS Systems Manager Parameter Store (tipo SecureString)** ou o **AWS Secrets Manager**, combinados com o **AWS KMS** para criptografia. O CloudTrail audita todas as chamadas de API (como `GetParameter`), fornecendo a trilha de auditoria necessária.
+
+*   **Pergunta 62** (Decodificar mensagem de erro): Você errou ao identificar qual comando decodifica a mensagem de erro de autorização. O correto é o comando **`decode-authorization-message` do AWS STS**.
+    *   **Dica de Estudo**: Lembre-se que **STS (Security Token Service)** é o serviço responsável por credenciais temporárias e também por fornecer ferramentas para solução de problemas de autorização. O comando `aws sts decode-authorization-message` é essencial para entender por que uma ação foi negada.
+
+#### 2. Implantação (Domínio 3) - MUITOS ERROS
+
+*   **Pergunta 8** (Ordem dos hooks no CodeDeploy): Você errou a ordem dos eventos do ciclo de vida em uma implantação **In-place**.
+    *   **Dica de Estudo**: Decore a ordem: **1. ApplicationStop** -> **2. DownloadBundle** -> **3. BeforeInstall** -> **4. Install** -> **5. AfterInstall** -> **6. ApplicationStart** -> **7. ValidateService**. Este é um tópico clássico de prova.
+
+*   **Pergunta 39** (Rollback no CodeDeploy): A pergunta era sobre o que acontece quando uma implantação falha. A resposta correta é que **uma nova implantação da última revisão bem-sucedida é realizada, gerando um novo ID de implantação**. Você errou, demonstrando dúvida sobre o mecanismo de rollback.
+    *   **Dica de Estudo**: O CodeDeploy não "restaura" uma versão anterior; ele a **reimplanta** como uma nova implantação, o que é uma diferença sutil, mas importante.
+
+*   **Pergunta 42** (Ordem dos hooks no CodeDeploy): Errou novamente a mesma ordem de hooks da Pergunta 8. Isso indica que você precisa revisar esse tópico com urgência. Reforce a memorização da ordem correta.
+
+*   **Pergunta 55** (Características do ALB): Você errou a pergunta sobre os tipos de alvo do Application Load Balancer.
+    *   **Dica de Estudo**: Os tipos de alvo do ALB são: **`instance`** (ID da instância EC2), **`ip`** (endereços IP privados) e **`lambda`** (uma função Lambda). Lembre-se que **IPs públicos não podem ser usados como alvos**.
+
+*   **Pergunta 61** (Região no CloudFormation): A pergunta pedia a forma mais eficiente de obter a região AWS dentro de um template. A resposta correta é usar o **pseudo parâmetro `AWS::Region`**. Você errou, mostrando que precisa estudar mais sobre as funções intrínsecas e pseudo-parâmetros do CloudFormation.
+    *   **Dica de Estudo**: Pseudo-parâmetros são variáveis que o CloudFormation preenche automaticamente. Exemplos: `AWS::Region`, `AWS::StackName`, `AWS::AccountId`. Eles são fundamentais para criar templates reutilizáveis.
+
+#### 3. Solução de Problemas e Otimização (Domínio 4) - MUITOS ERROS
+
+*   **Pergunta 4** (DynamoDB Scan): A pergunta pedia a melhor forma de melhorar o desempenho de uma operação Scan. A resposta correta é **Scans Paralelos**. Você errou ao selecionar `Query`, que não é viável no cenário descrito.
+    *   **Dica de Estudo**: A operação `Query` é sempre mais eficiente, pois usa índices. O `Scan` lê a tabela inteira. Se você precisa de um `Scan`, a única forma de acelerá-lo é usando **Scans Paralelos** (dividindo a tabela em segmentos). `FilterExpression` e `ProjectionExpression` não melhoram a performance do Scan, apenas filtram ou reduzem o que é retornado.
+
+*   **Pergunta 13** (Acesso entre contas com IAM): A pergunta pedia as três ações necessárias para permitir que uma conta AWS B acesse um recurso (fila SQS) na conta AWS A. Você selecionou incorretamente uma das três opções.
+    *   **Dica de Estudo**: O padrão para acesso entre contas é:
+        1.  **Conta A (dona do recurso)**: Cria uma **Role IAM**.
+        2.  **Conta A**: Anexa uma **Política de Permissões** a essa Role, definindo quais ações são permitidas no recurso (ex: `sqs:SendMessage`).
+        3.  **Conta A**: Anexa uma **Política de Confiança (Trust Policy)** à Role, especificando que a **Conta B** (como `Principal`) pode assumir essa Role (`sts:AssumeRole`).
+        4.  **Conta B**: Os **usuários da Conta B** precisam ter uma política que lhes permita executar `sts:AssumeRole` na Role criada pela Conta A.
+
+*   **Pergunta 46** (Otimizar build no CodeBuild): Você errou a pergunta sobre como acelerar o processo de build com muitas dependências. A resposta correta é **Fazer cache das dependências no Amazon S3**, uma funcionalidade nativa do CodeBuild.
+    *   **Dica de Estudo**: O CodeBuild permite configurar cache para armazenar dependências que não mudam com frequência. Isso evita que elas sejam baixadas da internet a cada build, reduzindo drasticamente o tempo.
+
+*   **Pergunta 64** (Métricas de memória no EC2): A pergunta sobre como coletar métricas de memória de instâncias EC2. A resposta correta é usar um **job cron que envie as estatísticas como uma métrica personalizada para o CloudWatch**, pois a memória não é uma métrica padrão.
+    *   **Dica de Estudo**: As métricas padrão do CloudWatch para EC2 são: **CPU, Disk, Network**. Para métricas de memória, você precisa instalar o **CloudWatch Agent** na instância ou enviar métricas personalizadas via script.
+
+---
+
+### Resumo dos Pontos para Foco
+
+Com base na sua análise, seus pontos de melhoria mais críticos são:
+
+1.  **Segurança (Domínio 1)**:
+    *   Criptografia no S3 (SSE-S3, SSE-KMS, SSE-C).
+    *   Gerenciamento de segredos (Parameter Store, Secrets Manager, KMS).
+    *   `sts:DecodeAuthorizationMessage`.
+    *   Políticas IAM e acesso entre contas.
+
+2.  **Implantação (Domínio 3)**:
+    *   Ciclo de vida de implantação do CodeDeploy (ordem dos hooks).
+    *   Mecanismo de rollback no CodeDeploy.
+    *   Tipos de alvo do Application Load Balancer (ALB).
+    *   Pseudo-parâmetros e funções intrínsecas do CloudFormation.
+
+3.  **Solução de Problemas e Otimização (Domínio 4)**:
+    *   Otimização de `Scan` vs `Query` no DynamoDB.
+    *   Cache no CodeBuild.
+    *   Métricas customizadas no CloudWatch.
+
+**Sugestão Final**: Revise os tópicos listados acima, especialmente a ordem dos hooks do CodeDeploy e as diferenças entre `Scan` e `Query`. Fazer mais simulados e focar nas explicações das questões que você errou (como as que estão no seu arquivo) vai ser muito produtivo. Parabéns pela dedicação e bons estudos para a certificação!
