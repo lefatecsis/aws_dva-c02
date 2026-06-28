@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simulado AWS Developer Associate - Explicações Detalhadas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --aws-blue: #232f3e;
+            --aws-orange: #ff9900;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fb 0%, #e8ecf4 100%);
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            height: 100vh;
+            width: 280px;
+            position: fixed;
+            top: 0;
+            left: -280px;
+            z-index: 1050;
+            background-color: var(--aws-blue);
+            transition: all 0.3s ease;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .sidebar-menu {
+            padding: 1rem 0;
+            list-style: none;
+            margin: 0;
+        }
+
+        .sidebar-item a {
+            display: flex;
+            align-items: center;
+            padding: 0.85rem 1.5rem;
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .sidebar-item a:hover,
+        .sidebar-item.active a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--aws-orange);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1040;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* Main Content Adjustments */
+        .quiz-container {
+            max-width: 980px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header-aws {
+            background: linear-gradient(90deg, var(--aws-blue), #1a2333);
+            color: white;
+        }
+
+        .carousel-item {
+            padding: 2rem;
+            min-height: 650px;
+            overflow-y: auto;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            line-height: 1.5;
+            font-weight: 500;
+            color: #1f2937;
+        }
+
+        .option {
+            transition: all 0.25s ease;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.1rem 1.4rem;
+            margin-bottom: 0.85rem;
+            cursor: pointer;
+            background-color: #fff;
+        }
+
+        .option:hover {
+            border-color: var(--aws-orange);
+            background-color: #fffaf0;
+            transform: translateY(-1px);
+        }
+
+        .option.selected-correct {
+            border-color: #10b981 !important;
+            background-color: #f0fdf4 !important;
+        }
+
+        .option.selected-wrong {
+            border-color: #ef4444 !important;
+            background-color: #fef2f2 !important;
+        }
+
+        .option.disabled {
+            pointer-events: none;
+        }
+
+        .feedback-box {
+            margin-top: 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .feedback-header {
+            padding: 1rem 1.25rem;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .feedback-body {
+            padding: 1.5rem;
+            background-color: #fff;
+        }
+
+        .explanation-item {
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px dashed #e5e7eb;
+        }
+
+        .explanation-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--aws-orange), #ffbb33);
+        }
+
+        .nav-btn {
+            border-radius: 50px;
+            padding: 0.65rem 1.75rem;
+            font-weight: 600;
+            min-width: 130px;
+        }
+
+        .aws-badge {
+            background-color: var(--aws-orange);
+            color: white;
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold text-white"><i class="fab fa-aws text-warning me-2"></i>Simulados</h5>
+            <button class="btn btn-sm btn-link text-white p-0 fs-4" onclick="toggleSidebar()"><i
+                    class="fas fa-times"></i></button>
+        </div>
+        <ul class="sidebar-menu" id="simulados-list">
+        </ul>
+    </div>
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <div class="container quiz-container">
+        <div class="card">
+            <div class="header-aws p-4">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <button class="btn btn-outline-light px-3 py-2" style="border-radius: 50px;"
+                            onclick="toggleSidebar()">
+                            <i class="fas fa-bars me-2"></i> <span class="d-none d-sm-inline">Simulados</span>
+                        </button>
+                        <div>
+                            <h1 class="h4 mb-1 fw-bold" id="quiz-title">Simulado AWS Developer Associate</h1>
+                            <p class="mb-0 opacity-75 small">Modo Carrossel com Explicações Individuais</p>
+                        </div>
+                    </div>
+                    <button onclick="resetAndRestart()" class="btn btn-sm btn-outline-light px-3 py-2"
+                        style="border-radius: 50px;">
+                        <i class="fas fa-sync-alt me-2"></i> Reiniciar Simulado
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-4">
+                <div id="quiz-screen">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div class="small fw-bold text-muted">
+                            Questão <span id="current-q">1</span> de <span id="total-q">0</span>
+                        </div>
+                        <div class="flex-grow-1 mx-4">
+                            <div class="progress" style="height: 8px; border-radius: 10px;">
+                                <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div id="score-header" class="fw-bold text-success fs-5">0/0</div>
+                    </div>
+
+                    <div id="quizCarousel" class="carousel slide" data-bs-interval="false" data-bs-touch="false">
+                        <div class="carousel-inner" id="carousel-inner"></div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button class="btn btn-outline-secondary nav-btn" onclick="prevQuestion()">
+                                <i class="fas fa-arrow-left me-2"></i> Anterior
+                            </button>
+                            <button class="btn btn-primary nav-btn" onclick="nextQuestion()">
+                                Próxima <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="result-screen" class="d-none text-center py-5">
+                    <i class="fas fa-trophy fa-5x text-warning mb-4"></i>
+                    <h2 class="fw-bold mb-2">Simulado Concluído!</h2>
+                    <h1 id="result-percentage" class="display-3 fw-bold my-3" style="color: var(--aws-orange);">0%</h1>
+                    <p id="result-detail" class="lead mb-4"></p>
+                    <button onclick="resetAndRestart()" class="btn btn-lg btn-primary px-5"
+                        style="border-radius: 50px;">
+                        <i class="fas fa-redo me-2"></i> Tentar Novamente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="questions-script-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Configuração dos simulados disponíveis.
+        const disponiveis = [
+            { id: "01", nome: "Simulado 1", arquivo: "questions_01.js" },
+            { id: "02", nome: "Simulado 2", arquivo: "questions_02.js" },
+            { id: "03", nome: "Simulado 3", arquivo: "questions_03.js" }
+        ];
+
+        let currentSimuladoId = localStorage.getItem('aws_current_simulado_id') || disponiveis[0].id;
+        let questions = [];
+        let currentIndex = 0;
+        let answers = [];
+        let carousel;
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('sidebar-overlay').classList.toggle('active');
+        }
+
+        function buildSidebarMenu() {
+            const list = document.getElementById('simulados-list');
+            list.innerHTML = '';
+            disponiveis.forEach(sim => {
+                const li = document.createElement('li');
+                li.className = `sidebar-item ${sim.id === currentSimuladoId ? 'active' : ''}`;
+                li.innerHTML = `<a href="#" onclick="trocarSimulado('${sim.id}'); return false;"><i class="fas fa-file-alt me-3"></i>${sim.nome}</a>`;
+                list.appendChild(li);
+            });
+        }
+
+        function trocarSimulado(id) {
+            // Se for o mesmo simulado e já tiver questões carregadas, apenas fecha o menu
+            if (id === currentSimuladoId && questions.length > 0) {
+                toggleSidebar();
+                return;
+            }
+
+            // Força a limpeza total do progresso anterior no LocalStorage
+            limparProgressoLocal();
+
+            currentSimuladoId = id;
+            localStorage.setItem('aws_current_simulado_id', id);
+
+            // Reseta o estado da aplicação
+            currentIndex = 0;
+            answers = [];
+            questions = [];
+
+            buildSidebarMenu();
+            toggleSidebar();
+            carregarScriptSimulado();
+        }
+
+        function carregarScriptSimulado() {
+            const sim = disponiveis.find(s => s.id === currentSimuladoId) || disponiveis[0];
+            document.getElementById('quiz-title').textContent = `AWS Developer Associate - ${sim.nome}`;
+
+            // CRITICAL: Remove a variável global antiga para forçar o navegador a ler a do novo arquivo
+            if (typeof originalQuestions !== 'undefined') {
+                try {
+                    window.originalQuestions = undefined;
+                } catch (e) { }
+            }
+
+            const container = document.getElementById('questions-script-container');
+            container.innerHTML = '';
+
+            const script = document.createElement('script');
+            // Adiciona um timestamp (Query String) para evitar que o navegador use o cache do arquivo anterior
+            script.src = sim.arquivo + "?t=" + new Date().getTime();
+            script.onload = function () {
+                inicializarSimulado();
+            };
+            script.onerror = function () {
+                alert(`Erro ao carregar o arquivo de questões: ${sim.arquivo}`);
+            };
+            container.appendChild(script);
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function inicializarSimulado() {
+            document.getElementById('quiz-screen').classList.remove('d-none');
+            document.getElementById('result-screen').classList.add('d-none');
+
+            const savedQuestions = localStorage.getItem('aws_questions_v2');
+            const savedAnswers = localStorage.getItem('aws_answers_v2');
+            const savedIndex = localStorage.getItem('aws_currentIndex_v2');
+
+            if (savedQuestions && savedAnswers && savedIndex !== null) {
+                try {
+                    questions = JSON.parse(savedQuestions);
+                    answers = JSON.parse(savedAnswers);
+                    currentIndex = parseInt(savedIndex, 10);
+
+                    montarInterface();
+                    return;
+                } catch (e) {
+                    limparProgressoLocal();
+                }
+            }
+
+            if (typeof originalQuestions === 'undefined' || !Array.isArray(originalQuestions)) {
+                alert("Erro: A estrutura 'originalQuestions' não foi encontrada ou está vazia no arquivo carregado.");
+                return;
+            }
+
+            // Clona profundamente os dados do novo arquivo
+            questions = JSON.parse(JSON.stringify(originalQuestions));
+            shuffleArray(questions);
+
+            questions.forEach(q => {
+                const correctText = q.options[q.correct];
+                const originalExplanations = q.detailedExplanations ? [...q.detailedExplanations] : [];
+
+                let combined = q.options.map((opt, idx) => ({
+                    text: opt,
+                    exp: originalExplanations[idx] || ""
+                }));
+
+                shuffleArray(combined);
+
+                q.options = combined.map(c => c.text);
+                q.detailedExplanations = combined.map(c => c.exp);
+                q.correct = q.options.indexOf(correctText);
+            });
+
+            answers = new Array(questions.length).fill(null);
+            currentIndex = 0;
+
+            saveToLocalStorage();
+            montarInterface();
+        }
+
+        function montarInterface() {
+            createCarouselItems();
+
+            const carouselEl = document.getElementById('quizCarousel');
+            if (carousel) {
+                carousel.dispose();
+            }
+            carousel = new bootstrap.Carousel(carouselEl, { wrap: false, keyboard: false });
+
+            carousel.to(currentIndex);
+            updateProgress();
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('aws_questions_v2', JSON.stringify(questions));
+            localStorage.setItem('aws_answers_v2', JSON.stringify(answers));
+            localStorage.setItem('aws_currentIndex_v2', currentIndex.toString());
+        }
+
+        function limparProgressoLocal() {
+            localStorage.removeItem('aws_questions_v2');
+            localStorage.removeItem('aws_answers_v2');
+            localStorage.removeItem('aws_currentIndex_v2');
+        }
+
+        function checkCorrectOption(q, optionText) {
+            if (typeof originalQuestions === 'undefined') return false;
+
+            const original = originalQuestions.find(orig => orig.question === q.question);
+            if (!original) return false;
+
+            const origIdx = original.options.indexOf(optionText);
+            if (origIdx === -1) return false;
+
+            const exp = original.detailedExplanations[origIdx] || "";
+
+            if (origIdx === original.correct) return true;
+            if (/oferece suporte nativo|suporte nativo|reduzindo significativamente/i.test(exp)) return true;
+            if (/^Correta\./i.test(exp.trim())) return true;
+
+            return false;
+        }
+
+        function generateDetailedFeedbackHTML(q, userAnswerIndex) {
+            const userSelectedText = q.options[userAnswerIndex];
+            const isCorrect = checkCorrectOption(q, userSelectedText);
+            let explanationItemsHTML = '';
+
+            if (q.detailedExplanations && q.detailedExplanations.length > 0) {
+                q.options.forEach((option, idx) => {
+                    const isOptionCorrect = checkCorrectOption(q, option);
+                    const badgeClass = isOptionCorrect ? 'bg-success' : 'bg-secondary';
+                    const badgeText = isOptionCorrect ? 'Alternativa Correta' : 'Alternativa Incorreta';
+
+                    let textClean = (q.detailedExplanations[idx] || '')
+                        .replace(/^(Alternativa Incorreta|Alternativa Correta)\s*/i, '')
+                        .replace(/^[A-E]\.\s*/i, '')
+                        .replace(/^(Correta\.|Incorreta\.)\s*/i, '');
+
+                    explanationItemsHTML += `
+                        <div class="explanation-item">
+                            <span class="badge ${badgeClass} mb-2">${badgeText}</span>
+                            <p class="mb-1"><strong>${String.fromCharCode(65 + idx)}. ${option}</strong></p>
+                            <p class="text-muted small mb-0">${textClean}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            return `
+                <div class="feedback-box">
+                    <div class="feedback-header ${isCorrect ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger'}">
+                        <i class="fas ${isCorrect ? 'fa-check-circle' : 'fa-times-circle'} me-2"></i>
+                        ${isCorrect ? 'Você acertou!' : 'Você errou essa questão'}
+                    </div>
+                    <div class="feedback-body">
+                        <h6 class="fw-bold mb-3"><i class="fas fa-tasks me-2"></i>Justificativa das Alternativas:</h6>
+                        ${explanationItemsHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        function createCarouselItems() {
+            const inner = document.getElementById('carousel-inner');
+            inner.innerHTML = '';
+
+            if (questions.length === 0) return;
+
+            questions.forEach((q, index) => {
+                const isAnswered = answers[index] !== null;
+                let optionsHTML = '';
+
+                q.options.forEach((option, optIndex) => {
+                    let modifierClass = '';
+                    if (isAnswered) {
+                        const isOptionCorrect = checkCorrectOption(q, option);
+                        if (isOptionCorrect) {
+                            modifierClass = 'selected-correct disabled';
+                        } else if (optIndex === answers[index]) {
+                            modifierClass = 'selected-wrong disabled';
+                        } else {
+                            modifierClass = 'disabled';
+                        }
+                    }
+
+                    optionsHTML += `
+                        <div class="option ${modifierClass}" onclick="selectOption(${index}, ${optIndex}, this)">
+                            <div class="d-flex align-items-start">
+                                <span class="me-3 mt-1 fw-bold text-muted">${String.fromCharCode(65 + optIndex)}.</span>
+                                <span>${option}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                let feedbackHTML = isAnswered ? generateDetailedFeedbackHTML(q, answers[index]) : '';
+
+                const item = document.createElement('div');
+                item.className = `carousel-item ${index === currentIndex ? 'active' : ''}`;
+                item.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge aws-badge">Questão ${index + 1}</span>
+                        <span class="text-muted small">${Math.round(((index + 1) / questions.length) * 100)}% concluído</span>
+                    </div>
+                    <h5 class="question-text mb-4">${q.question}</h5>
+                    <div class="options-container">${optionsHTML}</div>
+                    <div class="feedback-placeholder">${feedbackHTML}</div>
+                `;
+                inner.appendChild(item);
+            });
+        }
+
+        function selectOption(qIndex, optIndex, element) {
+            if (answers[qIndex] !== null) return;
+
+            answers[qIndex] = optIndex;
+            saveToLocalStorage();
+
+            const container = element.parentElement;
+            const options = container.querySelectorAll('.option');
+            const q = questions[qIndex];
+
+            options.forEach((opt, idx) => {
+                opt.classList.add('disabled');
+                const isOptionCorrect = checkCorrectOption(q, q.options[idx]);
+
+                if (isOptionCorrect) {
+                    opt.classList.add('selected-correct');
+                } else if (idx === optIndex) {
+                    opt.classList.add('selected-wrong');
+                }
+            });
+
+            const placeholder = container.parentElement.querySelector('.feedback-placeholder');
+            placeholder.innerHTML = generateDetailedFeedbackHTML(q, optIndex);
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            if (questions.length === 0) return;
+            const answeredCount = answers.filter(a => a !== null).length;
+            const percentage = Math.round((answeredCount / questions.length) * 100);
+
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('current-q').textContent = currentIndex + 1;
+            document.getElementById('total-q').textContent = questions.length;
+
+            const score = answers.filter((ans, i) => {
+                if (ans === null) return false;
+                return checkCorrectOption(questions[i], questions[i].options[ans]);
+            }).length;
+
+            document.getElementById('score-header').textContent = `${score}/${questions.length}`;
+        }
+
+        function nextQuestion() {
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                saveToLocalStorage();
+                carousel.to(currentIndex);
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                saveToLocalStorage();
+                carousel.to(currentIndex);
+            }
+        }
+
+        function showResults() {
+            const score = answers.filter((ans, i) => {
+                if (ans === null) return false;
+                return checkCorrectOption(questions[i], questions[i].options[ans]);
+            }).length;
+            const percentage = ((score / questions.length) * 100).toFixed(1);
+
+            document.getElementById('quiz-screen').classList.add('d-none');
+            document.getElementById('result-screen').classList.remove('d-none');
+            document.getElementById('result-percentage').textContent = `${percentage}%`;
+            document.getElementById('result-detail').innerHTML = `Você acertou <strong>${score}</strong> de <strong>${questions.length}</strong> questões.`;
+        }
+
+        function resetAndRestart() {
+            limparProgressoLocal();
+            currentIndex = 0;
+            answers = [];
+            questions = [];
+
+            inicializarSimulado();
+        }
+
+        window.onload = function () {
+            buildSidebarMenu();
+            carregarScriptSimulado();
+
+            const carouselEl = document.getElementById('quizCarousel');
+            carouselEl.addEventListener('slid.bs.carousel', e => {
+                currentIndex = e.to;
+                saveToLocalStorage();
+                updateProgress();
+            });
+        };
+    </script>
+</body>
+
+</html>
