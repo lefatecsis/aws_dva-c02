@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Simulado AWS Developer Associate - Explicações Detalhadas</title>
+    <title>Simulado AWS Developer Associate</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <style>
@@ -19,7 +19,6 @@
             min-height: 100vh;
         }
 
-        /* Sidebar Styling */
         .sidebar {
             height: 100vh;
             width: 280px;
@@ -39,29 +38,36 @@
         .sidebar-header {
             padding: 1.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
+            background-color: #1a2333;
         }
 
         .sidebar-menu {
             padding: 1rem 0;
-            list-style: none;
-            margin: 0;
+            height: calc(100vh - 85px);
+            overflow-y: auto;
         }
 
-        .sidebar-item a {
+        .sidebar-item {
+            padding: 0.85rem 1.5rem;
+            color: #d1d5db;
+            text-decoration: none;
             display: flex;
             align-items: center;
-            padding: 0.85rem 1.5rem;
-            color: rgba(255, 255, 255, 0.75);
-            text-decoration: none;
-            transition: all 0.2s;
+            gap: 0.75rem;
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
         }
 
-        .sidebar-item a:hover,
-        .sidebar-item.active a {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-left: 4px solid var(--aws-orange);
+        .sidebar-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        .sidebar-item.active {
+            background-color: rgba(255, 153, 0, 0.15);
+            color: var(--aws-orange);
+            border-left-color: var(--aws-orange);
+            font-weight: 600;
         }
 
         .sidebar-overlay {
@@ -71,7 +77,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 1040;
         }
 
@@ -79,11 +85,14 @@
             display: block;
         }
 
-        /* Main Content Adjustments */
+        .main-content {
+            transition: all 0.3s ease;
+            padding-top: 1rem;
+        }
+
         .quiz-container {
             max-width: 980px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            margin: 1rem auto 2rem auto;
         }
 
         .card {
@@ -100,7 +109,7 @@
 
         .carousel-item {
             padding: 2rem;
-            min-height: 650px;
+            min-height: 680px;
             overflow-y: auto;
         }
 
@@ -194,162 +203,170 @@
 </head>
 
 <body>
-
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0 fw-bold text-white"><i class="fab fa-aws text-warning me-2"></i>Simulados</h5>
-            <button class="btn btn-sm btn-link text-white p-0 fs-4" onclick="toggleSidebar()"><i
-                    class="fas fa-times"></i></button>
+    <div id="sidebarMenu" class="sidebar">
+        <div class="sidebar-header d-flex align-items-center justify-content-between">
+            <span class="text-white fw-bold"><i class="fas fa-layer-group me-2 text-warning"></i>Simulados</span>
+            <button type="button" class="btn-close btn-close-white" onclick="toggleSidebar()"></button>
         </div>
-        <ul class="sidebar-menu" id="simulados-list">
-        </ul>
+        <div class="sidebar-menu" id="sidebarItemsContainer">
+            <div class="text-center text-muted py-3 small"><i class="fas fa-spinner fa-spin me-2"></i>Buscando arquivos...</div>
+        </div>
     </div>
-    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-    <div class="container quiz-container">
-        <div class="card">
-            <div class="header-aws p-4">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3">
-                        <button class="btn btn-outline-light px-3 py-2" style="border-radius: 50px;"
-                            onclick="toggleSidebar()">
-                            <i class="fas fa-bars me-2"></i> <span class="d-none d-sm-inline">Simulados</span>
-                        </button>
-                        <div>
-                            <h1 class="h4 mb-1 fw-bold" id="quiz-title">Simulado AWS Developer Associate</h1>
-                            <p class="mb-0 opacity-75 small">Modo Carrossel com Explicações Individuais</p>
-                        </div>
-                    </div>
-                    <button onclick="resetAndRestart()" class="btn btn-sm btn-outline-light px-3 py-2"
-                        style="border-radius: 50px;">
-                        <i class="fas fa-sync-alt me-2"></i> Reiniciar Simulado
-                    </button>
-                </div>
-            </div>
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-            <div class="p-4">
-                <div id="quiz-screen">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div class="small fw-bold text-muted">
-                            Questão <span id="current-q">1</span> de <span id="total-q">0</span>
-                        </div>
-                        <div class="flex-grow-1 mx-4">
-                            <div class="progress" style="height: 8px; border-radius: 10px;">
-                                <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+    <div class="main-content">
+        <div class="container quiz-container">
+            <div class="card">
+                <div class="header-aws p-4">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <button class="btn btn-outline-light" onclick="toggleSidebar()" style="border-radius: 8px;">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fab fa-aws fa-3x text-warning"></i>
+                                <div>
+                                    <h1 class="h4 mb-1 fw-bold" id="simulado-title-display">Simulado AWS</h1>
+                                    <p class="mb-0 opacity-75 small">Modo Carrossel com Explicações Individuais</p>
+                                </div>
                             </div>
                         </div>
-                        <div id="score-header" class="fw-bold text-success fs-5">0/0</div>
-                    </div>
-
-                    <div id="quizCarousel" class="carousel slide" data-bs-interval="false" data-bs-touch="false">
-                        <div class="carousel-inner" id="carousel-inner"></div>
-
-                        <div class="d-flex justify-content-between mt-4">
-                            <button class="btn btn-outline-secondary nav-btn" onclick="prevQuestion()">
-                                <i class="fas fa-arrow-left me-2"></i> Anterior
-                            </button>
-                            <button class="btn btn-primary nav-btn" onclick="nextQuestion()">
-                                Próxima <i class="fas fa-arrow-right ms-2"></i>
-                            </button>
-                        </div>
+                        <button onclick="resetAndRestart()" class="btn btn-sm btn-outline-light px-3 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-sync-alt me-2"></i> Reiniciar Atual
+                        </button>
                     </div>
                 </div>
 
-                <div id="result-screen" class="d-none text-center py-5">
-                    <i class="fas fa-trophy fa-5x text-warning mb-4"></i>
-                    <h2 class="fw-bold mb-2">Simulado Concluído!</h2>
-                    <h1 id="result-percentage" class="display-3 fw-bold my-3" style="color: var(--aws-orange);">0%</h1>
-                    <p id="result-detail" class="lead mb-4"></p>
-                    <button onclick="resetAndRestart()" class="btn btn-lg btn-primary px-5"
-                        style="border-radius: 50px;">
-                        <i class="fas fa-redo me-2"></i> Tentar Novamente
-                    </button>
+                <div class="p-4">
+                    <div id="quiz-screen">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="small fw-bold text-muted">
+                                Questão <span id="current-q">1</span> de <span id="total-q-display">65</span>
+                            </div>
+                            <div class="flex-grow-1 mx-4">
+                                <div class="progress" style="height: 8px; border-radius: 10px;">
+                                    <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div id="score-header" class="fw-bold text-success fs-5">0/0</div>
+                        </div>
+
+                        <div id="quizCarousel" class="carousel slide" data-bs-interval="false" data-bs-touch="false">
+                            <div class="carousel-inner" id="carousel-inner">
+                                <div class="text-center py-5">
+                                    <i class="fas fa-circle-notch fa-spin fa-3x text-warning mb-3"></i>
+                                    <h5>Carregando perguntas do simulado...</h5>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-4">
+                                <button class="btn btn-outline-secondary nav-btn" onclick="prevQuestion()">
+                                    <i class="fas fa-arrow-left me-2"></i> Anterior
+                                </button>
+                                <button class="btn btn-primary nav-btn" onclick="nextQuestion()">
+                                    Próxima <i class="fas fa-arrow-right ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="result-screen" class="d-none text-center py-5">
+                        <i class="fas fa-trophy fa-5x text-warning mb-4"></i>
+                        <h2 class="fw-bold mb-2">Simulado Concluído!</h2>
+                        <h1 id="result-percentage" class="display-3 fw-bold my-3" style="color: var(--aws-orange);">0%</h1>
+                        <p id="result-detail" class="lead mb-4"></p>
+                        <button onclick="resetAndRestart()" class="btn btn-lg btn-primary px-5" style="border-radius: 50px;">
+                            <i class="fas fa-redo me-2"></i> Tentar Novamente
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="questions-script-container"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Configuração dos simulados disponíveis.
-        const disponiveis = [
-            { id: "01", nome: "Simulado 1", arquivo: "questions_01.js" },
-            { id: "02", nome: "Simulado 2", arquivo: "questions_02.js" },
-            { id: "03", nome: "Simulado 3", arquivo: "questions_03.js" }
-        ];
-
-        let currentSimuladoId = localStorage.getItem('aws_current_simulado_id') || disponiveis[0].id;
         let questions = [];
         let currentIndex = 0;
         let answers = [];
         let carousel;
+        let currentSimuladoFile = "";
 
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('sidebar-overlay').classList.toggle('active');
+            document.getElementById('sidebarMenu').classList.toggle('active');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
         }
 
-        function buildSidebarMenu() {
-            const list = document.getElementById('simulados-list');
-            list.innerHTML = '';
-            disponiveis.forEach(sim => {
-                const li = document.createElement('li');
-                li.className = `sidebar-item ${sim.id === currentSimuladoId ? 'active' : ''}`;
-                li.innerHTML = `<a href="#" onclick="trocarSimulado('${sim.id}'); return false;"><i class="fas fa-file-alt me-3"></i>${sim.nome}</a>`;
-                list.appendChild(li);
-            });
-        }
+        async function scanAndBuildMenu() {
+            const menuContainer = document.getElementById('sidebarItemsContainer');
+            menuContainer.innerHTML = '';
+            
+            let foundAny = false;
+            let index = 1;
+            let activeFile = localStorage.getItem('aws_active_file') || "questions_01.js";
 
-        function trocarSimulado(id) {
-            // Se for o mesmo simulado e já tiver questões carregadas, apenas fecha o menu
-            if (id === currentSimuladoId && questions.length > 0) {
-                toggleSidebar();
-                return;
+            while (index <= 50) {
+                let formattedNum = String(index).padStart(2, '0');
+                let fileName = `questions_${formattedNum}.js`;
+                
+                try {
+                    let response = await fetch(fileName, { method: 'HEAD' });
+                    if (response.ok) {
+                        foundAny = true;
+                        let item = document.createElement('a');
+                        item.href = "#";
+                        item.className = `sidebar-item ${fileName === activeFile ? 'active' : ''}`;
+                        item.innerHTML = `<i class="fas fa-file-alt"></i> Simulado ${formattedNum}`;
+                        item.onclick = (e) => {
+                            e.preventDefault();
+                            selectSimuladoFile(fileName);
+                            toggleSidebar();
+                        };
+                        menuContainer.appendChild(item);
+                    } else {
+                        break;
+                    }
+                } catch (err) {
+                    break;
+                }
+                index++;
             }
 
-            // Força a limpeza total do progresso anterior no LocalStorage
-            limparProgressoLocal();
+            if (!foundAny) {
+                menuContainer.innerHTML = '<div class="text-center text-muted py-3 small">Nenhum simulado encontrado.</div>';
+            }
+        }
 
-            currentSimuladoId = id;
-            localStorage.setItem('aws_current_simulado_id', id);
+        function selectSimuladoFile(fileName) {
+            localStorage.setItem('aws_active_file', fileName);
+            
+            localStorage.removeItem('aws_questions_v2');
+            localStorage.removeItem('aws_answers_v2');
+            localStorage.removeItem('aws_currentIndex_v2');
 
-            // Reseta o estado da aplicação
-            currentIndex = 0;
-            answers = [];
-            questions = [];
-
-            buildSidebarMenu();
-            toggleSidebar();
-            carregarScriptSimulado();
+            location.reload();
         }
 
         function carregarScriptSimulado() {
-            const sim = disponiveis.find(s => s.id === currentSimuladoId) || disponiveis[0];
-            document.getElementById('quiz-title').textContent = `AWS Developer Associate - ${sim.nome}`;
+            currentSimuladoFile = localStorage.getItem('aws_active_file') || "questions_01.js";
+            
+            let numMatch = currentSimuladoFile.match(/\d+/);
+            let displayNum = numMatch ? numMatch[0] : "01";
+            document.getElementById('simulado-title-display').textContent = `Simulado ${displayNum}`;
 
-            // CRITICAL: Remove a variável global antiga para forçar o navegador a ler a do novo arquivo
-            if (typeof originalQuestions !== 'undefined') {
-                try {
-                    window.originalQuestions = undefined;
-                } catch (e) { }
-            }
-
-            const container = document.getElementById('questions-script-container');
-            container.innerHTML = '';
-
-            const script = document.createElement('script');
-            // Adiciona um timestamp (Query String) para evitar que o navegador use o cache do arquivo anterior
-            script.src = sim.arquivo + "?t=" + new Date().getTime();
+            let script = document.createElement('script');
+            script.src = currentSimuladoFile;
             script.onload = function () {
                 inicializarSimulado();
             };
             script.onerror = function () {
-                alert(`Erro ao carregar o arquivo de questões: ${sim.arquivo}`);
+                document.getElementById('carousel-inner').innerHTML = `
+                    <div class="alert alert-danger m-4">
+                        <i class="fas fa-exclamation-triangle me-2"></i> Erro ao carregar o arquivo <strong>${currentSimuladoFile}</strong>. Verifique se ele existe no servidor.
+                    </div>`;
             };
-            container.appendChild(script);
+            document.body.appendChild(script);
         }
 
         function shuffleArray(array) {
@@ -360,9 +377,6 @@
         }
 
         function inicializarSimulado() {
-            document.getElementById('quiz-screen').classList.remove('d-none');
-            document.getElementById('result-screen').classList.add('d-none');
-
             const savedQuestions = localStorage.getItem('aws_questions_v2');
             const savedAnswers = localStorage.getItem('aws_answers_v2');
             const savedIndex = localStorage.getItem('aws_currentIndex_v2');
@@ -372,8 +386,7 @@
                     questions = JSON.parse(savedQuestions);
                     answers = JSON.parse(savedAnswers);
                     currentIndex = parseInt(savedIndex, 10);
-
-                    montarInterface();
+                    renderizarEIniciar();
                     return;
                 } catch (e) {
                     limparProgressoLocal();
@@ -381,11 +394,13 @@
             }
 
             if (typeof originalQuestions === 'undefined' || !Array.isArray(originalQuestions)) {
-                alert("Erro: A estrutura 'originalQuestions' não foi encontrada ou está vazia no arquivo carregado.");
+                document.getElementById('carousel-inner').innerHTML = `
+                    <div class="alert alert-danger m-4">
+                        A estrutura do arquivo data está inválida ou vazia.
+                    </div>`;
                 return;
             }
 
-            // Clona profundamente os dados do novo arquivo
             questions = JSON.parse(JSON.stringify(originalQuestions));
             shuffleArray(questions);
 
@@ -407,20 +422,23 @@
 
             answers = new Array(questions.length).fill(null);
             currentIndex = 0;
-
             saveToLocalStorage();
-            montarInterface();
+            renderizarEIniciar();
         }
 
-        function montarInterface() {
+        function renderizarEIniciar() {
+            document.getElementById('total-q-display').textContent = questions.length;
             createCarouselItems();
-
+            
             const carouselEl = document.getElementById('quizCarousel');
-            if (carousel) {
-                carousel.dispose();
-            }
             carousel = new bootstrap.Carousel(carouselEl, { wrap: false, keyboard: false });
-
+            
+            carouselEl.addEventListener('slid.bs.carousel', e => {
+                currentIndex = e.to;
+                saveToLocalStorage();
+                updateProgress();
+            });
+            
             carousel.to(currentIndex);
             updateProgress();
         }
@@ -439,7 +457,6 @@
 
         function checkCorrectOption(q, optionText) {
             if (typeof originalQuestions === 'undefined') return false;
-
             const original = originalQuestions.find(orig => orig.question === q.question);
             if (!original) return false;
 
@@ -469,7 +486,7 @@
                     let textClean = (q.detailedExplanations[idx] || '')
                         .replace(/^(Alternativa Incorreta|Alternativa Correta)\s*/i, '')
                         .replace(/^[A-E]\.\s*/i, '')
-                        .replace(/^(Correta\.|Incorreta\.)\s*/i, '');
+                        .replace(/^(Correta\.|Incorreta\.)\s*/i);
 
                     explanationItemsHTML += `
                         <div class="explanation-item">
@@ -579,7 +596,6 @@
 
             document.getElementById('progress-bar').style.width = `${percentage}%`;
             document.getElementById('current-q').textContent = currentIndex + 1;
-            document.getElementById('total-q').textContent = questions.length;
 
             const score = answers.filter((ans, i) => {
                 if (ans === null) return false;
@@ -626,19 +642,15 @@
             answers = [];
             questions = [];
 
+            document.getElementById('quiz-screen').classList.remove('d-none');
+            document.getElementById('result-screen').classList.add('d-none');
+
             inicializarSimulado();
         }
 
         window.onload = function () {
-            buildSidebarMenu();
+            scanAndBuildMenu();
             carregarScriptSimulado();
-
-            const carouselEl = document.getElementById('quizCarousel');
-            carouselEl.addEventListener('slid.bs.carousel', e => {
-                currentIndex = e.to;
-                saveToLocalStorage();
-                updateProgress();
-            });
         };
     </script>
 </body>
