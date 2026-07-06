@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Template basico para criar um bucket S3 usando o nome do cliente.
+
+# Parameters: Define a variavel NomeCliente que voce vai passar via linha de comando.
+Parameters:
+  NomeCliente:
+    Type: String
+    Description: O nome do cliente que sera usado no sufixo do bucket.
+    Default: cliente-padrao
+
+# Resources: E o que a AWS vai de fato construir. No caso, um AWS::S3::Bucket.
+Resources:
+  BucketDoCliente:
+    Type: AWS::S3::Bucket
+    Properties:
+      # !Sub: E uma funcao do CloudFormation que junta (substitui) o texto fixo com o valor da variavel, gerando um nome dinamico como bucket-infra-leandro.
+      BucketName: !Sub "bucket-infra-${NomeCliente}"
