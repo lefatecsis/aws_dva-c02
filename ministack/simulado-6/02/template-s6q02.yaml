@@ -1,17 +1,28 @@
+# Define a versao do motor do CloudFormation. Atualmente, esse e o unico valor valido.
 AWSTemplateFormatVersion: '2010-09-09'
+
+# Uma descricao textual sobre o objetivo do template. Ajuda a identificar o que esta stack cria.
 Description: Template basico para criar um bucket S3 usando o nome do cliente.
 
-# Parameters: Define a variavel NomeCliente que voce vai passar via linha de comando.
+# Secao onde definimos entradas dinamicas. Permite reutilizar o mesmo template para cenarios diferentes.
 Parameters:
+  # Nome lógico do parametro (o identificador que voce usa dentro do template).
   NomeCliente:
+    # O tipo de dado esperado para este parametro (neste caso, texto puro).
     Type: String
+    # Mensagem informativa que aparece no console da AWS para orientar o usuario.
     Description: O nome do cliente que sera usado no sufixo do bucket.
+    # O valor que sera assumido caso nenhuma informacao seja passada na execucao.
     Default: cliente-padrao
 
-# Resources: E o que a AWS vai de fato construir. No caso, um AWS::S3::Bucket.
+# Secao obrigatoria onde declaramos todos os recursos da AWS que queremos criar.
 Resources:
+  # Nome lógico do recurso dentro do template (usado para referencias internas).
   BucketDoCliente:
+    # Define o tipo exato de recurso AWS que esta sendo criado (obrigatorio para todo recurso).
     Type: AWS::S3::Bucket
+    # Subsecao onde configuramos as especificacoes e atributos detalhados do recurso.
     Properties:
-      # !Sub: E uma funcao do CloudFormation que junta (substitui) o texto fixo com o valor da variavel, gerando um nome dinamico como bucket-infra-leandro.
+      # Propriedade especifica do S3 para definir o nome global e unico que o bucket tera.
       BucketName: !Sub "bucket-infra-${NomeCliente}"
+      # !Sub e uma funcao intrinseca que substitui a sintaxe ${Parametro} pelo valor real digitado.
