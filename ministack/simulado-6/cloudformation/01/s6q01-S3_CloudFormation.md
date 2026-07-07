@@ -1,15 +1,6 @@
-
 ---
 
 ### `documentacao.md`
-
-  "question": "Uma equipe de desenvolvimento criou templates do AWS CloudFormation que são reutilizáveis, aproveitando parâmetros de entrada para nomear recursos com base nos nomes dos clientes.\n\nVocê deseja salvar seus templates na nuvem. Qual opção de armazenamento você deve escolher?",
-    "options": [
-      "Amazon ECR",
-      "Amazon S3",
-      "Amazon EBS",
-      "Amazon EFS"
-    ],
 
 ```markdown
 # Documentação Técnica: Infraestrutura como Código Parametrizada
@@ -22,9 +13,12 @@ Este documento detalha o procedimento prático para o armazenamento de templates
 
 O primeiro passo consiste em inicializar um repositório centralizado para salvaguardar os arquivos de configuração da infraestrutura (arquivos YAML ou JSON).
 
-#### O comando 'aws s3 mb' (make bucket) cria um novo bucket no S3 para servir como repositório dos templates reutilizáveis.
+#### Criação do Bucket de Armazenamento
+* O comando `aws s3 mb` (make bucket) inicializa o provisionamento de um novo bucket no S3.
+* O URI `s3://templates-cloudformation-bucket-exemplo` define o nome globalmente exclusivo que identificará o bucket na nuvem.
+
 ```bash
-aws s3 mb s3://templates-cloudformation-clientes-s6q02
+aws s3 mb s3://templates-cloudformation-bucket-exemplo
 
 ```
 
@@ -39,12 +33,15 @@ Durante o envio do artefato local para o bucket S3, a AWS CLI adota nativamente 
 
 Para contornar o comportamento e forçar o envio seguro, deve-se explicitar o uso de um algoritmo de checksum amplamente compatível (`SHA256`).
 
-#### O comando 'aws s3 cp' copia o template local para a nuvem.
+#### Envio do Arquivo de Configuração
 
-#### O parâmetro '--checksum-algorithm SHA256' resolve a incompatibilidade do emulador local, substituindo o algoritmo padrão CRC64NVME.
+* O comando `aws s3 cp` realiza a operação de cópia e upload de um arquivo local para o S3.
+* O primeiro argumento (`template.yaml`) indica o caminho de origem do template no sistema local.
+* O segundo argumento (`s3://templates-cloudformation-bucket-exemplo/...`) determina o bucket e a chave do objeto de destino.
+* O parâmetro `--checksum-algorithm SHA256` resolve o conflito forçando o uso do algoritmo SHA256, substituindo o padrão não suportado CRC64NVME.
 
 ```bash
-aws s3 cp simulado-6/02/template-s6q02.yaml s3://templates-cloudformation-clientes-s6q02/infra-cliente-param.yaml --checksum-algorithm SHA256
+aws s3 cp template.yaml s3://templates-cloudformation-bucket-exemplo/infra-exemplo-param.yaml --checksum-algorithm SHA256
 
 ```
 
@@ -54,18 +51,17 @@ aws s3 cp simulado-6/02/template-s6q02.yaml s3://templates-cloudformation-client
 
 Com o arquivo unificado exposto através de uma URL estática do S3, inicializa-se a compilação da Stack injetando os parâmetros que definirão a nomenclatura final dos serviços baseados no identificador único do cliente.
 
-####   O comando 'aws cloudformation create-stack' dispara o provisionamento de recursos automatizados na AWS.
+#### Criação da Stack Parametrizada
 
-#### '--stack-name' especifica o nome identificador deste agrupamento de recursos (pilha).
-
-#### '--template-url' aponta para o endereço HTTP onde o CloudFormation lerá as instruções armazenadas no S3.
-
-#### '--parameters' realiza a injeção dinâmica de variáveis, associando a chave 'NomeCliente' ao valor do cliente atual ('xpto').
+* O comando `aws cloudformation create-stack` dispara o provisionamento de recursos automatizados na AWS.
+* O parâmetro `--stack-name` especifica o nome identificador exclusivo deste agrupamento de recursos (`infra-cliente-xpto`).
+* O parâmetro `--template-url` aponta para o endereço HTTP local onde o CloudFormation lerá as instruções do template hospedado no S3.
+* O parâmetro `--parameters` realiza a injeção dinâmica de variáveis, associando a chave `NomeCliente` ao valor customizado do cliente atual (`xpto`).
 
 ```bash
 aws cloudformation create-stack \
     --stack-name infra-cliente-xpto \
-    --template-url http://localhost:4566/templates-cloudformation-clientes-s6q02/infra-cliente-param.yaml \
+    --template-url http://localhost:4566/templates-cloudformation-bucket-exemplo/infra-exemplo-param.yaml \
     --parameters ParameterKey=NomeCliente,ParameterValue=xpto
 
 ```
@@ -76,18 +72,20 @@ aws cloudformation create-stack \
 
 Para verificar se a infraestrutura descrita foi consolidada com sucesso e sem falhas de rollback, analisa-se o estado final da receita lógica através do nome definido para a Stack.
 
-#### O comando 'aws cloudformation describe-stacks' realiza uma consulta de status para auditar a criação da infraestrutura.
+#### Consulta de Status da Infraestrutura
+
+* O comando `aws cloudformation describe-stacks` retorna os metadados atuais e o ciclo de vida das pilhas de infraestrutura.
+* O parâmetro `--stack-name` restringe a busca e isola os detalhes especificamente para a stack `infra-cliente-xpto`.
 
 ```bash
 aws cloudformation describe-stacks --stack-name infra-cliente-xpto
 
 ```
 
-O retorno da API consolida a criação bem-sucedida através da propriedade `"StackStatus": "CREATE_COMPLETE"`.
+**Output esperado:**
 
 ```json
 {
-    {
     "Stacks": [
         {
             "StackId": "arn:aws:cloudformation:us-east-1:000000000000:stack/infra-cliente-xpto/99a8a401-820c-46bf-aa28-4b9ddc94c500", // Identificador único global (ARN) da Stack na AWS.
@@ -109,11 +107,14 @@ O retorno da API consolida a criação bem-sucedida através da propriedade `"St
         }
     ]
 }
+
 ```
 
 Por fim, ao mapear o provisionamento físico dos recursos, o isolamento lógico do bucket dinâmico é verificado em conjunto com o repositório original de receitas.
 
-#### O comando 'aws s3 ls' lista os recursos do tipo bucket criados no ambiente, comprovando a existência do recurso parametrizado.
+#### Listagem e Comprovação de Criação Física
+
+* O comando `aws s3 ls` lista os buckets existentes ou objetos contidos neles para auditoria rápida.
 
 ```bash
 aws s3 ls
@@ -124,13 +125,13 @@ aws s3 ls
 
 ```text
 2026-07-06 14:53:46 bucket-infra-xpto
-2026-07-06 14:28:12 templates-cloudformation-clientes-s6q02
+2026-07-06 14:28:12 templates-cloudformation-bucket-exemplo
 
 ```
 
 ---
 
-**Conclusão:** A Stack foi devidamente estabilizada. O isolamento lógico baseado no parâmetro `NomeCliente="xpto"` valida o comportamento de reuso do template, reduzindo o tempo de provisionamento manual e mantendo a governança ideal sobre os recursos gerados de forma programática.
+**Conclusão:** A Stack foi devidamente estabilizada. O isolamento lógico baseado no parâmetro `NomeCliente="xpto"` valida o comportamento de reuso do template, reduzindo o tempo de provisionamento manual e mantendo a governança ideal sobre os recursos gerados de forma programática através do **Amazon S3** como repositório de templates.
 
 ```
 
