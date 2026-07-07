@@ -10,7 +10,6 @@
       "Amazon EBS",
       "Amazon EFS"
     ],
-    "correta": "Amazon S3"
 
 ```markdown
 # Documentação Técnica: Infraestrutura como Código Parametrizada
