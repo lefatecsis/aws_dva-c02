@@ -1,0 +1,1 @@
+// Validando Logs do MiniStack
