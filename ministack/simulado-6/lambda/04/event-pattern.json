@@ -1,0 +1,9 @@
+{
+  "source": ["aws.codecommit"],
+  "detail-type": ["CodeCommit Repository State Change"],
+  "resources": ["arn:aws:codecommit:us-east-1:000000000000:RepositorioVarejo"],
+  "detail": {
+    "event": ["referenceUpdated"],
+    "referenceName": ["main"]
+  }
+}

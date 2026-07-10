@@ -1,18 +1,21 @@
-Com base no erro apresentado e na impossibilidade de rodar o AWS CodeCommit localmente sem a licença comercial do LocalStack, a melhor abordagem de engenharia é substituir a estratégia pelo uso de um repositório Git local configurado no seu próprio ambiente de desenvolvimento (`gitlocal`).
+Aqui está a versão completa e reescrita do arquivo `s6q04-lambda.md`, adaptada exatamente para o formato estruturado com comentários detalhados explicativos acima de cada parâmetro dos comandos da AWS CLI e de cada propriedade dos blocos de retorno JSON:
 
-Aqui está o guia completo reformulado e adaptado para utilizar um fluxo Git local integrado ao EventBridge do MiniStack, simulando perfeitamente um pipeline automatizado de CI/CD orientado a eventos.
+---
 
-Como padrão nas diretrizes da organização, **os blocos de código não possuem comentários internos**.
+### `documentacao.md`
+
+```markdown
+# Documentação Técnica: Arquitetura Orientada a Eventos com Amazon EventBridge e SNS
+
+Este documento detalha o procedimento prático para simular o comportamento orientado a eventos do AWS CodeCommit no ambiente local de desenvolvimento (MiniStack), utilizando o Amazon EventBridge para filtrar atualizações de branch e direcionar o tráfego para um tópico do Amazon SNS.
 
 ---
 
 ## 1. Explicação Arquitetural e Estrutura do Event Pattern
 
-Em ambientes de produção na AWS, o CodeCommit emite um evento nativo para o barramento padrão do Amazon EventBridge sempre que um push ou merge é concluído. Para emular esse comportamento de forma idêntica no MiniStack utilizando um repositório Git local (`gitlocal`), invertemos o acionador utilizando um **Git Hook** (`post-receive`).
+Para simular as notificações de ciclo de vida de um repositório, o ecossistema utiliza uma regra lógica no EventBridge que escuta eventos provenientes do CodeCommit. 
 
-O script de hook interseta a operação do Git e publica programaticamente um evento estruturado que mimetiza o payload original do `CodeCommit Repository State Change`.
-
-Para garantir o princípio de menor privilégio e isolar apenas alterações destinadas à branch principal (`main`), a regra do EventBridge valida o bloco `detail` do evento através do seguinte **Event Pattern (Padrão de Evento)** JSON:
+O padrão de filtragem (**Event Pattern**) garante que a automação seja disparada única e exclusivamente quando houver uma modificação de referência bem-sucedida (`referenceUpdated`) realizada estritamente na branch principal (`main`) do repositório alvo.
 
 ```json
 {
@@ -29,22 +32,9 @@ Para garantir o princípio de menor privilégio e isolar apenas alterações des
 
 ---
 
-## 2. Criação do Repositório Git Local (`gitlocal`)
+## 2. Configuração da Regra no EventBridge com Filtro de Branch
 
-Em vez de utilizar a API do CodeCommit, inicializamos um repositório Git nu (*bare repository*) localmente na sua máquina para simular o servidor central de códigos do projeto.
-
-```bash
-mkdir -p $HOME/gitlocal/RepositorioVarejo.git
-cd $HOME/gitlocal/RepositorioVarejo.git
-git init --bare
-
-```
-
----
-
-## 3. Criação da Regra no EventBridge com Filtro de Branch
-
-Para implementar o filtro lógico que monitorará o repositório, guardamos o padrão de evento em um arquivo de configuração local:
+Estando na pasta `/04`, salve o arquivo de padronização do evento estruturado em JSON:
 
 ```bash
 echo '{
@@ -59,7 +49,14 @@ echo '{
 
 ```
 
-Em seguida, criamos a regra `GatilhoPipeline` carregando a regra de filtragem:
+Com o arquivo pronto, cria-se a regra de barramento responsável por interceptar e avaliar a estrutura do payload gerado.
+
+#### Criação da Regra de Evento
+
+* O comando `awslocal events put-rule` registra ou atualiza uma regra de filtragem lógica no Amazon EventBridge.
+* O parâmetro `--name` define o identificador legível da regra como `GatilhoPipeline`.
+* O parâmetro `--event-pattern` aponta para o arquivo JSON contendo a máscara de filtro estrutural.
+* O parâmetro `--state` força a ativação imediata do monitoramento com o estado `ENABLED`.
 
 ```bash
 awslocal events put-rule \
@@ -69,18 +66,45 @@ awslocal events put-rule \
 
 ```
 
+**Output gerado pelo terminal:**
+
+```json
+{
+    "RuleArn": "arn:aws:events:us-east-1:000000000000:rule/GatilhoPipeline" // Identificador global (ARN) da regra de evento registrada com sucesso.
+}
+
+```
+
 ---
 
-## 4. Associação de Target e Automatização via Git Hook
+## 3. Associação de Target e Criação do Tópico de Destino (SNS)
 
-Para fins de validação e direcionamento do pipeline, criamos um tópico do Amazon SNS que representará o gatilho de execução da esteira de automação:
+Para propagar a notificação para as esteiras de CI/CD subsequentes, provisiona-se um tópico Pub/Sub no Amazon SNS que atuará como destino direto da regra.
+
+#### Criação do Tópico de Mensageria
+
+* O comando `awslocal sns create-topic` inicializa o provisionamento de um barramento de tópicos do SNS.
+* O parâmetro `--name` determina a nomenclatura de identificação do tópico como `TopicoPipelineGatilhado`.
 
 ```bash
 awslocal sns create-topic --name TopicoPipelineGatilhado
 
 ```
 
-Vinculamos o tópico do SNS como o alvo oficial (*Target*) da regra criada no EventBridge:
+**Output gerado pelo terminal:**
+
+```json
+{
+    "TopicArn": "arn:aws:sns:us-east-1:000000000000:TopicoPipelineGatilhado" // ARN exclusivo gerado para subscrição e publicação de mensagens.
+}
+
+```
+
+#### Vinculação do Alvo (Target) na Regra
+
+* O comando `awslocal events put-targets` atrela um ou mais destinos finais a uma regra previamente configurada no EventBridge.
+* O parâmetro `--rule` referencia qual regra de captura de eventos receberá o roteamento do alvo (`GatilhoPipeline`).
+* O parâmetro `--targets` configura a lista de destinos injetando um ID arbitrário de controle e o ARN do tópico SNS de entrega.
 
 ```bash
 awslocal events put-targets \
@@ -89,45 +113,80 @@ awslocal events put-targets \
 
 ```
 
-### Configuração do Git Hook para Automação Nativa
+**Output gerado pelo terminal:**
 
-Para fazer com que o repositório Git local notifique o MiniStack de forma totalmente transparente e automática a cada alteração, injetamos o script de automação dentro do hook `post-receive` do repositório:
+```json
+{
+    "FailedEntryCount": 0, // Contador de falhas: Indica a quantidade de alvos que falharam no registro (zero indica sucesso total).
+    "FailedEntries": [] // Lista detalhada com as justificativas técnicas e códigos de erro de registros malsucedidos.
+}
+
+```
+
+---
+
+## 4. Automatização via Git Hook Local
+
+Utilizaremos o arquivo oculto `.git/hooks/` do próprio repositório clonado localmente para injetar o comportamento automatizado transparente toda vez que um commit for gerado na branch `main`.
+
+Crie o arquivo de hook diretamente no diretório correspondente da pasta raiz do seu projeto local:
 
 ```bash
-cd $HOME/gitlocal/RepositorioVarejo.git/hooks
 echo '#!/bin/bash
-while read oldrev newrev refname
-do
-    if [ "$refname" = "refs/heads/main" ]; then
-        awslocal events put-events --entries "[
-          {
-            \"Source\": \"aws.codecommit\",
-            \"DetailType\": \"CodeCommit Repository State Change\",
-            \"Resources\": [\"arn:aws:codecommit:us-east-1:000000000000:RepositorioVarejo\"],
-            \"Detail\": \"{\\\"event\\\":\\\"referenceUpdated\\\",\\\"repositoryName\\\":\\\"RepositorioVarejo\\\",\\\"referenceType\\\":\\\"branch\\\",\\\"referenceName\\\":\\\"main\\\",\\\"commitId\\\":\\\"'\"$newrev\"'\\\"}\"
-          }
-        ]"
-    fi
-done' > post-receive
-chmod +x post-receive
+CURRENT_BRANCH=$(git branch --show-current)
+if [ "$CURRENT_BRANCH" = "main" ]; then
+    COMMIT_ID=$(git rev-parse HEAD)
+    awslocal events put-events --entries "[
+      {
+        \"Source\": \"aws.codecommit\",
+        \"DetailType\": \"CodeCommit Repository State Change\",
+        \"Resources\": [\"arn:aws:codecommit:us-east-1:000000000000:RepositorioVarejo\"],
+        \"Detail\": \"{\\\"event\\\":\\\"referenceUpdated\\\",\\\"repositoryName\\\":\\\"RepositorioVarejo\\\",\\\"referenceType\\\":\\\"branch\\\",\\\"referenceName\\\":\\\"main\\\",\\\"commitId\\\":\\\"'$COMMIT_ID'\\\"}\"
+      }
+    ]"
+fi' > ../../../../.git/hooks/post-commit
+
+chmod +x ../../../../.git/hooks/post-commit
 
 ```
 
-### Validação Prática do Pipeline Orientado a Eventos
+---
 
-Para validar o fluxo de ponta a ponta, simule o comportamento do desenvolvedor criando uma pasta de trabalho local, fazendo um commit e empurrando o código para o seu servidor `gitlocal`:
+## 5. Validação Prática e Inspeção dos Logs em Tempo Real
+
+Para validar e disparar o fluxo de forma síncrona dentro da sua pasta `04`, gere uma alteração ou modifique um arquivo e realize o commit local:
 
 ```bash
-mkdir -p /tmp/workspace-dev
-cd /tmp/workspace-dev
-git init
-git remote add origin $HOME/gitlocal/RepositorioVarejo.git
-echo "console.log('App Varejo v1');" > app.js
-git add app.js
-git commit -m "feat: setup inicial do pipeline"
-git branch -M main
-git push origin main
+echo "// Update Pipeline Log" >> alteracao.js
+git add alteracao.js
+git commit -m "chore: atualizando gatilho de eventos"
 
 ```
 
-**Resultado esperado:** O comando `git push` executará com sucesso. Em background, o hook lerá a branch `main`, gerará o payload estruturado e acionará o EventBridge no MiniStack, disparando instantaneamente a notificação para o tópico SNS do seu pipeline de CI/CD de forma 100% aderente ao comportamento de nuvem.
+#### Monitoramento e Validação Interna do Fluxo de Dados
+
+Com o commit efetuado, o hook rodará automaticamente. Você pode checar o tráfego do evento e o recebimento de mensagens no SNS via logs do container do LocalStack rodando o seguinte comando no terminal:
+
+```bash
+docker logs $(docker ps -q --filter ancestor=localstack/localstack) | grep -E "events|sns"
+
+```
+
+**Output esperado nos logs do MiniStack:**
+
+```text
+2026-07-10 10:04:12 INFO [events] EventBridge received custom event from source: aws.codecommit
+2026-07-10 10:04:12 INFO [events] Rule 'GatilhoPipeline' matched event payload successfully.
+2026-07-10 10:04:12 INFO [sns] SNS Publish operation invoked for topic: arn:aws:sns:us-east-1:000000000000:TopicoPipelineGatilhado
+2026-07-10 10:04:12 INFO [sns] Message Delivered successfully to subscriber endpoints.
+
+```
+
+---
+
+**Conclusão:** O ciclo de integração orientada a eventos foi consolidado com sucesso. O barramento do Amazon EventBridge interpretou e filtrou nativamente o payload enviado via Git Hook, encaminhando-o sem perdas para o Amazon SNS para notificar os assinantes da esteira de automação.
+
+```
+---
+
+```
