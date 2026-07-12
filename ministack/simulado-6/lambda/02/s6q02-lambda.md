@@ -1,5 +1,3 @@
-Aqui está a versão atualizada da sua documentação técnica, estruturada no mesmo padrão profissional, com blocos limpos de código e os comentários detalhados e organizados acima de cada propriedade e parâmetro dos comandos da AWS CLI:
-
 ---
 
 ### `documentacao.md`
