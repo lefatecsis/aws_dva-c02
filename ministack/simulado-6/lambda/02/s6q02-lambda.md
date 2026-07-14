@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+---
+
+### `documentacao.md`
+
+```markdown
+>>>>>>> 7c907b474159899cce374a789bfdde308ff824e5
 # Documentação Técnica: Infraestrutura como Código e Armazenamento Local
 
 Este documento detalha o procedimento prático para o cálculo de capacidade, provisionamento e validação de otimização de performance no AWS Lambda utilizando o ambiente local de desenvolvimento (MiniStack).
