@@ -1,13 +1,7 @@
----
-
-### `documentacao_api_lambda.md`
-
-```markdown
 # Documentação Técnica: Integração API Gateway e AWS Lambda com Roteamento por Variáveis de Estágio
 
 Este documento detalha o procedimento prático para o provisionamento, publicação de versões e integração de uma API RESTful utilizando o Amazon API Gateway e o AWS Lambda com variáveis de estágio no ambiente local de desenvolvimento (MiniStack).
 
----
 
 ## 1. Cenário Técnico e Arquitetura de Versões
 

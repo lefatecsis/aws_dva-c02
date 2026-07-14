@@ -1,13 +1,7 @@
----
-
-### `documentacao.md`
-
-```markdown
 # Documentação Técnica: Autenticação e Acesso Cross-Account no Amazon DynamoDB
 
 Este documento detalha o procedimento prático para configuração, simulação e auditoria de segurança de um fluxo de acesso entre contas distintas (Cross-Account) para leitura de tabelas no Amazon DynamoDB utilizando o ambiente local de desenvolvimento (MiniStack).
 
----
 
 ## 1. Cenário Técnico e Arquitetura Cross-Account
 

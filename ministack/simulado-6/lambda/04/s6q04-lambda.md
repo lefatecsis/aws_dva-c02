@@ -1,15 +1,7 @@
-Aqui está a versão completa e reescrita do arquivo `s6q04-lambda.md`, adaptada exatamente para o formato estruturado com comentários detalhados explicativos acima de cada parâmetro dos comandos da AWS CLI e de cada propriedade dos blocos de retorno JSON:
-
----
-
-### `documentacao.md`
-
-```markdown
 # Documentação Técnica: Arquitetura Orientada a Eventos com Amazon EventBridge e SNS
 
 Este documento detalha o procedimento prático para simular o comportamento orientado a eventos do AWS CodeCommit no ambiente local de desenvolvimento (MiniStack), utilizando o Amazon EventBridge para filtrar atualizações de branch e direcionar o tráfego para um tópico do Amazon SNS.
 
----
 
 ## 1. Explicação Arquitetural e Estrutura do Event Pattern
 
