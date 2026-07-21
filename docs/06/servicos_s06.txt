@@ -1,0 +1,129 @@
+1. Kinesis
+
+2. CloudFormation - S3
+
+3. ECR - CLI
+
+4. DynamoDB
+
+5. Elastic Beanstalk - IAM - S3
+
+6. Auto Scaling - ELB - CloudWatch
+
+7. CloudFront - S3 - Lambda
+
+8. ELB - EC2
+
+9. Auto Scaling - ELB
+
+10. KMS
+
+11. S3 - KMS
+
+12. CodeBuild - ECR - CodePipeline - IAM
+
+13. API Gateway - Lambda
+
+14. ECS - CloudWatch Logs - IAM
+
+15. ELB - EC2
+
+16. Lambda
+
+17. S3 - KMS - IAM
+
+18. ELB - ECS - API Gateway - Lambda
+
+19. S3
+
+20. CodeBuild
+
+21. S3
+
+22. CloudFormation - EC2 - RDS
+
+23. S3
+
+24. EC2 - EBS - CLI
+
+25. CodeBuild - CodeDeploy
+
+26. ELB - EC2
+
+27. Lambda - DynamoDB - IAM
+
+28. DynamoDB
+
+29. ELB - ACM - EC2
+
+30. EBS - KMS - EC2
+
+31. X-Ray - CloudTrail - CloudWatch - API Gateway
+
+32. EFS - EC2
+
+33. DynamoDB
+
+34. EventBridge - CodeCommit - Lambda
+
+35. RDS
+
+36. ELB - Cognito - CloudFront
+
+37. ECS
+
+38. SQS
+
+39. API Gateway - Lambda - DynamoDB
+
+40. DynamoDB
+
+41. Elastic Beanstalk - Route 53
+
+42. ELB
+
+43. ECS - CloudWatch Logs
+
+44. SQS
+
+45. ECS - IAM
+
+46. Auto Scaling - CloudWatch
+
+47. EC2
+
+48. Lambda - ELB
+
+49. ELB
+
+50. CloudTrail - EC2 - EBS
+
+51. CloudTrail - CodePipeline - CodeCommit - S3
+
+52. CloudFormation
+
+53. S3 - SNS
+
+54. Kinesis - KMS
+
+55. API Gateway - Lambda - CloudWatch Logs - IAM - STS
+
+56. Elastic Beanstalk - Auto Scaling - ELB
+
+57. API Gateway - Lambda
+
+58. Kinesis
+
+59. Kinesis
+
+60. SQS
+
+61. CodeDeploy - EC2
+
+62. ELB
+
+63. CloudFront
+
+64. Auto Scaling - CodeDeploy - Systems Manager
+
+65. SQS - EC2

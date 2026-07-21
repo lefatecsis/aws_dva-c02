@@ -1,0 +1,65 @@
+1. SQS
+2. EC2 - EBS
+3. Lambda - CloudWatch
+4. SQS
+5. EC2 - IAM
+6. SAM - CloudFormation - Lambda
+7. Step Functions - Lambda
+8. DynamoDB
+9. SES - CloudWatch - IAM
+10. API Gateway - Lambda - Cognito - S3 - DynamoDB
+11. DynamoDB
+12. API Gateway - IAM
+13. EC2 - Auto Scaling - CloudWatch
+14. CloudFormation
+15. SAM - CloudFormation
+16. CloudFront - IAM
+17. Lambda - KMS - S3
+18. ECS - ALB - ECR
+19. Cognito
+20. EC2 - VPC - DynamoDB
+21. EC2 - EBS
+22. S3
+23. EC2 - IAM - CLI
+24. EC2 - Auto Scaling - ALB
+25. VPC - VPN - EC2 - CloudWatch
+26. VPC - EC2 - Internet Gateway - NACL
+27. CodeDeploy
+28. Elastic Beanstalk
+29. S3
+30. DynamoDB
+31. API Gateway - Lambda
+32. Lambda - ECR
+33. SAM - CloudFormation
+34. EC2 - Reserved Instances
+35. Lambda - IAM - X-Ray
+36. Elastic Beanstalk - CloudFormation
+37. SNS - Lambda - API Gateway
+38. EC2 - EBS - KMS - IAM
+39. CodeDeploy - EC2
+40. RDS - DynamoDB
+41. Kinesis Firehose - S3 - Redshift - OpenSearch
+42. CloudFormation
+43. CodeDeploy - CodeCommit - EC2
+44. SQS - EC2 - Lambda
+45. CodeCommit - S3
+46. Lambda - CloudWatch - SNS
+47. Secrets Manager - IAM - EC2
+48. EC2 - S3 - IAM
+49. CloudFront - S3 - EC2
+50. Step Functions - Lambda - SQS - SNS - EventBridge
+51. AppSync - Amplify - DynamoDB - Cognito
+52. EC2 - EBS
+53. Kinesis Data Streams - KPL
+54. DynamoDB - S3 - EMR - Glue - Data Pipeline
+55. DynamoDB
+56. EC2 - Reserved Instances - On-Demand
+57. EC2 - Security Groups - NACL - VPC
+58. API Gateway - Lambda - Cognito - IAM - STS
+59. ECS - Parameter Store - KMS
+60. Cognito - DynamoDB - IAM
+61. Lambda - DynamoDB - IAM
+62. Lambda - Auto Scaling - CloudWatch
+63. EC2 - S3 - CloudFront - Auto Scaling
+64. CodeBuild - CloudWatch - S3 - Athena
+65. Auto Scaling - EC2

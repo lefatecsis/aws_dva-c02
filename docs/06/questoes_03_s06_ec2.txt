@@ -1,0 +1,122 @@
+---
+
+**8. ELB - EC2**
+
+> Sua empresa possui um balanceador de carga em uma VPC configurado para ser acessível pela internet. O nome DNS público atribuído ao balanceador de carga é myDns-1234567890.us-east-1.elb.amazonaws.com. Quando suas aplicações clientes são carregadas pela primeira vez, elas capturam o nome DNS do balanceador e resolvem o endereço IP para que possam referenciar diretamente o IP subjacente.
+>
+> Foi observado que as aplicações clientes funcionam bem inicialmente, mas param de funcionar inesperadamente após algum tempo. Qual é a causa desse problema?
+
+---
+
+**15. ELB - EC2**
+
+> Sua aplicação web possui um front-end composto por 5 instâncias EC2 atrás de um Application Load Balancer. Você configurou sua aplicação para capturar o endereço IP do cliente que realiza as requisições. Ao analisar os dados capturados, percebe que todos os endereços IP registrados são iguais, sendo o mesmo endereço IP do Application Load Balancer.
+>
+> O que você deve fazer para identificar o endereço IP verdadeiro do cliente?
+
+---
+
+**22. CloudFormation - EC2 - RDS**
+
+> Como um AWS Certified Developer Associate, você está escrevendo um template CloudFormation em YAML. O template consiste na criação de uma instância EC2 e um recurso RDS. Após a criação dos recursos, você deseja exibir o endpoint de conexão do banco de dados RDS.
+>
+> Qual função intrínseca retorna o valor necessário para isso?
+
+---
+
+**24. EC2 - EBS - CLI**
+
+> Uma equipe de desenvolvimento percebeu que uma das instâncias EC2 foi configurada incorretamente com o atributo 'DeleteOnTermination' definido como True para seu volume raiz EBS.
+>
+> Como um associado de desenvolvimento, qual a melhor forma de desabilitar essa flag enquanto a instância ainda está em execução?
+
+---
+
+**29. ELB - ACM - EC2**
+
+> Uma empresa de comércio eletrônico possui uma frota de servidores web baseados em EC2 que estão enfrentando problemas de alta utilização de CPU. A equipe de desenvolvimento determinou que o atendimento de tráfego seguro via HTTPS é um dos principais fatores que contribuem para a alta carga da CPU.
+>
+> Quais das seguintes ações podem reduzir a alta carga de CPU nos servidores web? (Selecione duas.)
+
+---
+
+**30. EBS - KMS - EC2**
+
+> Uma empresa utiliza um grande conjunto de volumes EBS para sua frota de instâncias Amazon EC2. Como um AWS Certified Developer – Associate, foi solicitado seu auxílio para entender os recursos de segurança dos volumes EBS. A empresa não deseja construir ou manter sua própria infraestrutura de gerenciamento de chaves de criptografia.
+>
+> Você pode ajudá-los a entender o que funciona para a criptografia do Amazon EBS? (Selecione duas.)
+
+---
+
+**32. EFS - EC2**
+
+> Uma empresa deseja armazenar seus arquivos acessados com pouca frequência na AWS, que possam ser acessados simultaneamente por centenas de instâncias EC2. A empresa precisa do serviço de armazenamento de arquivos mais econômico que forneça acesso imediato aos dados sempre que necessário.
+>
+> Qual das seguintes opções representa a melhor solução para os requisitos apresentados?
+
+---
+
+**42. ELB**
+
+> Um desenvolvedor acabou de concluir a configuração do Application Load Balancer (ALB) para as instâncias EC2. Ao iniciar os testes, ele percebeu que esqueceu de associar grupos-alvo ao seu ALB.
+>
+> Qual código de erro ele deve esperar encontrar nos logs de depuração?
+
+---
+
+**46. Auto Scaling - CloudWatch**
+
+> Uma empresa configurou um grupo de Auto Scaling com verificações de integridade. A configuração está definida com capacidade desejada de 3 e capacidade máxima de 3. As instâncias EC2 do seu grupo de Auto Scaling estão configuradas para escalar quando a utilização da CPU atingir 60%, e atualmente estão operando com 80% de utilização.
+>
+> O que acontecerá a seguir?
+
+---
+
+**47. EC2**
+
+> Sua equipe acabou de assinar um contrato anual com um cliente que mantém uma aplicação web em três camadas, que precisa ser migrada para a AWS Cloud. A aplicação possui tráfego constante ao longo do dia e necessita estar em um sistema confiável, com alta disponibilidade e sem tempo de inatividade. A solução também precisa ser custo-efetiva para essa startup.
+>
+> Qual das seguintes opções você deve escolher?
+
+---
+
+**50. CloudTrail - EC2 - EBS**
+
+> Uma empresa multinacional executa suas operações de tecnologia na AWS Cloud. Como parte da solução de armazenamento, ela utiliza um grande número de volumes EBS, com AWS Config e CloudTrail ativados. Um gerente tentou encontrar o nome do usuário que criou um volume EBS buscando nos logs de eventos do CloudTrail, mas não obteve sucesso.
+>
+> Como um Associate Developer, qual das seguintes opções você recomendaria como a solução correta para esse problema?
+
+---
+
+**56. Elastic Beanstalk - Auto Scaling - ELB**
+
+> Uma startup gerencia seus recursos na nuvem com Elastic Beanstalk. O ambiente consiste em algumas instâncias Amazon EC2, um Auto Scaling Group (ASG) e um Elastic Load Balancer (ELB). Mesmo após o Load Balancer marcar uma instância EC2 como não saudável, o ASG não a substituiu por uma instância saudável.
+>
+> Como desenvolvedor, qual configuração é necessária para automatizar a substituição da instância não saudável?
+
+---
+
+**61. CodeDeploy - EC2**
+
+> Como engenheiro de confiabilidade de site, você é responsável por melhorar a implantação da empresa escalando e automatizando aplicações. À medida que novas versões da aplicação ficam prontas para produção, você garante que a aplicação seja implantada em diferentes conjuntos de instâncias EC2 em momentos distintos, permitindo uma transição suave.
+>
+> Usando o AWS CodeDeploy, qual das opções a seguir permite realizar isso?
+
+---
+
+**64. Auto Scaling - CodeDeploy - Systems Manager**
+
+> Um desenvolvedor está configurando um Auto Scaling Group do Amazon EC2 que deve lançar instâncias Spot e On-Demand conforme a necessidade. Além disso, o agente do CodeDeploy precisa ser instalado automaticamente nessas instâncias EC2. Todas as instâncias EC2 estão executando o sistema operacional Amazon Linux.
+>
+> Qual é a forma mais eficiente operacionalmente para configurar esse requisito?
+
+---
+
+**65. SQS - EC2**
+
+> Uma aplicação de codificação de vídeo rodando em uma instância EC2 leva cerca de 20 segundos em média para processar cada arquivo de vídeo bruto. A aplicação consome as mensagens de novos trabalhos a partir de uma fila SQS. A equipe de desenvolvimento precisa considerar o cenário em que o processo de codificação de vídeo leva mais tempo do que o habitual, para garantir que o mesmo vídeo bruto não seja processado por múltiplos consumidores.
+>
+> Como um Desenvolvedor Associado, qual das seguintes soluções você recomendaria para atender a esse caso de uso?
+
+---
+

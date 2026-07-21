@@ -1,0 +1,92 @@
+---
+
+**QUESTÃO 1**
+**Kinesis**
+
+> Uma equipe de desenvolvimento está configurando o Amazon Kinesis Data Streams para ingestão de dados em tempo real provenientes de diversos aparelhos. A equipe definiu a capacidade de shards como um para testar a configuração.
+>
+> O que acontece se os limites de capacidade de um stream de dados do Amazon Kinesis forem excedidos enquanto o produtor de dados adiciona dados ao stream?
+
+---
+
+**QUESTÃO 54**
+**Kinesis - KMS**
+
+> Como Desenvolvedor Associado, você é responsável pelo gerenciamento dos dados dos streams do AWS Kinesis na sua empresa. A equipe de segurança estabeleceu requisitos mais rigorosos, utilizando mecanismos disponíveis no serviço Kinesis Data Streams que não exigem alterações no código da sua parte.
+>
+> Quais das seguintes funcionalidades atendem aos requisitos mencionados? (Selecione duas.)
+
+---
+
+**QUESTÃO 58**
+**Kinesis**
+
+> Uma empresa de investimentos deseja gerar continuamente análises de séries temporais das ações compradas por seus clientes. A empresa quer construir um ranking ao vivo com análises quase em tempo real dessas ações mais demandadas.
+>
+> Qual das alternativas a seguir representa uma solução totalmente gerenciada com o menor custo para atender a esse caso de uso?
+
+---
+
+**QUESTÃO 59**
+**Kinesis**
+
+> Uma empresa de análise está utilizando o Kinesis Data Streams (KDS) para processar dados de status de saúde de automóveis de táxis gerenciados por um serviço de transporte por aplicativo. Múltiplas aplicações consumidoras estão utilizando os fluxos de dados recebidos, e os engenheiros notaram uma lentidão no desempenho da entrega dos dados entre os produtores e consumidores dos fluxos de dados.
+>
+> Como um Desenvolvedor Associado, qual das seguintes opções você sugeriria para melhorar o desempenho para esse caso de uso?
+
+---
+
+
+
+Agora vou fazer para **SQS** (próximo serviço com mais ocorrências):
+
+---
+
+### QUESTÕES COM SQS (SEM LAMBDA, EC2, S3, ELB/ALB, DYNAMODB OU KINESIS)
+
+---
+
+**QUESTÃO 38**
+**SQS**
+
+> Sua aplicação envia mensagens com frequência para uma fila do Amazon Simple Queue Service (SQS), que são então consultadas por outra aplicação que especifica qual mensagem deseja recuperar.
+>
+> Qual das opções abaixo descreve o número máximo de mensagens que podem ser recuperadas de uma vez?
+
+---
+
+**QUESTÃO 44**
+**SQS**
+
+> Uma empresa de comércio eletrônico utiliza filas Amazon SQS para desacoplar a arquitetura de sua aplicação. A equipe de desenvolvimento observou falhas no processamento de mensagens em um cenário específico, quando um usuário realiza um pedido para um determinado ID de produto, mas esse ID de produto é excluído, causando a falha no código da aplicação.
+>
+> Como um Desenvolvedor Associado, qual das seguintes soluções você recomendaria para lidar com essas falhas no processamento de mensagens?
+
+---
+
+**QUESTÃO 60**
+**SQS**
+
+> Como desenvolvedor, você está trabalhando em um aplicativo móvel que utiliza o Amazon Simple Queue Service (SQS) para enviar mensagens a sistemas downstream para processamento adicional. Um dos requisitos é que as mensagens sejam armazenadas na fila por um período de 12 dias.
+>
+> Como você configuraria esse requisito?
+
+---
+
+### QUESTÕES ELIMINADAS (POR TEREM LAMBDA, EC2, S3, ELB/ALB, DYNAMODB OU KINESIS)
+
+| Questão | Serviços | Motivo da exclusão |
+|---------|----------|-------------------|
+| 65 | SQS - EC2 | Tem EC2 |
+
+---
+
+### RESUMO FINAL
+
+**Total de questões com SQS sem Lambda, EC2, S3, ELB/ALB, DynamoDB ou Kinesis: 3 questões**
+
+| Questão | Serviços |
+|---------|----------|
+| 38 | SQS |
+| 44 | SQS |
+| 60 | SQS |

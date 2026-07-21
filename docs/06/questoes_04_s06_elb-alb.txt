@@ -1,0 +1,59 @@
+---
+
+### QUESTÕES COM ELB/ALB (SEM LAMBDA, EC2 OU S3)
+
+---
+
+**QUESTÃO 6**
+**Auto Scaling - ELB - CloudWatch**
+
+> Um novo colaborador está tentando entender as particularidades do Auto Scaling do EC2. Como um AWS Certified Developer – Associate, você foi solicitado a orientar esse novo colaborador.
+>
+> Você consegue identificar e explicar as afirmações corretas sobre o Auto Scaling para o novo colaborador? (Selecione três.)
+
+---
+
+**QUESTÃO 9**
+**Auto Scaling - ELB**
+
+> Um desenvolvedor, ao trabalhar com instâncias Amazon EC2, percebeu que uma instância não era mais necessária e a desligou. Porém, outra instância do mesmo tipo foi automaticamente iniciada na conta.
+>
+> Qual das opções a seguir pode explicar essa sequência de ações?
+
+---
+
+**QUESTÃO 42**
+**ELB**
+
+> Um desenvolvedor acabou de concluir a configuração do Application Load Balancer (ALB) para as instâncias EC2. Ao iniciar os testes, ele percebeu que esqueceu de associar grupos-alvo ao seu ALB.
+>
+> Qual código de erro ele deve esperar encontrar nos logs de depuração?
+
+---
+
+**QUESTÃO 49**
+**ELB**
+
+> Um desenvolvedor está configurando as ações de redirecionamento para um Application Load Balancer. Ele encontrou o seguinte trecho de código.
+>
+> Qual das opções abaixo é um exemplo válido de condição para query string que o desenvolvedor pode usar na AWS CLI?
+
+---
+
+**QUESTÃO 56**
+**Elastic Beanstalk - Auto Scaling - ELB**
+
+> Uma startup gerencia seus recursos na nuvem com Elastic Beanstalk. O ambiente consiste em algumas instâncias Amazon EC2, um Auto Scaling Group (ASG) e um Elastic Load Balancer (ELB). Mesmo após o Load Balancer marcar uma instância EC2 como não saudável, o ASG não a substituiu por uma instância saudável.
+>
+> Como desenvolvedor, qual configuração é necessária para automatizar a substituição da instância não saudável?
+
+---
+
+**QUESTÃO 62**
+**ELB**
+
+> Uma equipe de desenvolvimento configurou um Elastic Load Balancer para roteamento baseado em host. O objetivo é suportar múltiplos subdomínios e diferentes domínios de nível superior.
+>
+> A regra *.sample.com corresponde a qual(is) dos seguintes domínios?
+
+---

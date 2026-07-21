@@ -1,0 +1,53 @@
+2. CloudFormation - S3
+
+    Uma equipe de desenvolvimento criou templates do AWS CloudFormation que são reutilizáveis, aproveitando parâmetros de entrada para nomear recursos com base nos nomes dos clientes.
+
+    Você deseja salvar seus templates na nuvem. Qual opção de armazenamento você deve escolher?
+
+5. Elastic Beanstalk - IAM - S3
+
+    Uma empresa multinacional mantém contas AWS separadas para diferentes verticais em sua organização. O gerente de projeto de uma equipe deseja migrar o ambiente Elastic Beanstalk da conta AWS da Equipe A para a conta AWS da Equipe B. Como Desenvolvedor, você foi chamado para ajudar nesse processo.
+
+    Qual das opções a seguir você sugeriria?
+
+11. S3 - KMS
+
+    Uma empresa armazena dados confidenciais em um bucket do Amazon Simple Storage Service (S3). Novas diretrizes regulatórias exigem que os arquivos sejam armazenados com criptografia do lado do servidor. A criptografia utilizada deve ser o Advanced Encryption Standard (AES-256) e a empresa não deseja gerenciar as chaves de criptografia do S3.
+
+    Qual das seguintes opções você deve utilizar?
+
+17. S3 - KMS - IAM
+
+    Uma empresa possui dados sensíveis armazenados em um bucket Amazon S3 que está criptografado usando o AWS Key Management Service (AWS KMS). Um desenvolvedor deseja garantir a criptografia em trânsito para todos os usuários que receberam permissão para usar a operação S3 GetObject em múltiplas contas AWS.
+
+    Qual das seguintes opções representa a melhor solução para esse caso de uso?
+
+19. S3
+
+    Uma aplicação de comércio eletrônico grava arquivos de log no Amazon S3. A aplicação também lê esses arquivos de log em paralelo, quase em tempo real. A equipe de desenvolvimento deseja evitar quaisquer discrepâncias de dados que possam ocorrer quando a aplicação sobrescreve um arquivo de log existente e, em seguida, tenta ler esse arquivo específico.
+
+    Qual das opções a seguir MELHOR descreve as capacidades do Amazon S3 relevantes para esse cenário?
+
+21. S3
+
+    Você é um desenvolvedor responsável por manter uma aplicação web escrita em .NET. A aplicação faz referências a objetos públicos em um bucket S3 público acessível via URL pública. Durante uma revisão de código, seu colega alerta que essa abordagem não é uma boa prática, pois alguns objetos contêm dados privados. Após o administrador tornar o bucket S3 privado, você não consegue mais acessar os objetos, mas deseja criar uma aplicação que permita que as pessoas acessem alguns objetos conforme necessário, com uma restrição de tempo.
+
+    Qual das seguintes opções permitirá o acesso aos objetos?
+
+23. S3
+
+    Uma equipe de desenvolvimento tem utilizado o serviço Amazon S3 como armazenamento de objetos. Com a introdução da consistência forte no Amazon S3, a equipe deseja entender o impacto dessa mudança em suas práticas de armazenamento de dados.
+
+    Como um associado de desenvolvimento, você pode identificar as principais características do modelo de dados com consistência forte adotado pelo S3? (Selecione duas.)
+
+51. CloudTrail - CodePipeline - CodeCommit - S3
+
+    Um pipeline do AWS CodePipeline foi configurado para ser acionado por eventos do Amazon CloudWatch. Recentemente, o pipeline falhou e, após investigação, o líder da equipe percebeu que a origem foi alterada de AWS CodeCommit para Amazon Simple Storage Service (S3). O líder da equipe solicitou que você identifique qual usuário realizou essa alteração.
+
+    Qual serviço da AWS ajudará você a resolver esse problema?
+
+53. S3 - SNS
+
+    Seu colega de equipe configurou uma notificação de evento do Amazon S3 para um bucket que armazena dados sensíveis de auditoria da empresa. Como líder da equipe, você está recebendo as notificações SNS para todos os eventos nesse bucket. Após validar os dados dos eventos, percebeu que alguns eventos estão faltando.
+
+    Qual poderia ser a causa desse comportamento e como evitá-lo no futuro? (Selecione duas.)

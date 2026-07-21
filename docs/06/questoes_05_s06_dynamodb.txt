@@ -1,0 +1,43 @@
+Perfeito! Agora vou fazer para **DynamoDB**, seguindo a mesma regra: **APENAS questões com DynamoDB** e que **NÃO** tenham Lambda, EC2, S3 ou ELB/ALB como serviços mencionados.
+
+---
+
+### QUESTÕES COM DYNAMODB (SEM LAMBDA, EC2, S3 OU ELB/ALB)
+
+---
+
+**QUESTÃO 4**
+**DynamoDB**
+
+> Você é um engenheiro de software trabalhando em uma empresa de TI e foi solicitado a contribuir para uma aplicação interna em crescimento que inclui dashboards para visualização de dados. Você está provisionando uma tabela AWS DynamoDB e precisa realizar 10 leituras fortemente consistentes por segundo, cada uma com tamanho de 4 KB.
+>
+> Quantas Unidades de Capacidade de Leitura (RCUs) são necessárias?
+
+---
+
+**QUESTÃO 28**
+**DynamoDB**
+
+> Uma organização com cargas de trabalho de alto volume de dados migrou com sucesso para o DynamoDB após enfrentar muitos problemas com sistemas tradicionais de banco de dados. No entanto, alguns meses após a entrada em produção, as tabelas do DynamoDB estão registrando latência consistentemente alta.
+>
+> Como um Associate Developer, qual das seguintes opções você sugeriria para reduzir a latência? (Selecione duas.)
+
+---
+
+**QUESTÃO 33**
+**DynamoDB**
+
+> Você é um desenvolvedor DynamoDB em uma empresa aeroespacial que precisa gravar 6 objetos por segundo, cada um com tamanho de 4,5 KB.
+>
+> Qual é a unidade de capacidade de gravação (Write Capacity Unit - WCU) necessária para o seu projeto?
+
+---
+
+**QUESTÃO 40**
+**DynamoDB**
+
+> Você é um desenvolvedor da 'Movie Gallery', uma empresa que acabou de migrar para a nuvem. É necessário criar um banco de dados utilizando tecnologia NoSQL para armazenar filmes que serão listados para visualização pública. Você está em uma etapa importante do design do banco de dados com DynamoDB e precisa escolher a chave de partição apropriada.
+>
+> Qual dos seguintes atributos únicos atende a esse requisito?
+
+---

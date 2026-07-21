@@ -1,0 +1,118 @@
+---
+
+**7. CloudFront - S3 - Lambda**
+
+> Uma aplicação de mídia utiliza uma distribuição Amazon CloudFront para distribuir conteúdo estático configurado em um bucket Amazon S3. A aplicação é utilizada em diferentes países e várias Regiões AWS. Algumas regiões têm experimentado latência quando ocorre um cache miss no CloudFront.
+>
+> Qual das seguintes alterações de configuração você sugeriria para diminuir a latência e melhorar a performance do usuário redirecionando as requisições em caso de cache miss para o bucket S3 na Região mais próxima do país do usuário?
+
+---
+
+**QUESTÃO 14**
+**ECS - CloudWatch Logs - IAM**
+
+> Um desenvolvedor está configurando instâncias de contêiner do Amazon ECS para enviar informações de logs para o CloudWatch Logs. Para que as instâncias de contêiner possam enviar dados de log ao CloudWatch Logs, é necessário criar uma política IAM que permita que as instâncias utilizem as APIs do CloudWatch Logs.
+>
+> Qual política é a mais adequada para atender a esse requisito?
+
+---
+
+**QUESTÃO 37**
+**ECS**
+
+> A equipe de desenvolvimento de uma empresa de comércio eletrônico deseja executar um serviço de armazenamento de dados serverless em dois containers Docker que compartilham recursos.
+>
+> Qual das seguintes configurações do ECS pode ser usada para facilitar esse caso de uso?
+
+---
+
+**QUESTÃO 43**
+**ECS - CloudWatch Logs**
+
+> Uma aplicação é executada no Amazon Elastic Container Service (Amazon ECS) usando AWS Fargate. Os requisitos de auditoria da empresa exigem que o registro e o armazenamento dos dados de logs da aplicação sejam feitos de forma centralizada na AWS.
+>
+> Como você configuraria esse requisito?
+
+---
+
+**QUESTÃO 45**
+**ECS - IAM**
+
+> Uma empresa deseja automatizar a criação de clusters ECS usando CloudFormation. O processo funcionou por um tempo, mas após criar definições de tarefas e atribuir funções, a equipe de desenvolvimento descobre que as tarefas dos containers não estão utilizando as permissões atribuídas a elas.
+>
+> Qual configuração do ECS deve ser definida em /etc/ecs/ecs.config para permitir que as tarefas ECS utilizem funções IAM?
+
+---
+
+**QUESTÃO 46**
+**Auto Scaling - CloudWatch**
+
+> Uma empresa configurou um grupo de Auto Scaling com verificações de integridade. A configuração está definida com capacidade desejada de 3 e capacidade máxima de 3. As instâncias EC2 do seu grupo de Auto Scaling estão configuradas para escalar quando a utilização da CPU atingir 60%, e atualmente estão operando com 80% de utilização.
+>
+> O que acontecerá a seguir?
+
+---
+
+**QUESTÃO 31**
+**X-Ray - CloudTrail - CloudWatch - API Gateway**
+
+> Uma empresa utiliza uma infraestrutura baseada em microsserviços para processar chamadas de API de clientes, realizar filtragem de requisições e armazenar em cache usando o AWS API Gateway. Os usuários relatam receber o código de erro 501 e você foi acionado para identificar o que está falhando.
+>
+> Qual serviço você escolheria para ajudar na solução desse problema?
+
+---
+
+**QUESTÃO 52**
+**CloudFormation**
+
+> A equipe de desenvolvimento de uma empresa de TI utiliza o CloudFormation para gerenciar sua infraestrutura AWS. A equipe criou uma stack de rede contendo uma VPC com sub-redes e uma stack de aplicação web com instâncias EC2 e uma instância RDS. A equipe deseja referenciar a VPC criada na stack de rede dentro da stack da aplicação web.
+>
+> Como um profissional com certificação Developer Associate, qual das seguintes soluções você recomendaria para esse caso de uso?
+
+---
+
+**QUESTÃO 10**
+**KMS**
+
+> Um desenvolvedor em uma universidade está criptografando uma grande carga útil XML transferida pela rede usando o AWS KMS e deseja testar a aplicação antes de ir para produção.
+>
+> Qual é o tamanho máximo de dados suportado pelo AWS KMS para criptografia direta?
+
+---
+
+**QUESTÃO 35**
+**RDS**
+
+> A equipe de desenvolvimento de uma empresa de saúde está planejando migrar para a AWS Cloud a partir do data center local. A equipe está avaliando o Amazon RDS como camada de banco de dados para sua aplicação principal.
+>
+> Quais das seguintes afirmações você identificaria como corretas para o RDS Multi-AZ? (Selecione duas.)
+
+---
+
+**QUESTÃO 41**
+**Elastic Beanstalk - Route 53**
+
+> Uma empresa de varejo gerencia sua infraestrutura de TI na AWS Cloud utilizando o Elastic Beanstalk. A equipe de desenvolvimento planeja implantar a próxima versão da aplicação com o MÍNIMO tempo de inatividade e a capacidade de realizar rollback rapidamente caso a implantação apresente problemas.
+>
+> Como um Associate Developer, qual das seguintes opções você recomendaria para a equipe de desenvolvimento?
+
+---
+
+**QUESTÃO 63**
+**CloudFront**
+
+> Um aplicativo de streaming de vídeo utiliza o Amazon CloudFront para distribuição de dados. A equipe de desenvolvimento decidiu usar o CloudFront com failover de origem para alta disponibilidade.
+>
+> Quais das seguintes opções estão corretas ao configurar o CloudFront com Grupos de Origem? (Selecione duas.)
+
+---
+
+**QUESTÃO 64**
+**Auto Scaling - CodeDeploy - Systems Manager**
+
+> Um desenvolvedor está configurando um Auto Scaling Group do Amazon EC2 que deve lançar instâncias Spot e On-Demand conforme a necessidade. Além disso, o agente do CodeDeploy precisa ser instalado automaticamente nessas instâncias EC2. Todas as instâncias EC2 estão executando o sistema operacional Amazon Linux.
+>
+> Qual é a forma mais eficiente operacionalmente para configurar esse requisito?
+
+---
+

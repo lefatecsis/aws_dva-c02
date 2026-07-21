@@ -1,0 +1,78 @@
+Aqui estão todas as perguntas que mencionam **AWS Lambda**, com a numeração correspondente e o texto completo de cada uma:
+
+---
+
+**3. Lambda - CloudWatch**
+> "Quais passos um desenvolvedor pode tomar para otimizar o desempenho de uma função AWS Lambda limitada por CPU e garantir um tempo de resposta rápido?"
+
+---
+
+**6. SAM - CloudFormation - Lambda**
+> "Um desenvolvedor está criando uma aplicação serverless na AWS e deseja estabelecer um fluxo de trabalho acelerado para desenvolvimento. O fluxo deve permitir que o desenvolvedor faça deploy de mudanças incrementais para testes, sem precisar implantar toda a aplicação a cada commit de código. O desenvolvedor quer otimizar o processo, minimizando o tempo de implantação. O que o desenvolvedor deve fazer para atender a esses requisitos?"
+
+---
+
+**7. Step Functions - Lambda**
+> "Ao definir um fluxo de trabalho empresarial como uma máquina de estados no AWS Step Functions, um desenvolvedor configurou vários estados. Qual dos seguintes você identificaria como o estado que representa uma única unidade de trabalho executada por uma máquina de estados?"
+
+---
+
+**10. API Gateway - Lambda - Cognito - S3 - DynamoDB**
+> "Considere uma aplicação que permite aos usuários armazenar imagens de seus celulares na nuvem e suporta dezenas de milhares de usuários. A aplicação deve utilizar uma API REST do Amazon API Gateway que aproveite funções AWS Lambda para o processamento das fotos, enquanto armazena os detalhes das fotos no Amazon DynamoDB. A aplicação deve permitir que os usuários criem uma conta, façam upload de imagens e recuperem imagens previamente enviadas, com imagens variando de 500 KB a 5 MB. Como você projetaria essa aplicação com o menor overhead operacional possível?"
+
+---
+
+**17. Lambda - KMS - S3**
+> "Você lançou várias funções AWS Lambda escritas em Java. Um novo requisito foi definido: mais de 1 MB de dados devem ser passados para as funções e precisam ser criptografados e descriptografados em tempo de execução. Qual dos seguintes métodos é adequado para atender a esse caso de uso?"
+
+---
+
+**31. API Gateway - Lambda**
+> "Como um AWS Certified Developer Associate, você foi contratado para trabalhar com a equipe de desenvolvimento de uma empresa para criar uma API REST utilizando arquitetura serverless. Qual das seguintes soluções você escolheria para migrar a empresa para o paradigma de arquitetura serverless?"
+
+---
+
+**32. Lambda - ECR**
+> "Um desenvolvedor deseja empacotar o código e as dependências das funções Lambda específicas da aplicação como imagens de contêiner para serem hospedadas no Amazon Elastic Container Registry (ECR). Quais das opções a seguir estão corretas para o requisito apresentado? (Selecione duas.)"
+
+---
+
+**35. Lambda - IAM - X-Ray**
+> "Recentemente, em sua organização, o SDK do AWS X-Ray foi incorporado em cada função Lambda para registrar chamadas de saída para fins de rastreamento. Quando seu líder de equipe acessa o serviço X-Ray no Console de Gerenciamento da AWS para obter uma visão geral das informações coletadas, ele descobre que nenhum dado está disponível. Qual é a causa mais provável desse problema?"
+
+---
+
+**37. SNS - Lambda - API Gateway**
+> "Uma empresa de comércio eletrônico gerencia uma aplicação de microsserviços que recebe pedidos de vários parceiros por meio de uma API personalizada para cada parceiro, exposta via Amazon API Gateway. Os pedidos são processados por uma função Lambda compartilhada. Como a empresa pode notificar cada parceiro sobre o status dos seus respectivos pedidos da forma mais eficiente, sem impactar os pedidos dos outros parceiros? Além disso, a solução deve ser escalável para acomodar novos parceiros com o mínimo de alterações no código."
+
+---
+
+**44. SQS - EC2 - Lambda**
+> "Uma aplicação executando em instâncias EC2 processa mensagens de uma fila SQS. No entanto, às vezes as mensagens não são processadas corretamente e acabam em erro. Essas mensagens precisam ser isoladas para processamento e solução de problemas posteriores. Qual das opções a seguir ajudará a alcançar esse objetivo?"
+
+---
+
+**46. Lambda - CloudWatch - SNS**
+> "Uma aplicação serverless construída na AWS processa pedidos de clientes 24/7 utilizando uma função AWS Lambda e se comunica com a API HTTP de um fornecedor externo para o processamento de pagamentos. A equipe de desenvolvimento deseja notificar a equipe de suporte quase em tempo real usando um tópico Amazon Simple Notification Service (Amazon SNS) já existente, mas somente quando a taxa de erro da API externa ultrapassar 5% do total de transações processadas em uma hora. Como um AWS Certified Developer – Associate, qual opção você sugeriria como a solução mais eficiente?"
+
+---
+
+**50. Step Functions - Lambda - SQS - SNS - EventBridge**
+> "Uma empresa deseja automatizar seu fluxo de trabalho de atendimento de pedidos e rastreamento de inventário. Desde a criação do pedido até a atualização do inventário e o envio, todo o processo precisa ser monitorado, gerenciado e atualizado automaticamente. Qual das seguintes opções você recomendaria como a solução mais otimizada para esse requisito?"
+
+---
+
+**58. API Gateway - Lambda - Cognito - IAM - STS**
+> "Um desenvolvedor está buscando estabelecer controle de acesso para uma API que se conecta a uma função Lambda downstream. Qual dos seguintes mecanismos NÃO pode ser usado para autenticação com o API Gateway?"
+
+---
+
+**61. Lambda - DynamoDB - IAM**
+> "Uma equipe de desenvolvimento está trabalhando em uma função AWS Lambda que acessa o DynamoDB. A função Lambda deve realizar um upsert, ou seja, deve recuperar um item e atualizar alguns de seus atributos ou criar o item caso ele não exista. Qual das seguintes opções representa a solução com as permissões IAM MÍNIMAS que podem ser usadas pela função Lambda para alcançar essa funcionalidade?"
+
+---
+
+**62. Lambda - Auto Scaling - CloudWatch**
+> "A equipe de desenvolvimento de uma empresa varejista está se preparando para a próxima promoção de Ação de Graças e quer garantir que o backend serverless da aplicação, executado por funções Lambda, não sofra gargalos de latência devido ao aumento repentino de tráfego. Como um Associate Developer, qual das seguintes soluções você recomendaria para atender a esse caso de uso?"
+
+---

@@ -1,0 +1,90 @@
+---
+
+**13. API Gateway - Lambda**
+
+> Um desenvolvedor está criando um serviço de API RESTful usando o Amazon API Gateway com integração AWS Lambda. O serviço deve suportar diferentes versões da API para fins de teste.
+>
+> Como um Associate Developer, qual das seguintes opções você sugeriria como a melhor forma de realizar isso?
+
+---
+
+**16. Lambda**
+
+> Uma empresa possui funções AWS Lambda que são invocadas por outros serviços AWS, como Amazon Kinesis Data Firehose, Amazon API Gateway, Amazon Simple Storage Service ou Amazon CloudWatch Events. O que essas funções Lambda têm em comum é que elas processam cargas de trabalho pesadas, como análise de big data, processamento de arquivos grandes e cálculos estatísticos.
+>
+> O que você deve fazer para melhorar o desempenho das suas funções AWS Lambda sem alterar o código?
+
+---
+
+**18. ELB - ECS - API Gateway - Lambda**
+
+> Uma empresa especializada em plataforma de comunicação em nuvem como serviço permite que desenvolvedores de software utilizem programaticamente seus serviços para enviar e receber mensagens de texto. A plataforma inicial não possuía uma arquitetura escalável, pois todos os componentes estavam hospedados em um único servidor, e deve ser redesenhada para alta disponibilidade e escalabilidade.
+>
+> Quais das seguintes opções podem ser usadas para implementar a nova arquitetura? (Selecione duas.)
+
+---
+
+**27. Lambda - DynamoDB - IAM**
+
+> A equipe de desenvolvimento de uma organização varejista deseja permitir que uma função Lambda em sua Conta AWS A acesse uma tabela DynamoDB em outra Conta AWS B.
+>
+> Como um Associate Developer, qual das seguintes soluções você recomendaria para esse caso de uso? (Selecione duas.)
+
+---
+
+**31. X-Ray - CloudTrail - CloudWatch - API Gateway**
+
+> Uma empresa utiliza uma infraestrutura baseada em microsserviços para processar chamadas de API de clientes, realizar filtragem de requisições e armazenar em cache usando o AWS API Gateway. Os usuários relatam receber o código de erro 501 e você foi acionado para identificar o que está falhando.
+>
+> Qual serviço você escolheria para ajudar na solução desse problema?
+
+---
+
+**34. EventBridge - CodeCommit - Lambda**
+
+> Sua organização possui desenvolvedores que fazem merge de alterações de código regularmente em um repositório AWS CodeCommit. Seu pipeline utiliza o AWS CodeCommit como fonte e você deseja configurar uma regra que reaja a mudanças no CodeCommit.
+>
+> Qual das opções a seguir você escolheria para esse tipo de integração?
+
+---
+
+**36. ELB - Cognito - CloudFront**
+
+> Um aplicativo de compartilhamento de fotos gerencia sua frota de servidores EC2 por trás de um Application Load Balancer, e o tráfego é distribuído por uma distribuição CloudFront. A equipe de desenvolvimento deseja desacoplar o processo de autenticação de usuários do aplicativo para que os servidores possam focar apenas na lógica de negócio.
+>
+> Como um Associate Developer, qual das seguintes soluções você recomendaria para atender a esse caso de uso com o mínimo esforço de desenvolvimento?
+
+---
+
+**39. API Gateway - Lambda - DynamoDB**
+
+> Uma empresa deseja implementar autenticação para seu novo serviço RESTful API que utiliza o Amazon API Gateway. Para autenticar as chamadas, cada requisição deve incluir cabeçalhos HTTP com um client ID e um user ID. Essas credenciais devem ser comparadas com os dados de autenticação armazenados em uma tabela DynamoDB.
+>
+> Como um AWS Certified Developer – Associate, qual das seguintes opções você recomendaria para implementar essa autenticação no API Gateway?
+
+---
+
+**48. Lambda - ELB**
+
+> A equipe de desenvolvimento de uma empresa de TI configurou um Application Load Balancer (ALB) com uma função Lambda A como alvo, mas a função Lambda A não consegue processar nenhuma requisição proveniente do ALB. Após investigação, a equipe descobriu que há outra função Lambda B na conta AWS que está ultrapassando os limites de concorrência.
+>
+> Como a equipe de desenvolvimento pode resolver esse problema?
+
+---
+
+**55. API Gateway - Lambda - CloudWatch Logs - IAM - STS**
+
+> Um desenvolvedor acabou de integrar uma função AWS Lambda a uma API do Amazon API Gateway. A integração resultou em erros que o desenvolvedor não consegue solucionar. Por isso, ele decidiu habilitar o registro de logs no CloudWatch no nível do método para a API Gateway.
+>
+> Quais são os pontos principais a serem considerados ao configurar o registro de logs no nível do método para a API Gateway? (Selecione duas.)
+
+---
+
+**57. API Gateway - Lambda**
+
+> Você é um desenvolvedor em uma empresa de nuvem que adota arquitetura serverless. Você já realizou o deployment inicial e deseja avançar para adicionar estágios no API Gateway, associando-os a deployments existentes. Seus estágios incluirão prod, test e dev, e precisarão corresponder a variantes de funções Lambda que podem ser atualizadas ao longo do tempo.
+>
+> Quais dos seguintes recursos você deve adicionar para alcançar esse objetivo? (Selecione duas.)
+
+---
+

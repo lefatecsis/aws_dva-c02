@@ -1,0 +1,32 @@
+---
+
+### QUESTÕES COM SQS (SEM LAMBDA, EC2, S3, ELB/ALB, DYNAMODB OU KINESIS)
+
+---
+
+**QUESTÃO 38**
+**SQS**
+
+> Sua aplicação envia mensagens com frequência para uma fila do Amazon Simple Queue Service (SQS), que são então consultadas por outra aplicação que especifica qual mensagem deseja recuperar.
+>
+> Qual das opções abaixo descreve o número máximo de mensagens que podem ser recuperadas de uma vez?
+
+---
+
+**QUESTÃO 44**
+**SQS**
+
+> Uma empresa de comércio eletrônico utiliza filas Amazon SQS para desacoplar a arquitetura de sua aplicação. A equipe de desenvolvimento observou falhas no processamento de mensagens em um cenário específico, quando um usuário realiza um pedido para um determinado ID de produto, mas esse ID de produto é excluído, causando a falha no código da aplicação.
+>
+> Como um Desenvolvedor Associado, qual das seguintes soluções você recomendaria para lidar com essas falhas no processamento de mensagens?
+
+---
+
+**QUESTÃO 60**
+**SQS**
+
+> Como desenvolvedor, você está trabalhando em um aplicativo móvel que utiliza o Amazon Simple Queue Service (SQS) para enviar mensagens a sistemas downstream para processamento adicional. Um dos requisitos é que as mensagens sejam armazenadas na fila por um período de 12 dias.
+>
+> Como você configuraria esse requisito?
+
+---
