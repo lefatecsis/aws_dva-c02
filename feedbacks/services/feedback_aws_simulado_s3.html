@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questões AWS - DVA-C02 (Completas)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <style>
+        body {
+            background: #f4f6f9;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
+
+        .main-title {
+            font-weight: 700;
+            color: #1a2a4a;
+            border-left: 6px solid #ff9900;
+            padding-left: 1.2rem;
+        }
+
+        .badge-s3 {
+            background: #1a5a3a;
+            color: #fff;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .card-question {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 20, 40, 0.06);
+            transition: all 0.15s ease;
+            background: #ffffff;
+        }
+
+        .card-question:hover {
+            box-shadow: 0 12px 28px rgba(0, 20, 40, 0.10);
+        }
+
+        .card-header-custom {
+            background: #f9faff;
+            border-bottom: 1px solid #e9edf4;
+            border-radius: 20px 20px 0 0 !important;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .q-number {
+            background: #1a2a4a;
+            color: white;
+            font-weight: 600;
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .q-simulado {
+            background: #6c757d;
+            color: white;
+            font-weight: 500;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .q-text {
+            font-weight: 600;
+            color: #0b1a33;
+            font-size: 1.08rem;
+        }
+
+        .option-item {
+            border-radius: 14px;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 0.6rem;
+            border: 1px solid #eef2f7;
+            transition: 0.1s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            background: #f9fafc;
+        }
+
+        .option-item:hover {
+            background: #f1f4fe;
+            border-color: #cbd5e1;
+        }
+
+        .option-item.correct {
+            background: #e6f7ed;
+            border-color: #8fdbb6;
+        }
+
+        .option-item.incorrect {
+            background: #fde8e8;
+            border-color: #f5bebe;
+        }
+
+        .option-letter {
+            font-weight: 700;
+            color: #1f3a6b;
+            min-width: 28px;
+        }
+
+        .option-text {
+            color: #1f2a44;
+        }
+
+        .badge-correct {
+            background: #d1fae5;
+            color: #0b5e3b;
+            font-weight: 600;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+        }
+
+        .badge-incorrect {
+            background: #fee2e2;
+            color: #991b1b;
+            font-weight: 600;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+        }
+
+        .explanation-box {
+            background: #f2f6fe;
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            border-left: 5px solid #ff9900;
+            margin-top: 1rem;
+        }
+
+        .explanation-box h6 {
+            color: #1f3a6b;
+            font-weight: 700;
+        }
+
+        .explanation-box .alt-explication {
+            font-size: 0.92rem;
+            padding: 0.6rem 0.9rem;
+            margin-top: 0.4rem;
+            border-radius: 8px;
+            background: #ffffffcc;
+            border-left: 3px solid #adb5bd;
+        }
+
+        .explanation-box .alt-explication.correct-alt {
+            border-left-color: #28a745;
+        }
+
+        .explanation-box .alt-explication.incorrect-alt {
+            border-left-color: #dc3545;
+        }
+
+        .glossary-card {
+            background: #f8faff;
+            border: 1px solid #dce3ed;
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .glossary-card h6 {
+            color: #1f3a6b;
+            font-weight: 700;
+        }
+
+        .glossary-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        .glossary-card ul li::before {
+            content: "● ";
+            color: #ff9900;
+            font-weight: 700;
+        }
+
+        .glossary-card ul li {
+            padding: 0.15rem 0;
+            font-size: 0.92rem;
+            color: #1f2a44;
+        }
+
+        .glossary-card .general-explanation {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #dce3ed;
+        }
+
+        .glossary-card .general-explanation ul {
+            padding-left: 1.2rem;
+        }
+
+        .glossary-card .general-explanation ul li {
+            list-style: disc;
+            font-size: 0.92rem;
+        }
+
+        .glossary-card .general-explanation ul li::before {
+            content: "";
+        }
+
+        .glossary-card .real-world {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #dce3ed;
+        }
+
+        .glossary-card .real-world ul {
+            padding-left: 1.2rem;
+        }
+
+        .glossary-card .real-world ul li {
+            list-style: disc;
+            font-size: 0.92rem;
+        }
+
+        .glossary-card .real-world ul li::before {
+            content: "";
+        }
+
+        .domain-tag {
+            background: #e6edf8;
+            color: #1f3a6b;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-note {
+            color: #4a5b7a;
+            border-top: 1px solid #dce3ed;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 576px) {
+            .q-text {
+                font-size: 0.98rem;
+            }
+
+            .option-item {
+                padding: 0.6rem 1rem;
+            }
+
+            .q-number {
+                font-size: 0.75rem;
+                padding: 0.15rem 0.6rem;
+            }
+
+            .q-simulado {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+    </style>
+
+    <style>
+        #anchorNav {
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            background: #ffffff;
+            padding: 0.6rem 0.75rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #dce3ed;
+            box-shadow: 0 2px 8px rgba(0, 20, 40, 0.07);
+        }
+
+        #anchorNav a {
+            background: #1a2a4a;
+            color: white;
+            font-weight: 600;
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            text-decoration: none;
+            transition: background 0.15s ease;
+        }
+
+        #anchorNav a:hover {
+            background: #ff9900;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container py-5">
+
+        <!-- Header DINÂMICO -->
+        <div id="headerContainer"></div>
+
+        <!-- Âncoras de navegação por simulado -->
+        <div id="anchorNav" class="d-flex flex-wrap gap-2"></div>
+
+        <!-- Container das questões -->
+        <div id="questionsContainer"></div>
+
+        <!-- Rodapé -->
+        <div class="footer-note" id="footerContainer">
+            <i class="bi bi-diagram-3 me-2"></i> <span id="footerText">Carregando...</span>
+        </div>
+
+    </div>
+
+    <script>
+        // ============================================================
+        // CONFIGURAÇÃO DO SERVIÇO
+        // ============================================================
+        const serviceConfig = {
+            name: "Amazon S3",
+            icon: "bi-folder2-open",
+            badgeIcon: "bi-folder-fill",
+            badgeClass: "badge-s3",
+            color: "#ff9900",
+            tags: ["Armazenamento", "Todas as explicações", "Gerado por JavaScript"]
+        };
+
+        // ============================================================
+        // DADOS DAS QUESTÕES - com número original do simulado
+        // ============================================================
+        const questionsDatabase = {
+            "feedback_aws_simulado_1": [{
+                // QUESTÃO 3 do simulado
+                id: 3,
+                title: "IAM Access Analyzer para buckets S3 expostos",
+                domain: "Segurança",
+                prompt: "Um desenvolvedor foi encarregado de proteger determinados buckets S3 que são compartilhados por uma grande equipe de usuários. Na última vez em que a política de um bucket foi alterada, ele ficou erroneamente disponível para qualquer pessoa, inclusive fora da organização. Qual recurso/serviço ajudará o desenvolvedor a identificar problemas de segurança semelhantes com o mínimo de esforço?",
+                options: [
+                    { letter: "A", text: "IAM Access Analyzer", correct: true },
+                    { letter: "B", text: "Access Advisor (console IAM)", correct: false },
+                    { letter: "C", text: "S3 Analytics", correct: false },
+                    { letter: "D", text: "S3 Object Lock", correct: false }
+                ],
+                explanations: [
+                    { correct: true, text: "O AWS IAM Access Analyzer ajuda a identificar recursos na sua organização e contas, como buckets Amazon S3 ou funções IAM, que estão compartilhados com entidades externas. Isso permite detectar acessos não intencionais aos seus recursos e dados, reduzindo riscos de segurança." },
+                    { correct: false, text: "O Access Advisor informa o último uso de funções IAM para ajudar a identificar funções não utilizadas, auxiliando na remoção segura dessas funções. No entanto, ele não fornece informações sobre entidades fora do IAM, como buckets S3, e portanto não é adequado para este cenário." },
+                    { correct: false, text: "O Amazon S3 Analytics Storage Class Analysis ajuda a analisar padrões de acesso para otimizar a transição de dados entre classes de armazenamento. Ele não é capaz de identificar acessos não intencionais ou problemas de segurança em buckets S3." },
+                    { correct: false, text: "O S3 Object Lock permite armazenar objetos usando o modelo \"Write Once Read Many\" (WORM), prevenindo exclusões acidentais ou inadequadas de dados. Porém, não é adequado para identificar problemas de acesso ou políticas incorretas em buckets S3." }
+                ],
+                glossary: [
+                    "IAM Access Analyzer: ferramenta da AWS que identifica recursos compartilhados com entidades externas à organização, destacando acessos não intencionais.",
+                    "S3 Object Lock: recurso WORM do S3 que previne exclusões ou alterações em objetos, garantindo integridade.",
+                    "Access Advisor: mostra o último uso das permissões associadas a usuários ou funções IAM, útil para identificar permissões não utilizadas.",
+                    "S3 Analytics: analisa padrões de acesso para otimizar classes de armazenamento, sem foco em segurança.",
+                    "Bucket Policy: conjunto de regras que define quem pode acessar um bucket S3 e quais ações são permitidas.",
+                    "Zona de confiança: escopo interno versus externo usado para definir limites de análise de acesso.",
+                    "WORM (Write Once Read Many): modelo de armazenamento em que dados gravados não podem ser alterados ou excluídos, garantindo integridade."
+                ],
+                generalExplanation: [
+                    "O <strong>IAM Access Analyzer</strong> é a ferramenta indicada para identificar buckets S3 expostos inadvertidamente a entidades externas à organização.",
+                    "Ele analisa políticas e permissões, destacando recursos acessíveis fora da zona de confiança.",
+                    "Outras opções, como S3 Object Lock, Access Advisor, S3 Analytics ou Bucket Policies manuais, não oferecem análise automatizada ou abrangente de acessos externos, tornando o Access Analyzer a escolha ideal para este cenário."
+                ],
+                realWorld: [
+                    "Em empresas com múltiplas equipes usando buckets S3 compartilhados, alterações nas políticas podem abrir brechas de segurança.",
+                    "Um engenheiro de segurança pode usar o IAM Access Analyzer para monitorar continuamente esses buckets e identificar qualquer exposição externa.",
+                    "Por exemplo, em pipelines que usam <strong>AWS Lambda</strong> para processar dados S3, o Access Analyzer garante que apenas funções ou usuários autorizados tenham acesso, prevenindo vazamentos e mantendo conformidade com normas internas e regulatórias.",
+                    "Além disso, ele fornece alertas e relatórios que facilitam ações corretivas rápidas, mantendo o ambiente seguro e controlado."
+                ]
+            }, {
+                // QUESTÃO 35 do simulado
+                id: 35,
+                title: "Política genérica para pastas de usuários no S3",
+                domain: "Segurança",
+                prompt: "O gerente de uma empresa de TI deseja configurar o acesso dos membros a pastas específicas de usuários em um bucket Amazon S3 - bucket-a. Assim, o usuário x pode acessar apenas os arquivos em sua pasta - bucket-a/user/user-x/ e o usuário y pode acessar apenas os arquivos em sua pasta - bucket-a/user/user-y/, e assim por diante. Como um Associate Developer, qual das seguintes construções do IAM você recomendaria para que o trecho da política possa ser genérico para todos os membros da equipe, evitando que o gerente precise criar uma política IAM separada para cada membro?",
+                options: [
+                    { letter: "A", text: "Principal de política IAM", correct: false },
+                    { letter: "B", text: "Variáveis de política IAM", correct: true },
+                    { letter: "C", text: "Recurso de política IAM", correct: false },
+                    { letter: "D", text: "Condição de política IAM", correct: false }
+                ],
+                explanations: [
+                    { correct: false, text: "O elemento Principal é usado para especificar a entidade que pode acessar um recurso, geralmente em políticas baseadas em recursos ou políticas de confiança de funções IAM, e não pode ser usado em políticas baseadas em identidade para parametrizar o acesso de múltiplos usuários." },
+                    { correct: true, text: "As variáveis de política IAM funcionam como espaços reservados que são substituídos por valores específicos da solicitação no momento da avaliação da política. Isso permite criar uma única política genérica que se aplica a múltiplos usuários, como membros de uma equipe, controlando o acesso a pastas específicas de cada usuário sem a necessidade de políticas individuais." },
+                    { correct: false, text: "O elemento Resource define os recursos (ARNs) aos quais a política se aplica, mas não oferece um mecanismo para tornar o recurso dinâmico ou genérico para múltiplos usuários. Para isso, é necessário usar variáveis na definição do recurso." },
+                    { correct: false, text: "O elemento Condition permite especificar condições para quando uma política está em vigor, como comparar valores específicos, mas não é adequado para parametrizar recursos de forma genérica para múltiplos usuários com base em seus nomes ou pastas específicas." }
+                ],
+                glossary: [
+                    "Variáveis de política IAM: espaços reservados que são substituídos por <strong>valores dinâmicos</strong> no momento da avaliação da política, permitindo personalizar permissões para diferentes usuários sem criar políticas separadas.",
+                    "Condição de política IAM: bloco que define critérios específicos que devem ser atendidos para que a política seja aplicada, como comparação de atributos da solicitação; <strong>não parametriza recursos dinamicamente</strong>.",
+                    "Recurso de política IAM: elemento que especifica os <strong>recursos da AWS (ARNs)</strong> aos quais a política se aplica, definindo o escopo da permissão.",
+                    "Principal de política IAM: entidade (usuário, função ou serviço) autorizada a acessar um recurso, geralmente usado em <strong>políticas baseadas em recursos</strong> ou <strong>políticas de confiança</strong>."
+                ],
+                generalExplanation: [
+                    "Para controlar o acesso de múltiplos usuários a <strong>pastas específicas dentro de um bucket S3</strong> com uma <strong>única política</strong>, o uso de <strong>variáveis de política IAM</strong> é a melhor prática.",
+                    "Permite que o caminho do recurso seja <strong>parametrizado dinamicamente</strong> com base no usuário que faz a requisição, como <code>${aws:username}</code>, evitando criar uma política individual para cada membro da equipe.",
+                    "Outras opções, como <strong>condições</strong>, <strong>recursos fixos</strong> ou <strong>principal</strong>, <strong>não oferecem a flexibilidade</strong> de generalizar o acesso de forma segura e eficiente."
+                ],
+                realWorld: [
+                    "Em um ambiente corporativo, equipes de desenvolvimento ou suporte podem ter <strong>pastas individuais</strong> dentro de um bucket S3 compartilhado.",
+                    "Uma política usando <code>${aws:username}</code> garante que <strong>cada usuário acesse apenas sua pasta</strong>, mantendo segurança e isolamento, sem criar múltiplas políticas.",
+                    "Exemplo: em aplicações <strong>serverless</strong>, funções Lambda podem assumir papéis com <strong>políticas parametrizadas</strong> para acessar apenas os dados específicos de cada usuário.",
+                    "Essa abordagem facilita <strong>controle de acesso granular e automatizado</strong>, alinhado às <strong>melhores práticas de segurança AWS</strong>, reduzindo esforço administrativo e riscos de exposição de dados."
+                ]
+            }, {
+                // QUESTÃO 59 do simulado
+                id: 59,
+                title: "Política de bucket para exigir SSE-KMS",
+                domain: "Segurança",
+                prompt: "Um desenvolvedor está configurando uma política de bucket que nega a permissão de upload de objetos para qualquer requisição que não inclua o cabeçalho x-amz-server-side-encryption solicitando criptografia do lado do servidor com SSE-KMS para um bucket Amazon S3 chamado examplebucket. Qual das seguintes políticas atende corretamente a esse requisito?",
+                options: [
+                    { letter: "A", text: "Política com StringEquals e \"aws:kms\"", correct: false },
+                    { letter: "B", text: "Política com StringNotEquals e \"false\"", correct: false },
+                    { letter: "C", text: "Política negando s3:GetObject com AES256", correct: false },
+                    { letter: "D", text: "Política com StringNotEquals e \"aws:kms\"", correct: true }
+                ],
+                explanations: [
+                    { correct: false, text: "Embora verifique o valor correto do cabeçalho SSE-KMS, a condição usa 'StringEquals' em vez de 'StringNotEquals'. Isso significa que ela negaria uploads apenas quando o cabeçalho for exatamente \"aws:kms\", o que é o oposto do comportamento desejado." },
+                    { correct: false, text: "Esta política nega uploads quando o cabeçalho de criptografia não é \"false\", o que não faz sentido, pois \"false\" não é um valor válido para o cabeçalho 'x-amz-server-side-encryption'." },
+                    { correct: false, text: "Esta política nega a ação s3:GetObject, que é para leitura, enquanto o requisito é negar uploads (s3:PutObject). Além disso, verifica a criptografia SSE-S3 (AES256) em vez de SSE-KMS." },
+                    { correct: true, text: "Esta política nega a permissão de upload (s3:PutObject) para qualquer requisição que não inclua o cabeçalho 'x-amz-server-side-encryption' com o valor \"aws:kms\", garantindo que apenas uploads criptografados com SSE-KMS sejam permitidos." }
+                ],
+                glossary: [
+                    "SSE-KMS: Server-Side Encryption com <strong>AWS Key Management Service</strong>, método de criptografia gerenciado que utiliza <strong>chaves KMS</strong> para proteger dados em repouso.",
+                    "x-amz-server-side-encryption: cabeçalho HTTP usado em requisições ao S3 para indicar o tipo de <strong>criptografia do lado do servidor</strong> a ser aplicada.",
+                    "s3:PutObject: permissão do IAM que permite a <strong>ação de upload de objetos</strong> em um bucket Amazon S3.",
+                    "StringNotEquals: operador de condição no IAM que verifica se o valor de uma chave <strong>não é igual</strong> ao valor especificado.",
+                    "SSE-S3 (AES256): criptografia do lado do servidor gerenciada pelo S3, utilizando o algoritmo <strong>AES-256</strong>.",
+                    "ARN (Amazon Resource Name): identificador único de recursos na AWS, como buckets S3.",
+                    "Bucket Policy: política de permissões aplicada diretamente a um <strong>bucket S3</strong> para controlar acesso e ações permitidas.",
+                    "CMK (Customer Master Key): chave mestra gerenciada no AWS KMS usada para <strong>criptografia e controle de acesso</strong> a dados criptografados."
+                ],
+                generalExplanation: [
+                    "A política correta deve <strong>negar explicitamente uploads (</strong><code><strong>s3:PutObject</strong></code><strong>)</strong> que <strong>não incluam</strong> o cabeçalho <code>x-amz-server-side-encryption</code> com valor <code>\"aws:kms\"</code>.",
+                    "O operador <code><strong>StringNotEquals</strong></code> é usado para <strong>bloquear requisições sem SSE-KMS</strong>, garantindo que todos os objetos sejam criptografados usando chaves KMS.",
+                    "A política deve especificar <strong>ação e recurso corretamente</strong>, aplicando-se apenas ao bucket desejado.",
+                    "Políticas que negam ações erradas, usam valores incorretos no cabeçalho ou aplicam condições invertidas <strong>não atendem aos requisitos de segurança</strong>."
+                ],
+                realWorld: [
+                    "Em ambientes corporativos com <strong>requisitos de conformidade</strong>, é fundamental garantir que todos os dados no S3 estejam protegidos com <strong>SSE-KMS</strong>.",
+                    "Exemplo: uma aplicação serverless que armazena documentos sensíveis via <strong>AWS Lambda</strong> só permite uploads <strong>criptografados</strong>, evitando falhas de segurança ou uploads maliciosos.",
+                    "Essa prática facilita <strong>auditorias</strong> e gerenciamento centralizado de chaves KMS, permitindo que equipes monitorem e controlem <strong>acesso às chaves de criptografia</strong>.",
+                    "Essencial para aplicações que lidam com <strong>dados financeiros, pessoais ou confidenciais</strong>, garantindo proteção consistente e automática no momento do upload."
+                ]
+            }, {
+                // QUESTÃO 62 do simulado
+                id: 62,
+                title: "Política de bucket para exigir SSE-S3",
+                domain: "Segurança",
+                prompt: "Um desenvolvedor possui uma aplicação que armazena dados em um bucket do Amazon S3. A aplicação utiliza uma API HTTP para armazenar e recuperar objetos. Quando a operação PutObject adiciona objetos ao bucket S3, o desenvolvedor deve garantir que esses objetos sejam criptografados em repouso utilizando criptografia do lado do servidor com chaves gerenciadas pelo Amazon S3 (SSE-S3). Qual solução garantirá que qualquer requisição de upload sem a criptografia obrigatória não seja processada?",
+                options: [
+                    { letter: "A", text: "Definir a chave de criptografia para SSE-S3 no cabeçalho HTTP de cada requisição. Usar uma política de bucket S3 para negar permissão de upload de objeto caso a requisição não contenha esse cabeçalho.", correct: false },
+                    { letter: "B", text: "Invocar a operação PutObject e definir o cabeçalho x-amz-server-side-encryption como sse:s3. Utilizar uma política de bucket S3 para negar permissão de upload de objeto caso a requisição não contenha esse cabeçalho.", correct: false },
+                    { letter: "C", text: "Invocar a operação PutObject e definir o cabeçalho x-amz-server-side-encryption como AES256. Utilizar uma política de bucket S3 para negar permissão de upload de objeto caso a requisição não contenha esse cabeçalho.", correct: true },
+                    { letter: "D", text: "Invocar a operação PutObject e definir o cabeçalho x-amz-server-side-encryption como aws:kms. Utilizar uma política de bucket S3 para negar permissão de upload de objeto caso a requisição não contenha esse cabeçalho.", correct: false }
+                ],
+                explanations: [
+                    { correct: false, text: "Para SSE-S3, o Amazon S3 gerencia automaticamente as chaves de criptografia e não permite que o cliente defina ou envie a chave de criptografia no cabeçalho HTTP. Portanto, essa abordagem não é válida nem suportada." },
+                    { correct: false, text: "O valor 'sse:s3' não é um valor válido para o cabeçalho x-amz-server-side-encryption. Para SSE-S3, o valor correto é 'AES256'. Essa opção é fictícia e não funcionará." },
+                    { correct: true, text: "A criptografia SSE-S3 é ativada ao definir o cabeçalho x-amz-server-side-encryption com o valor AES256 na requisição PutObject. Uma política de bucket pode negar uploads que não incluam esse cabeçalho, garantindo que todos os objetos sejam criptografados em repouso com SSE-S3." },
+                    { correct: false, text: "O valor 'aws:kms' é utilizado para criptografia do lado do servidor com AWS KMS (SSE-KMS), que é diferente do SSE-S3. Como a exigência é usar SSE-S3, essa opção não atende ao requisito." }
+                ],
+                glossary: [
+                    "SSE-S3: Server-Side Encryption com chaves gerenciadas automaticamente pelo Amazon S3 para proteger dados em repouso.",
+                    "x-amz-server-side-encryption: cabeçalho HTTP utilizado para especificar o método de criptografia do lado do servidor ao enviar objetos para o S3.",
+                    "AES256: algoritmo de criptografia simétrica com chave de 256 bits, padrão utilizado pelo SSE-S3.",
+                    "SSE-KMS: Server-Side Encryption com chaves gerenciadas pelo AWS Key Management Service (KMS), diferente do SSE-S3.",
+                    "Política de bucket S3: conjunto de regras que definem permissões e restrições para operações em um bucket S3."
+                ],
+                generalExplanation: [
+                    "A prática correta é <strong>configurar o cabeçalho </strong><code><strong>x-amz-server-side-encryption</strong></code><strong> com valor </strong><code><strong>AES256</strong></code> nas requisições <code>PutObject</code> e criar uma <strong>política de bucket que negue uploads sem esse cabeçalho</strong>.",
+                    "Isso garante que todos os objetos sejam criptografados em repouso usando <strong>SSE-S3</strong>, sem necessidade de enviar ou gerenciar chaves manualmente.",
+                    "O uso de <strong>SSE-KMS</strong> não atende ao requisito específico de SSE-S3, e valores incorretos no cabeçalho podem permitir uploads sem criptografia.",
+                    "A política de bucket adiciona uma camada de controle que impede que objetos sejam gravados sem criptografia, reforçando a segurança dos dados."
+                ],
+                realWorld: [
+                    "Em produção, ao armazenar dados sensíveis no S3, é essencial que <strong>todos os objetos sejam criptografados automaticamente</strong>, para atender a normas de conformidade e segurança.",
+                    "Configurar o cliente para incluir <code>x-amz-server-side-encryption: AES256</code> em cada upload e aplicar uma política de bucket que bloqueie uploads sem esse cabeçalho garante que <strong>nenhum dado seja armazenado sem proteção</strong>, mesmo em casos de falhas no código ou tentativas de upload direto via API.",
+                    "<strong>Exemplo prático:</strong> uma aplicação serverless que utiliza AWS Lambda para processar arquivos e enviá-los ao S3. Com essa configuração, o Lambda só consegue gravar arquivos que estejam criptografados, evitando vazamento ou armazenamento inseguro de informações sensíveis.",
+                    "Essa abordagem facilita a <strong>governança de dados</strong>, reduz riscos de exposição e está alinhada às <strong>melhores práticas de segurança da AWS</strong>."
+                ]
+            }, {
+                // QUESTÃO 28 do simulado
+                id: 28,
+                title: "Registro CNAME no Route 53 para domínio externo",
+                domain: "Desenvolvimento com serviços AWS",
+                prompt: "Uma aplicação está hospedada por um terceiro e exposta em yourapp.3rdparty.com. Você gostaria que seus usuários acessassem sua aplicação usando www.mydomain.com, domínio que você possui e gerencia no Route 53. Qual tipo de registro do Route 53 você deve criar para isso?",
+                options: [
+                    { letter: "A", text: "Criar um registro CNAME", correct: true },
+                    { letter: "B", text: "Criar um registro A", correct: false },
+                    { letter: "C", text: "Criar um registro PTR", correct: false },
+                    { letter: "D", text: "Criar um registro Alias", correct: false }
+                ],
+                explanations: [
+                    { correct: true, text: "Um registro CNAME mapeia consultas DNS de um nome de domínio para outro domínio ou subdomínio. Ele é ideal para apontar www.mydomain.com para yourapp.3rdparty.com. Contudo, não é possível criar um registro CNAME para o domínio raiz (zone apex), como mydomain.com, mas para subdomínios como www.mydomain.com é permitido." },
+                    { correct: false, text: "O registro A é usado para apontar um domínio ou subdomínio diretamente para um endereço IP. Ele não pode ser utilizado para mapear um nome de domínio para outro nome de domínio." },
+                    { correct: false, text: "O registro PTR (Pointer) é utilizado para resolver um endereço IP para um nome de domínio totalmente qualificado (FQDN), funcionando como um DNS reverso. Ele não serve para mapear um nome de domínio para outro." },
+                    { correct: false, text: "Registros Alias permitem rotear tráfego para recursos específicos da AWS, como distribuições CloudFront, buckets S3, ou para outro registro dentro da mesma zona hospedada. Eles não podem ser usados para apontar para domínios externos genéricos, como yourapp.3rdparty.com, que não são recursos AWS gerenciados." }
+                ],
+                glossary: [
+                    "Registro A: associa um nome de domínio a um endereço IPv4.",
+                    "Registro PTR: usado para resolução reversa, mapeando IP para nome de domínio.",
+                    "Registro CNAME: mapeia um nome de domínio para outro domínio, permitindo redirecionamento.",
+                    "Registro Alias: registro especial no Route 53 que aponta para recursos AWS ou outros registros da mesma zona hospedada, sem custo adicional.",
+                    "Zone Apex: domínio raiz de uma zona DNS (ex.: example.com), que não pode ter registros CNAME.",
+                    "FQDN (Fully Qualified Domain Name): nome completo de domínio que indica sua posição na hierarquia DNS.",
+                    "DNS (Domain Name System): sistema que traduz nomes de domínio em endereços IP.",
+                    "Route 53: serviço de DNS gerenciado pela AWS para gerenciar registros de domínios."
+                ],
+                generalExplanation: [
+                    "A solução correta para mapear um subdomínio (ex.: www.mydomain.com) para um domínio externo (ex.: yourapp.3rdparty.com) é criar um <strong>registro CNAME</strong>.",
+                    "Registros A apontam para IPs, que podem mudar em serviços externos.",
+                    "Registros PTR são para DNS reverso, não para redirecionamento.",
+                    "Registros Alias são específicos para recursos AWS e não funcionam para domínios externos genéricos.",
+                    "Observação: CNAME <strong>não pode ser usado no zone apex</strong>, mas é permitido para subdomínios como www."
+                ],
+                realWorld: [
+                    "Um desenvolvedor que integra uma aplicação SaaS hospedada externamente pode criar um CNAME no Route 53 para <strong>www.mydomain.com</strong> apontando para o serviço externo, garantindo que os usuários acessem o aplicativo via domínio próprio sem gerenciar IPs.",
+                    "Essa prática é comum em arquiteturas serverless, onde o frontend é hospedado por terceiros, mas o domínio é controlado pela equipe interna.",
+                    "Usar CNAME mantém flexibilidade, facilita manutenção, e evita problemas caso o endereço do serviço externo mude, alinhando-se às boas práticas de DNS e garantindo uma experiência consistente para os usuários."
+                ]
+            }],
+            "feedback_aws_simulado_2": [
+                {
+                    id: 4,
+                    title: "Controle de Versão com S3",
+                    domain: "Desenvolvimento com serviços AWS",
+                    prompt: "Uma empresa precisa de um sistema de controle de versão para seu ciclo de desenvolvimento rápido, com mudanças incrementais, controle de versões e suporte às ferramentas Git existentes. Qual serviço da AWS atenderá a esses requisitos?",
+                    options: [
+                        { letter: "A", text: "Bucket Amazon S3 com versionamento ativado", correct: false },
+                        { letter: "B", text: "AWS CodeBuild", correct: false },
+                        { letter: "C", text: "AWS CodePipeline", correct: false },
+                        { letter: "D", text: "AWS CodeCommit", correct: true }
+                    ],
+                    explanations: [
+                        { correct: false, text: "Incorreta. Embora o versionamento do Amazon S3 permita recuperar versões anteriores de arquivos individuais, ele não oferece suporte ao controle de versões em lote, nem funcionalidades colaborativas como branching, pull requests ou integração com ferramentas Git, essenciais para desenvolvimento ágil e colaborativo." },
+                        { correct: false, text: "Incorreta. O AWS CodeBuild é um serviço gerenciado de integração contínua que compila código-fonte, executa testes e gera pacotes prontos para implantação. Ele não é um sistema de controle de versão." },
+                        { correct: false, text: "Incorreta. O AWS CodePipeline é um serviço de entrega contínua que automatiza as fases de build, teste e implantação de aplicações. Embora seja fundamental para automação de release, não é um sistema de controle de versão." },
+                        { correct: true, text: "Correta. O AWS CodeCommit é um serviço totalmente gerenciado de controle de código-fonte baseado em Git, que hospeda repositórios seguros e escaláveis, com suporte a pull requests, branching, merge e integração com ferramentas Git existentes." }
+                    ],
+                    glossary: [
+                        "Amazon S3 Versioning: Funcionalidade que permite armazenar múltiplas versões de um objeto no S3, útil para recuperação de dados, mas não voltada para colaboração em código-fonte.",
+                        "AWS CodeCommit: Serviço gerenciado de controle de versão baseado em Git, que hospeda repositórios privados e seguros.",
+                        "AWS CodeBuild: Serviço de integração contínua que compila, testa e empacota código-fonte.",
+                        "AWS CodePipeline: Serviço de entrega contínua que automatiza etapas de build, teste e deploy.",
+                        "Git: Sistema de controle de versão distribuído amplamente adotado no desenvolvimento de software."
+                    ],
+                    generalExplanation: [
+                        "O AWS CodeCommit é a escolha ideal para implantar um sistema de controle de versão que atenda a ciclos de desenvolvimento ágeis, suporte alterações incrementais e se integre facilmente com ferramentas Git já utilizadas pela equipe.",
+                        "Como um repositório Git gerenciado pela AWS, o CodeCommit fornece funcionalidades essenciais como: Branching para desenvolvimento paralelo, Pull requests para revisão de código, Merge com histórico de alterações e controle de conflitos.",
+                        "O Amazon S3 Versioning lida apenas com a gestão de versões de objetos individuais, sem controle de branches, colaboração ou histórico de merges, sendo inadequado como sistema de versionamento de código-fonte."
+                    ],
+                    realWorld: [
+                        "Em equipes de desenvolvimento ágil, é comum que múltiplos desenvolvedores trabalhem simultaneamente em diferentes funcionalidades.",
+                        "Cada desenvolvedor pode criar um branch no AWS CodeCommit, trabalhar em sua tarefa, e posteriormente abrir um pull request para revisão.",
+                        "Esse fluxo garante colaboração estruturada, histórico completo de mudanças e integração controlada de funcionalidades.",
+                        "Por exemplo, em um projeto serverless, o time pode versionar no CodeCommit os templates do AWS SAM ou CDK e os códigos das funções Lambda."
+                    ]
+                },
+                {
+                    id: 18,
+                    title: "Crescimento Inesperado do Bucket S3 com Logs",
+                    domain: "Solução de problemas e otimização",
+                    prompt: "Uma empresa criou um bucket Amazon S3 que armazena dados de clientes. O líder da equipe acabou de habilitar o registro de acesso (access logging) para esse bucket. O tamanho do bucket cresceu substancialmente após a ativação do registro de acesso. Como nenhum novo arquivo foi adicionado ao bucket, o líder da equipe está perplexo e busca uma explicação. Qual das seguintes razões explica esse comportamento?",
+                    options: [
+                        { letter: "A", text: "Políticas de bucket incorretas para uploads em lote podem, às vezes, ser responsáveis pelo crescimento exponencial do tamanho do bucket S3.", correct: false },
+                        { letter: "B", text: "O registro de acesso do S3 está configurado para apontar para o mesmo bucket, o que é responsável pelo crescimento substancial do tamanho do bucket.", correct: true },
+                        { letter: "C", text: "Um ataque DDoS ao seu bucket S3 pode potencialmente aumentar o tamanho dos dados no bucket se a segurança do bucket for comprometida durante o ataque.", correct: false },
+                        { letter: "D", text: "A criptografia de objetos foi habilitada e cada objeto é armazenado duas vezes como parte dessa configuração.", correct: false }
+                    ],
+                    explanations: [
+                        { correct: false, text: "Incorreta. Políticas de bucket são políticas baseadas em recursos que controlam permissões de acesso. Elas não causam aumento no tamanho dos dados armazenados no bucket, independentemente do tipo de upload." },
+                        { correct: true, text: "Correta. Quando o bucket de origem e o bucket de destino dos logs são o mesmo, os logs gerados para os próprios arquivos de log criam um ciclo que gera mais logs, causando um crescimento exponencial do tamanho do bucket." },
+                        { correct: false, text: "Incorreta. Embora ataques DDoS possam afetar a disponibilidade do serviço, a AWS gerencia a mitigação desses ataques. Um ataque DDoS não causa aumento no tamanho dos dados armazenados no bucket." },
+                        { correct: false, text: "Incorreta. A criptografia de objetos no S3 não faz com que cada objeto seja armazenado duas vezes. A criptografia protege os dados, mas não duplica o armazenamento dos objetos." }
+                    ],
+                    glossary: [
+                        "Bucket S3: Serviço de armazenamento de objetos da AWS que permite guardar e recuperar qualquer quantidade de dados a qualquer momento.",
+                        "Registro de acesso (Access Logging): Funcionalidade do S3 que gera logs detalhados das requisições feitas ao bucket, armazenando-os em um bucket de destino configurado.",
+                        "Criptografia de objetos: Técnica para proteger dados armazenados no S3, garantindo que apenas usuários autorizados tenham acesso.",
+                        "Políticas de bucket: Regras que definem permissões e controles de acesso para o bucket e seus objetos.",
+                        "Ataque DDoS: Tentativa maliciosa de sobrecarregar um serviço com tráfego excessivo, causando indisponibilidade.",
+                        "Logs de logs: Situação em que os arquivos de log gerados são armazenados no mesmo bucket monitorado, gerando um ciclo contínuo de criação de novos logs."
+                    ],
+                    generalExplanation: [
+                        "O aumento substancial no tamanho do bucket ocorre quando o bucket está configurado para armazenar seus próprios logs.",
+                        "Isso cria um ciclo de crescimento exponencial: logs de requisições incluem também as requisições para os próprios arquivos de log, gerando continuamente novos logs.",
+                        "Outras causas como criptografia, políticas de bucket ou ataques DDoS não explicam esse comportamento de aumento direto no volume de dados.",
+                        "Boas práticas AWS: configurar o bucket de destino dos logs como diferente do bucket monitorado para evitar o ciclo de 'logs de logs'."
+                    ],
+                    realWorld: [
+                        "Equipes que habilitam registro de acesso em produção usam os logs para monitorar e auditar o uso de buckets S3.",
+                        "Armazenar os logs no mesmo bucket pode causar crescimento inesperado do armazenamento, impactando custos e performance.",
+                        "Exemplo: uma aplicação serverless com AWS Lambda que processa arquivos de S3 pode sofrer atrasos ou aumento de custos se o bucket de logs não estiver separado.",
+                        "Configurar buckets de logs em buckets separados mantém a saúde do ambiente, facilita monitoramento via CloudWatch, evita surpresas no faturamento e garante que a aplicação continue escalável e eficiente."
+                    ]
+                },
+                {
+                    id: 40,
+                    title: "Otimização de Conteúdo Estático com S3 e CloudFront",
+                    domain: "Solução de problemas e otimização",
+                    prompt: "Uma empresa hospeda seu site em instâncias Amazon EC2 e utiliza Auto Scaling para ajustar seus recursos conforme picos de tráfego. No entanto, usuários ao redor do mundo relatam lentidão no carregamento, pois o conteúdo estático hospedado nas instâncias EC2 demora muito para carregar, mesmo fora dos períodos de maior movimento. Quais duas ações devem ser tomadas para melhorar a latência do site? (Selecione duas.)",
+                    options: [
+                        { letter: "A", text: "Atualizar a CPU e a memória RAM disponíveis nas instâncias EC2", correct: false },
+                        { letter: "B", text: "Transferir o conteúdo estático da aplicação hospedado nas instâncias EC2 para o Amazon S3", correct: true },
+                        { letter: "C", text: "Configurar uma distribuição Amazon CloudFront para cachear o conteúdo estático com o Amazon S3 configurado como origem", correct: true },
+                        { letter: "D", text: "Migrar a aplicação para AWS Lambda", correct: false },
+                        { letter: "E", text: "Dobrar a capacidade desejada do grupo de Auto Scaling", correct: false }
+                    ],
+                    explanations: [
+                        { correct: false, text: "Incorreta. Embora aumentar os recursos de hardware possa melhorar o desempenho computacional, o problema principal é a alta latência de rede para o conteúdo estático, que não será resolvida apenas com mais CPU ou RAM nas instâncias EC2." },
+                        { correct: true, text: "Correta. Migrar o conteúdo estático para o Amazon S3 permite que ele seja servido de forma mais eficiente, pois o S3 é um serviço de armazenamento altamente escalável e otimizado para distribuição de conteúdo estático." },
+                        { correct: true, text: "Correta. Amazon CloudFront é uma CDN que distribui conteúdo através de uma rede global de edge locations, reduzindo a latência ao entregar o conteúdo estático mais próximo dos usuários finais, especialmente quando combinado com o Amazon S3 como origem." },
+                        { correct: false, text: "Incorreta. AWS Lambda é um serviço de computação sem servidor para execução de código, não para armazenamento de conteúdo estático. Essa opção não resolve o problema de latência do conteúdo estático." },
+                        { correct: false, text: "Incorreta. A capacidade desejada define o número inicial de instâncias e mantém essa quantidade. Como a lentidão ocorre mesmo fora dos picos de tráfego, aumentar o número de instâncias não resolve a latência de rede para o conteúdo estático." }
+                    ],
+                    glossary: [
+                        "Amazon EC2: Serviço de computação em nuvem que oferece instâncias virtuais escaláveis para hospedar aplicações e serviços.",
+                        "Auto Scaling: Ajusta automaticamente o número de instâncias EC2 conforme a demanda de tráfego.",
+                        "Amazon S3: Armazenamento de objetos altamente escalável, durável e seguro, ideal para hospedar conteúdo estático.",
+                        "Amazon CloudFront: Rede de distribuição de conteúdo (CDN) que entrega dados com baixa latência usando uma rede global de edge locations.",
+                        "Latência: Tempo de atraso entre envio e recebimento de dados, impactando a velocidade percebida pelo usuário.",
+                        "Conteúdo estático: Arquivos que não mudam frequentemente, como imagens, CSS, JavaScript e vídeos."
+                    ],
+                    generalExplanation: [
+                        "A abordagem ideal para reduzir a latência do conteúdo estático é:",
+                        "Migrar arquivos estáticos para o Amazon S3, que oferece armazenamento eficiente e alta disponibilidade.",
+                        "Configurar o Amazon CloudFront como CDN, usando o S3 como origem. Isso distribui o conteúdo em edge locations próximas aos usuários finais, diminuindo o tempo de resposta.",
+                        "Outras alternativas, como aumentar recursos ou instâncias EC2, não resolvem o problema central: a entrega lenta de conteúdo devido à distância geográfica e à falta de caching distribuído."
+                    ],
+                    realWorld: [
+                        "Cenário prático: um site global recebe reclamações de usuários sobre lentidão no carregamento de imagens e arquivos estáticos.",
+                        "Solução: Migrar o conteúdo para S3 garante alta disponibilidade e escalabilidade. Configurar CloudFront distribui os arquivos a partir de locais próximos aos usuários, reduzindo latência.",
+                        "Benefícios adicionais: Facilita manutenção e atualização do conteúdo (S3 suporta versionamento). CloudFront permite invalidar caches quando necessário. Reduz a carga nas instâncias EC2, que podem se concentrar no processamento dinâmico da aplicação.",
+                        "Resultado: melhor experiência do usuário, otimização de custos e desempenho da infraestrutura."
+                    ]
+                },
+                {
+                    id: 51,
+                    title: "URLs Pré-Assinadas no S3",
+                    domain: "Segurança",
+                    prompt: "Após uma revisão de código, um desenvolvedor foi solicitado a tornar seus buckets S3 públicos privados e permitir o acesso aos objetos com uma restrição de tempo limitada. Qual das seguintes opções atenderá a esse caso de uso?",
+                    options: [
+                        { letter: "A", text: "Não é possível implementar restrições de tempo no acesso ao bucket Amazon S3", correct: false },
+                        { letter: "B", text: "Compartilhar URLs pré-assinadas com os recursos que precisam de acesso", correct: true },
+                        { letter: "C", text: "Usar política de bucket para bloquear o acesso não intencional", correct: false },
+                        { letter: "D", text: "Usar políticas de roteamento para redirecionar acessos não intencionais", correct: false }
+                    ],
+                    explanations: [
+                        { correct: false, text: "Incorreta. Essa afirmação está errada. É possível implementar restrições de acesso baseadas em tempo no Amazon S3, por exemplo, utilizando URLs pré-assinadas que expiram após um período definido." },
+                        { correct: true, text: "Correta. Por padrão, todos os objetos no S3 são privados, e o proprietário do objeto tem permissão para acessá-los. No entanto, o proprietário pode compartilhar objetos com terceiros criando URLs pré-assinadas, que concedem permissão temporária para acessar os objetos." },
+                        { correct: false, text: "Incorreta. A política de bucket é uma política baseada em recursos do AWS Identity and Access Management (IAM) que pode ser usada para conceder ou negar permissões a outros usuários ou contas AWS. Embora possa bloquear acessos não autorizados, ela não suporta restrições de acesso baseadas em tempo." },
+                        { correct: false, text: "Incorreta. O Amazon S3 não oferece suporte a políticas de roteamento para redirecionar acessos. Essa funcionalidade não existe diretamente no serviço." }
+                    ],
+                    glossary: [
+                        "Bucket Policy: Política baseada em recursos do IAM que define permissões de acesso a buckets e objetos no Amazon S3.",
+                        "URLs pré-assinadas (Pre-signed URLs): URLs geradas que concedem acesso temporário e controlado a objetos privados no S3, com validade limitada por tempo.",
+                        "IAM (Identity and Access Management): Serviço da AWS que gerencia identidades, permissões e controle de acesso a recursos.",
+                        "Expiração: Período após o qual uma URL pré-assinada deixa de ser válida, revogando automaticamente o acesso.",
+                        "Objeto S3: Arquivo ou dado armazenado dentro de um bucket no Amazon S3.",
+                        "Bucket S3: Contêiner lógico que armazena objetos no serviço Amazon S3."
+                    ],
+                    generalExplanation: [
+                        "A forma correta de compartilhar objetos privados no S3 com acesso temporário é através de URLs pré-assinadas.",
+                        "Por padrão, buckets e objetos no S3 são privados; compartilhamento público não é recomendado.",
+                        "URLs pré-assinadas permitem conceder acesso temporário e controlado a um objeto específico sem alterar a política do bucket.",
+                        "O acesso expira automaticamente, evitando exposição indevida de dados.",
+                        "Essa abordagem segue as melhores práticas de segurança da AWS, garantindo controle granular de acesso."
+                    ],
+                    realWorld: [
+                        "Em cenários práticos, desenvolvedores podem:",
+                        "Permitir que usuários baixem arquivos privados de uma aplicação web por um tempo limitado usando URLs pré-assinadas.",
+                        "Em arquiteturas serverless, funções AWS Lambda podem gerar essas URLs dinamicamente em resposta a requisições via API Gateway, garantindo acesso seguro sem alterar políticas do bucket.",
+                        "Exemplo: Uma aplicação de compartilhamento de documentos gera uma URL pré-assinada para que um usuário baixe um arquivo dentro de um prazo definido; após a expiração, o arquivo não é mais acessível publicamente.",
+                        "Essa prática mantém o controle de acesso seguro, facilita auditoria e gerenciamento de permissões, e segue as melhores práticas de segurança na nuvem."
+                    ]
+                },
+                {
+                    id: 60,
+                    title: "Destinos Suportados pelo Kinesis Firehose",
+                    domain: "Desenvolvimento com serviços AWS",
+                    prompt: "Um desenvolvedor que trabalha com uma instância Windows do EC2 instalou o Kinesis Agent para Windows para transmitir arquivos de log formatados em JSON para o Amazon Simple Storage Service (S3) via Amazon Kinesis Data Firehose. O desenvolvedor deseja entender quais tipos de destino (sink) são suportados pelo Kinesis Firehose. Qual dos seguintes tipos de destino NÃO é suportado pelo Kinesis Firehose?",
+                    options: [
+                        { letter: "A", text: "Amazon Simple Storage Service (Amazon S3) como destino direto do Firehose", correct: false },
+                        { letter: "B", text: "Amazon Elasticsearch Service (Amazon ES) com opção de backup para Amazon S3", correct: false },
+                        { letter: "C", text: "Amazon Redshift com Amazon S3", correct: false },
+                        { letter: "D", text: "Amazon ElastiCache com Amazon S3 como backup", correct: true }
+                    ],
+                    explanations: [
+                        { correct: false, text: "Incorreta. Amazon S3 é um dos destinos mais comuns e suportados diretamente pelo Kinesis Firehose para armazenamento de dados em streaming." },
+                        { correct: false, text: "Incorreta. Amazon Elasticsearch Service (atualmente Amazon OpenSearch Service) é um destino suportado pelo Kinesis Firehose. Os dados podem ser entregues diretamente ao cluster ES e, opcionalmente, armazenados simultaneamente em um bucket S3 para backup." },
+                        { correct: false, text: "Incorreta. Amazon Redshift é um destino suportado pelo Kinesis Firehose. Os dados são inicialmente entregues a um bucket do S3 e, em seguida, carregados no cluster Redshift usando o comando COPY." },
+                        { correct: true, text: "Correta. Amazon ElastiCache é um serviço totalmente gerenciado de armazenamento em memória compatível com Redis ou Memcached, mas não é um destino suportado pelo Amazon Kinesis Data Firehose. Portanto, não é possível enviar dados diretamente para ElastiCache via Firehose." }
+                    ],
+                    glossary: [
+                        "Amazon Kinesis Data Firehose: Serviço gerenciado da AWS para captura, transformação e entrega automática de dados em streaming para destinos como armazenamento e análise.",
+                        "Amazon S3: Serviço de armazenamento de objetos altamente escalável e durável.",
+                        "Amazon Redshift: Data warehouse totalmente gerenciado para análise rápida de grandes volumes de dados estruturados.",
+                        "Amazon Elasticsearch Service (Amazon ES / OpenSearch Service): Serviço gerenciado para busca, análise e visualização de dados em tempo real.",
+                        "Amazon ElastiCache: Serviço gerenciado de cache em memória (Redis ou Memcached) para acelerar aplicações com armazenamento temporário de dados.",
+                        "Sink type: Tipo de destino final para onde os dados são enviados em um pipeline de streaming."
+                    ],
+                    generalExplanation: [
+                        "O Amazon Kinesis Data Firehose permite entregar dados em streaming diretamente para destinos S3, Redshift e OpenSearch, garantindo ingestão contínua, escalável e durável.",
+                        "É possível configurar ainda backups no S3 para segurança adicional.",
+                        "ElastiCache não é um destino suportado pelo Firehose, pois é um cache em memória destinado a acesso rápido de dados temporários, e não a ingestão ou armazenamento contínuo.",
+                        "Assim, qualquer alternativa que indique ElastiCache como destino direto do Firehose está incorreta."
+                    ],
+                    realWorld: [
+                        "Um desenvolvedor de pipelines de dados em tempo real pode usar o Firehose para:",
+                        "Armazenar logs de eventos no S3 para durabilidade e auditoria.",
+                        "Enviar dados para o Redshift para análises complexas e agregações.",
+                        "Enviar dados para OpenSearch para dashboards em tempo real e monitoramento.",
+                        "Por exemplo, em uma aplicação serverless que processa logs de acesso via AWS Lambda, o Kinesis Data Firehose pode receber esses logs e enviá-los automaticamente para S3 e OpenSearch, permitindo monitoramento contínuo, alta disponibilidade e escalabilidade sem necessidade de gerenciar servidores adicionais."
+                    ]
+                }
+            ]
+        };
+
+        // ============================================================
+        // FUNÇÕES RENDERIZADORAS
+        // ============================================================
+
+        function renderHeader() {
+            const container = document.getElementById('headerContainer');
+            const { name, icon, badgeIcon, badgeClass, color, tags } = serviceConfig;
+            const totalCount = Object.values(questionsDatabase).reduce((sum, arr) => sum + arr.length, 0);
+            const simuladoCount = Object.keys(questionsDatabase).length;
+
+            const tagsHtml = tags.map(tag =>
+                `<span class="badge bg-light text-dark border ms-1">${tag}</span>`
+            ).join('');
+
+            container.innerHTML = `
+        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+            <div>
+                <h1 class="main-title display-6 mb-0">
+                    <i class="bi ${icon} text-warning me-2" style="color:${color} !important;"></i>${name} – Questões Diretas
+                </h1>
+                <p class="text-muted mt-2" style="font-size:0.98rem;">
+                    <i class="bi bi-check2-circle text-success me-1"></i> ${totalCount} questões em ${simuladoCount} simulado(s)
+                    ${tagsHtml}
+                </p>
+            </div>
+            <span class="${badgeClass} badge rounded-pill px-4 py-2">
+                <i class="bi ${badgeIcon} me-1"></i> ${name}
+            </span>
+        </div>
+    `;
+        }
+
+        function renderQuestionCard(q, arquivo) {
+            const optionsHtml = q.options.map(opt => {
+                const badge = opt.correct ?
+                    `<span class="badge-correct ms-2"><i class="bi bi-check-circle-fill me-1"></i>Correta</span>` :
+                    `<span class="badge-incorrect ms-2"><i class="bi bi-x-circle-fill me-1"></i>Incorreta</span>`;
+                const optionClass = opt.correct ? 'option-item correct' : 'option-item incorrect';
+                return `<div class="${optionClass}">
+                    <span class="option-letter">${opt.letter}.</span>
+                    <span class="option-text"><strong>${opt.text}</strong> ${badge}</span>
+                </div>`;
+            }).join('');
+
+            const explanationsHtml = q.explanations.map(exp => {
+                const expClass = exp.correct ? 'alt-explication correct-alt' : 'alt-explication incorrect-alt';
+                const icon = exp.correct ? 'bi-check-circle-fill text-success' : 'bi-x-circle-fill text-danger';
+                const label = exp.correct ? 'CORRETA' : 'INCORRETA';
+                return `<div class="${expClass}">
+                    <strong><i class="bi ${icon} me-1"></i> ${label}</strong><br>
+                    ${exp.text}
+                </div>`;
+            }).join('');
+
+            const glossaryHtml = q.glossary.map(item => `<li>${item}</li>`).join('');
+            const generalHtml = q.generalExplanation.map(item => `<li>${item}</li>`).join('');
+            const realWorldHtml = q.realWorld.map(item => `<li>${item}</li>`).join('');
+
+            return `
+        <div class="card card-question mb-5">
+            <div class="card-header-custom">
+                <span class="q-number">Q${q.id}</span>
+                <span class="q-simulado">${arquivo}</span>
+                <span class="q-text flex-grow-1">${q.title}</span>
+                <span class="domain-tag"><i class="bi bi-tag me-1"></i> ${q.domain}</span>
+            </div>
+            <div class="card-body p-4">
+                <p class="fw-semibold text-secondary" style="font-size:0.95rem;">${q.prompt}</p>
+                <div class="mt-3">${optionsHtml}</div>
+
+                <div class="explanation-box">
+                    <h6><i class="bi bi-lightbulb-fill text-warning me-2"></i>Explicação de todas as alternativas</h6>
+                    ${explanationsHtml}
+                </div>
+
+                <div class="glossary-card">
+                    <h6><i class="bi bi-book me-2"></i>💡 GLOSSÁRIO</h6>
+                    <ul>${glossaryHtml}</ul>
+
+                    <div class="general-explanation">
+                        <h6><i class="bi bi-globe2 me-2"></i>🌐 EXPLICAÇÃO GERAL</h6>
+                        <ul>${generalHtml}</ul>
+                    </div>
+
+                    <div class="real-world">
+                        <h6><i class="bi bi-rocket-takeoff me-2"></i>🚀 COMO ISSO SE APLICA NA VIDA REAL</h6>
+                        <ul>${realWorldHtml}</ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+        }
+
+        function renderAnchorNav() {
+            const nav = document.getElementById('anchorNav');
+            const simulados = Object.keys(questionsDatabase);
+            nav.innerHTML = simulados.map(arquivo => {
+                const label = arquivo.replace('feedback_aws_simulado_', 'Simulado ');
+                return `<a href="#${arquivo}"><i class="bi bi-bookmark-fill me-1"></i>${label}</a>`;
+            }).join('');
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questionsContainer');
+            let html = '';
+
+            for (const [arquivo, questoes] of Object.entries(questionsDatabase)) {
+                html += `
+            <div class="simulado-section mb-5" id="${arquivo}">
+                <div class="simulado-section-header d-flex align-items-center gap-3 mb-4 p-3 rounded-3" style="background:#f0f4ff; border-left:5px solid #ff9900;">
+                    <i class="bi bi-journal-bookmark-fill fs-4" style="color:#ff9900;"></i>
+                    <div>
+                        <div class="fw-bold fs-5" style="color:#1a2a4a;">${arquivo}</div>
+                        <div class="text-muted" style="font-size:0.85rem;">
+                            <i class="bi bi-collection me-1"></i>${questoes.length} questão(ões)
+                        </div>
+                    </div>
+                </div>
+                ${questoes.map(q => renderQuestionCard(q, arquivo)).join('')}
+            </div>
+        `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function renderFooter() {
+            const totalCount = Object.values(questionsDatabase).reduce((sum, arr) => sum + arr.length, 0);
+            const simuladoCount = Object.keys(questionsDatabase).length;
+            const { name } = serviceConfig;
+            document.getElementById('footerText').innerHTML = `
+        ${totalCount} questões diretas sobre ${name} – AWS Certified Developer Associate (DVA-C02)
+        <br><span class="text-muted" style="font-size:0.85rem;">${simuladoCount} simulado(s) • Domínios: Segurança e Desenvolvimento • Todas as explicações completas</span>
+    `;
+        }
+
+        // ============================================================
+        // INICIALIZAÇÃO
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHeader();
+            renderAnchorNav();
+            renderQuestions();
+            renderFooter();
+        });
+    </script>
+
+</body>
+
+</html>

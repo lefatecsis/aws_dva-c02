@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questões AWS - DVA-C02 (Completas)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <style>
+        body {
+            background: #f4f6f9;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
+
+        .main-title {
+            font-weight: 700;
+            color: #1a2a4a;
+            border-left: 6px solid #ff9900;
+            padding-left: 1.2rem;
+        }
+
+        .badge-s3 {
+            background: #1a5a3a;
+            color: #fff;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .card-question {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 20, 40, 0.06);
+            transition: all 0.15s ease;
+            background: #ffffff;
+        }
+
+        .card-question:hover {
+            box-shadow: 0 12px 28px rgba(0, 20, 40, 0.10);
+        }
+
+        .card-header-custom {
+            background: #f9faff;
+            border-bottom: 1px solid #e9edf4;
+            border-radius: 20px 20px 0 0 !important;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .q-number {
+            background: #1a2a4a;
+            color: white;
+            font-weight: 600;
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .q-simulado {
+            background: #6c757d;
+            color: white;
+            font-weight: 500;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .q-text {
+            font-weight: 600;
+            color: #0b1a33;
+            font-size: 1.08rem;
+        }
+
+        .option-item {
+            border-radius: 14px;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 0.6rem;
+            border: 1px solid #eef2f7;
+            transition: 0.1s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            background: #f9fafc;
+        }
+
+        .option-item:hover {
+            background: #f1f4fe;
+            border-color: #cbd5e1;
+        }
+
+        .option-item.correct {
+            background: #e6f7ed;
+            border-color: #8fdbb6;
+        }
+
+        .option-item.incorrect {
+            background: #fde8e8;
+            border-color: #f5bebe;
+        }
+
+        .option-letter {
+            font-weight: 700;
+            color: #1f3a6b;
+            min-width: 28px;
+        }
+
+        .option-text {
+            color: #1f2a44;
+        }
+
+        .badge-correct {
+            background: #d1fae5;
+            color: #0b5e3b;
+            font-weight: 600;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+        }
+
+        .badge-incorrect {
+            background: #fee2e2;
+            color: #991b1b;
+            font-weight: 600;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+        }
+
+        .explanation-box {
+            background: #f2f6fe;
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            border-left: 5px solid #ff9900;
+            margin-top: 1rem;
+        }
+
+        .explanation-box h6 {
+            color: #1f3a6b;
+            font-weight: 700;
+        }
+
+        .explanation-box .alt-explication {
+            font-size: 0.92rem;
+            padding: 0.6rem 0.9rem;
+            margin-top: 0.4rem;
+            border-radius: 8px;
+            background: #ffffffcc;
+            border-left: 3px solid #adb5bd;
+        }
+
+        .explanation-box .alt-explication.correct-alt {
+            border-left-color: #28a745;
+        }
+
+        .explanation-box .alt-explication.incorrect-alt {
+            border-left-color: #dc3545;
+        }
+
+        .glossary-card {
+            background: #f8faff;
+            border: 1px solid #dce3ed;
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .glossary-card h6 {
+            color: #1f3a6b;
+            font-weight: 700;
+        }
+
+        .glossary-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        .glossary-card ul li::before {
+            content: "● ";
+            color: #ff9900;
+            font-weight: 700;
+        }
+
+        .glossary-card ul li {
+            padding: 0.15rem 0;
+            font-size: 0.92rem;
+            color: #1f2a44;
+        }
+
+        .glossary-card .general-explanation {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #dce3ed;
+        }
+
+        .glossary-card .general-explanation ul {
+            padding-left: 1.2rem;
+        }
+
+        .glossary-card .general-explanation ul li {
+            list-style: disc;
+            font-size: 0.92rem;
+        }
+
+        .glossary-card .general-explanation ul li::before {
+            content: "";
+        }
+
+        .glossary-card .real-world {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #dce3ed;
+        }
+
+        .glossary-card .real-world ul {
+            padding-left: 1.2rem;
+        }
+
+        .glossary-card .real-world ul li {
+            list-style: disc;
+            font-size: 0.92rem;
+        }
+
+        .glossary-card .real-world ul li::before {
+            content: "";
+        }
+
+        .domain-tag {
+            background: #e6edf8;
+            color: #1f3a6b;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-note {
+            color: #4a5b7a;
+            border-top: 1px solid #dce3ed;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 576px) {
+            .q-text {
+                font-size: 0.98rem;
+            }
+
+            .option-item {
+                padding: 0.6rem 1rem;
+            }
+
+            .q-number {
+                font-size: 0.75rem;
+                padding: 0.15rem 0.6rem;
+            }
+
+            .q-simulado {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+    </style>
+
+    <style>
+        #anchorNav {
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            background: #ffffff;
+            padding: 0.6rem 0.75rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #dce3ed;
+            box-shadow: 0 2px 8px rgba(0, 20, 40, 0.07);
+        }
+
+        #anchorNav a {
+            background: #1a2a4a;
+            color: white;
+            font-weight: 600;
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            text-decoration: none;
+            transition: background 0.15s ease;
+        }
+
+        #anchorNav a:hover {
+            background: #ff9900;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container py-5">
+
+        <!-- Header DINÂMICO -->
+        <div id="headerContainer"></div>
+
+        <!-- Âncoras de navegação por simulado -->
+        <div id="anchorNav" class="d-flex flex-wrap gap-2"></div>
+
+        <!-- Container das questões -->
+        <div id="questionsContainer"></div>
+
+        <!-- Rodapé -->
+        <div class="footer-note" id="footerContainer">
+            <i class="bi bi-diagram-3 me-2"></i> <span id="footerText">Carregando...</span>
+        </div>
+
+    </div>
+
+    <script>
+        // ============================================================
+        // CONFIGURAÇÃO DO SERVIÇO
+        // ============================================================
+        const serviceConfig = {
+            name: "IAM",
+            icon: "bi-shield-lock-fill",
+            badgeIcon: "bi-person-badge",
+            badgeClass: "badge-iam",
+            color: "#ff9900",
+            tags: ["Segurança", "Todas as explicações", "Gerado por JavaScript"]
+        };
+
+        // ============================================================
+        // DADOS DAS QUESTÕES - IAM
+        // ============================================================
+        const questionsDatabase = {
+            "feedback_aws_simulado_1": [{
+                // QUESTÃO 3 do simulado
+                id: 3,
+                title: "IAM Access Analyzer para buckets S3 expostos",
+                domain: "Segurança",
+                prompt: "Um desenvolvedor foi encarregado de proteger determinados buckets S3 que são compartilhados por uma grande equipe de usuários. Na última vez em que a política de um bucket foi alterada, ele ficou erroneamente disponível para qualquer pessoa, inclusive fora da organização. Qual recurso/serviço ajudará o desenvolvedor a identificar problemas de segurança semelhantes com o mínimo de esforço?",
+                options: [
+                    { letter: "A", text: "IAM Access Analyzer", correct: true },
+                    { letter: "B", text: "Access Advisor (console IAM)", correct: false },
+                    { letter: "C", text: "S3 Analytics", correct: false },
+                    { letter: "D", text: "S3 Object Lock", correct: false }
+                ],
+                explanations: [
+                    { correct: true, text: "O AWS IAM Access Analyzer ajuda a identificar recursos na sua organização e contas, como buckets Amazon S3 ou funções IAM, que estão compartilhados com entidades externas. Isso permite detectar acessos não intencionais aos seus recursos e dados, reduzindo riscos de segurança." },
+                    { correct: false, text: "O Access Advisor informa o último uso de funções IAM para ajudar a identificar funções não utilizadas, auxiliando na remoção segura dessas funções. No entanto, ele não fornece informações sobre entidades fora do IAM, como buckets S3, e portanto não é adequado para este cenário." },
+                    { correct: false, text: "O Amazon S3 Analytics Storage Class Analysis ajuda a analisar padrões de acesso para otimizar a transição de dados entre classes de armazenamento. Ele não é capaz de identificar acessos não intencionais ou problemas de segurança em buckets S3." },
+                    { correct: false, text: "O S3 Object Lock permite armazenar objetos usando o modelo \"Write Once Read Many\" (WORM), prevenindo exclusões acidentais ou inadequadas de dados. Porém, não é adequado para identificar problemas de acesso ou políticas incorretas em buckets S3." }
+                ],
+                glossary: [
+                    "IAM Access Analyzer: ferramenta da AWS que identifica recursos compartilhados com entidades externas à organização, destacando acessos não intencionais.",
+                    "S3 Object Lock: recurso WORM do S3 que previne exclusões ou alterações em objetos, garantindo integridade.",
+                    "Access Advisor: mostra o último uso das permissões associadas a usuários ou funções IAM, útil para identificar permissões não utilizadas.",
+                    "S3 Analytics: analisa padrões de acesso para otimizar classes de armazenamento, sem foco em segurança.",
+                    "Bucket Policy: conjunto de regras que define quem pode acessar um bucket S3 e quais ações são permitidas.",
+                    "Zona de confiança: escopo interno versus externo usado para definir limites de análise de acesso.",
+                    "WORM (Write Once Read Many): modelo de armazenamento em que dados gravados não podem ser alterados ou excluídos, garantindo integridade."
+                ],
+                generalExplanation: [
+                    "O <strong>IAM Access Analyzer</strong> é a ferramenta indicada para identificar buckets S3 expostos inadvertidamente a entidades externas à organização.",
+                    "Ele analisa políticas e permissões, destacando recursos acessíveis fora da zona de confiança.",
+                    "Outras opções, como S3 Object Lock, Access Advisor, S3 Analytics ou Bucket Policies manuais, não oferecem análise automatizada ou abrangente de acessos externos, tornando o Access Analyzer a escolha ideal para este cenário."
+                ],
+                realWorld: [
+                    "Em empresas com múltiplas equipes usando buckets S3 compartilhados, alterações nas políticas podem abrir brechas de segurança.",
+                    "Um engenheiro de segurança pode usar o IAM Access Analyzer para monitorar continuamente esses buckets e identificar qualquer exposição externa.",
+                    "Por exemplo, em pipelines que usam <strong>AWS Lambda</strong> para processar dados S3, o Access Analyzer garante que apenas funções ou usuários autorizados tenham acesso, prevenindo vazamentos e mantendo conformidade com normas internas e regulatórias.",
+                    "Além disso, ele fornece alertas e relatórios que facilitam ações corretivas rápidas, mantendo o ambiente seguro e controlado."
+                ]
+            }, {
+                // QUESTÃO 11 do simulado
+                id: 11,
+                title: "Acesso IAM ao Billing and Cost Management",
+                domain: "Segurança",
+                prompt: "A equipe de desenvolvimento acabou de configurar e anexar a política IAM necessária para acessar o AWS Billing and Cost Management para todos os usuários do departamento financeiro. Porém, os usuários não conseguem visualizar o serviço AWS Billing and Cost Management no console da AWS. Qual poderia ser a razão para esse problema?",
+                options: [
+                    { letter: "A", text: "O usuário IAM deve ser criado especificamente dentro do AWS Billing and Cost Management e não na conta AWS para ter acesso ao console de faturamento.", correct: false },
+                    { letter: "B", text: "É necessário ativar o acesso de usuários IAM ao console do Billing and Cost Management para todos os usuários que precisam de acesso.", correct: true },
+                    { letter: "C", text: "Os usuários podem ter outra política que os restrinja de acessar as informações de faturamento.", correct: false },
+                    { letter: "D", text: "Apenas o usuário root tem acesso ao console do AWS Billing and Cost Management.", correct: false }
+                ],
+                explanations: [
+                    { correct: false, text: "Usuários IAM são criados e gerenciados dentro da conta AWS como um todo, independentemente do serviço. Não existe criação de usuários IAM específicos para o serviço de faturamento." },
+                    { correct: true, text: "Por padrão, usuários IAM não têm acesso ao console de Billing and Cost Management. O administrador da conta deve ativar explicitamente o acesso para usuários IAM ao console de faturamento, além de anexar as políticas necessárias. Essa ativação precisa ser feita uma única vez para que o acesso funcione." },
+                    { correct: false, text: "Embora políticas conflitantes possam causar restrições, no cenário apresentado não há indicação de outra política bloqueando o acesso, portanto essa não é a causa principal do problema." },
+                    { correct: false, text: "Embora o usuário root tenha acesso completo, é possível conceder acesso ao console de faturamento para usuários IAM ativando o acesso e aplicando as políticas apropriadas." }
+                ],
+                glossary: [
+                    "IAM (Identity and Access Management): gerencia usuários, grupos, funções e permissões para controlar o acesso aos recursos AWS.",
+                    "AWS Billing and Cost Management: serviço que permite visualizar, gerenciar e analisar os custos e faturamento da conta.",
+                    "Usuário root: conta principal da AWS com permissões administrativas completas e acesso irrestrito.",
+                    "Política IAM: documento JSON que define ações permitidas para usuários, grupos ou funções em recursos específicos.",
+                    "Console AWS: interface web para gerenciamento de serviços AWS.",
+                    "Ativação do acesso IAM ao faturamento: configuração que permite que usuários IAM acessem o console de Billing and Cost Management."
+                ],
+                generalExplanation: [
+                    "Por padrão, <strong>apenas o usuário root</strong> tem acesso ao console do AWS Billing and Cost Management.",
+                    "Mesmo que usuários IAM tenham políticas corretas anexadas, eles <strong>não conseguem visualizar o serviço</strong> até que o administrador ative explicitamente o acesso IAM ao faturamento.",
+                    "Essa configuração adiciona uma camada de <strong>segurança</strong>, protegendo informações financeiras sensíveis.",
+                    "Portanto, além de aplicar políticas IAM adequadas, é <strong>necessário habilitar essa ativação</strong> para que usuários IAM possam acessar o console de faturamento."
+                ],
+                realWorld: [
+                    "Em empresas, equipes financeiras precisam de acesso a relatórios detalhados para <strong>controle orçamentário e auditorias</strong>.",
+                    "Um administrador deve garantir que usuários IAM tenham <strong>permissões apropriadas e acesso habilitado ao console de faturamento</strong>.",
+                    "Exemplo: uma aplicação que gera relatórios financeiros requer que os usuários possam acessar o console para validar dados e configurar alertas de orçamento.",
+                    "Essa prática <strong>equilibra segurança e usabilidade</strong>, evitando que usuários não autorizados visualizem informações sensíveis mesmo com permissões IAM amplas."
+                ]
+            }, {
+                // QUESTÃO 16 do simulado (duas respostas)
+                id: 16,
+                title: "Entidades para implantar certificados SSL/TLS",
+                domain: "Segurança",
+                prompt: "Para habilitar conexões HTTPS para sua aplicação web implantada na AWS Cloud, um desenvolvedor está no processo de criar um certificado de servidor. Quais entidades da AWS podem ser usadas para implantar certificados de servidor SSL/TLS? (Selecione duas.)",
+                options: [
+                    { letter: "A", text: "IAM", correct: true },
+                    { letter: "B", text: "AWS Certificate Manager", correct: true },
+                    { letter: "C", text: "AWS Systems Manager", correct: false },
+                    { letter: "D", text: "AWS CloudFormation", correct: false },
+                    { letter: "E", text: "AWS Secrets Manager", correct: false }
+                ],
+                explanations: [
+                    { correct: true, text: "O IAM pode ser usado para gerenciar certificados de servidor SSL/TLS, especialmente em regiões onde o AWS Certificate Manager (ACM) não é suportado. O IAM armazena as chaves privadas de forma segura e permite o uso desses certificados em recursos AWS, embora exija que o certificado seja obtido externamente." },
+                    { correct: true, text: "O AWS Certificate Manager (ACM) é a ferramenta recomendada para provisionar, gerenciar e implantar certificados SSL/TLS na AWS. Ele permite solicitar certificados públicos gratuitamente, gerenciar certificados existentes e renová-los automaticamente em regiões suportadas." },
+                    { correct: false, text: "O AWS Systems Manager é uma ferramenta para gerenciamento operacional e automação de infraestrutura, mas não é usado para gerenciar ou implantar certificados SSL/TLS." },
+                    { correct: false, text: "O AWS CloudFormation é uma ferramenta para modelar e provisionar recursos de infraestrutura como código, mas não gerencia ou implanta certificados SSL/TLS diretamente." },
+                    { correct: false, text: "O AWS Secrets Manager é usado para proteger e gerenciar segredos, como credenciais e chaves privadas, que podem estar relacionados a certificados SSL/TLS, mas não é utilizado para implantar certificados diretamente." }
+                ],
+                glossary: [
+                    "SSL/TLS: protocolos criptográficos que garantem comunicação segura e encriptada entre clientes e servidores na internet.",
+                    "IAM (Identity and Access Management): serviço da AWS para gerenciamento de identidades, permissões e também armazenamento de certificados SSL/TLS em regiões onde o ACM não está disponível.",
+                    "AWS Certificate Manager (ACM): serviço gerenciado da AWS que facilita a criação, provisionamento, gerenciamento e renovação automática de certificados SSL/TLS para uso em recursos AWS.",
+                    "AWS Secrets Manager: serviço para armazenamento e gerenciamento seguro de segredos, como credenciais e chaves privadas, mas não utilizado para implantação direta de certificados SSL/TLS.",
+                    "AWS Systems Manager: serviço para automação e gerenciamento operacional de infraestrutura, sem funcionalidades específicas para gerenciamento de certificados SSL/TLS.",
+                    "AWS CloudFormation: serviço para modelagem e provisionamento de infraestrutura como código, não gerencia ou implanta certificados SSL/TLS diretamente."
+                ],
+                generalExplanation: [
+                    "O <strong>AWS Certificate Manager (ACM)</strong> é a solução recomendada para provisionar e gerenciar certificados SSL/TLS na AWS.",
+                    "O ACM <strong>automatiza a emissão, implantação e renovação</strong> dos certificados, facilitando a configuração de HTTPS em serviços como <strong>Elastic Load Balancing, CloudFront e API Gateway</strong>.",
+                    "Em regiões onde o ACM não está disponível, o <strong>IAM</strong> pode ser usado para armazenar e gerenciar certificados manualmente, permitindo que os recursos AWS utilizem esses certificados, embora exija gerenciamento manual do ciclo de vida.",
+                    "Serviços como <strong>Secrets Manager, Systems Manager e CloudFormation</strong> não gerenciam certificados SSL/TLS diretamente, mas podem ter papéis auxiliares na automação e segurança."
+                ],
+                realWorld: [
+                    "Um desenvolvedor que cria uma aplicação web na AWS pode usar <strong>ACM</strong> para provisionar certificados SSL/TLS gratuitos e associá-los a um <strong>Application Load Balancer</strong>, habilitando conexões HTTPS seguras e garantindo <strong>confidencialidade e integridade dos dados</strong>.",
+                    "Para aplicações implantadas em regiões <strong>sem suporte ao ACM</strong>, o desenvolvedor pode <strong>importar certificados SSL/TLS externos para o IAM</strong>, permitindo uso em serviços como ELB.",
+                    "Nesses casos, é necessário gerenciar manualmente o <strong>ciclo de vida dos certificados</strong>, incluindo renovação e armazenamento seguro das chaves privadas, garantindo a continuidade das conexões seguras."
+                ]
+            }, {
+                // QUESTÃO 35 do simulado
+                id: 35,
+                title: "Política genérica para pastas de usuários no S3",
+                domain: "Segurança",
+                prompt: "O gerente de uma empresa de TI deseja configurar o acesso dos membros a pastas específicas de usuários em um bucket Amazon S3 - bucket-a. Assim, o usuário x pode acessar apenas os arquivos em sua pasta - bucket-a/user/user-x/ e o usuário y pode acessar apenas os arquivos em sua pasta - bucket-a/user/user-y/, e assim por diante. Como um Associate Developer, qual das seguintes construções do IAM você recomendaria para que o trecho da política possa ser genérico para todos os membros da equipe, evitando que o gerente precise criar uma política IAM separada para cada membro?",
+                options: [
+                    { letter: "A", text: "Principal de política IAM", correct: false },
+                    { letter: "B", text: "Variáveis de política IAM", correct: true },
+                    { letter: "C", text: "Recurso de política IAM", correct: false },
+                    { letter: "D", text: "Condição de política IAM", correct: false }
+                ],
+                explanations: [
+                    { correct: false, text: "O elemento Principal é usado para especificar a entidade que pode acessar um recurso, geralmente em políticas baseadas em recursos ou políticas de confiança de funções IAM, e não pode ser usado em políticas baseadas em identidade para parametrizar o acesso de múltiplos usuários." },
+                    { correct: true, text: "As variáveis de política IAM funcionam como espaços reservados que são substituídos por valores específicos da solicitação no momento da avaliação da política. Isso permite criar uma única política genérica que se aplica a múltiplos usuários, como membros de uma equipe, controlando o acesso a pastas específicas de cada usuário sem a necessidade de políticas individuais." },
+                    { correct: false, text: "O elemento Resource define os recursos (ARNs) aos quais a política se aplica, mas não oferece um mecanismo para tornar o recurso dinâmico ou genérico para múltiplos usuários. Para isso, é necessário usar variáveis na definição do recurso." },
+                    { correct: false, text: "O elemento Condition permite especificar condições para quando uma política está em vigor, como comparar valores específicos, mas não é adequado para parametrizar recursos de forma genérica para múltiplos usuários com base em seus nomes ou pastas específicas." }
+                ],
+                glossary: [
+                    "Variáveis de política IAM: espaços reservados que são substituídos por <strong>valores dinâmicos</strong> no momento da avaliação da política, permitindo personalizar permissões para diferentes usuários sem criar políticas separadas.",
+                    "Condição de política IAM: bloco que define critérios específicos que devem ser atendidos para que a política seja aplicada, como comparação de atributos da solicitação; <strong>não parametriza recursos dinamicamente</strong>.",
+                    "Recurso de política IAM: elemento que especifica os <strong>recursos da AWS (ARNs)</strong> aos quais a política se aplica, definindo o escopo da permissão.",
+                    "Principal de política IAM: entidade (usuário, função ou serviço) autorizada a acessar um recurso, geralmente usado em <strong>políticas baseadas em recursos</strong> ou <strong>políticas de confiança</strong>."
+                ],
+                generalExplanation: [
+                    "Para controlar o acesso de múltiplos usuários a <strong>pastas específicas dentro de um bucket S3</strong> com uma <strong>única política</strong>, o uso de <strong>variáveis de política IAM</strong> é a melhor prática.",
+                    "Permite que o caminho do recurso seja <strong>parametrizado dinamicamente</strong> com base no usuário que faz a requisição, como <code>${aws:username}</code>, evitando criar uma política individual para cada membro da equipe.",
+                    "Outras opções, como <strong>condições</strong>, <strong>recursos fixos</strong> ou <strong>principal</strong>, <strong>não oferecem a flexibilidade</strong> de generalizar o acesso de forma segura e eficiente."
+                ],
+                realWorld: [
+                    "Em um ambiente corporativo, equipes de desenvolvimento ou suporte podem ter <strong>pastas individuais</strong> dentro de um bucket S3 compartilhado.",
+                    "Uma política usando <code>${aws:username}</code> garante que <strong>cada usuário acesse apenas sua pasta</strong>, mantendo segurança e isolamento, sem criar múltiplas políticas.",
+                    "Exemplo: em aplicações <strong>serverless</strong>, funções Lambda podem assumir papéis com <strong>políticas parametrizadas</strong> para acessar apenas os dados específicos de cada usuário.",
+                    "Essa abordagem facilita <strong>controle de acesso granular e automatizado</strong>, alinhado às <strong>melhores práticas de segurança AWS</strong>, reduzindo esforço administrativo e riscos de exposição de dados."
+                ]
+            }, {
+                // QUESTÃO 41 do simulado
+                id: 41,
+                title: "Identificar funções IAM não utilizadas",
+                domain: "Segurança",
+                prompt: "Um líder de equipe de desenvolvimento é responsável por gerenciar o acesso dos seus principais IAM. No início do ciclo, ela concedeu privilégios excessivos aos usuários para mantê-los motivados a experimentar novas funcionalidades. Agora, ela deseja garantir que a equipe tenha apenas as permissões mínimas necessárias para concluir o trabalho. Qual das opções a seguir ajudará a identificar funções IAM não utilizadas e removê-las sem interromper nenhum serviço?",
+                options: [
+                    { letter: "A", text: "AWS Trusted Advisor", correct: false },
+                    { letter: "B", text: "AWS Security Hub", correct: false },
+                    { letter: "C", text: "AWS IAM Credential Report", correct: false },
+                    { letter: "D", text: "IAM Access Analyzer", correct: true }
+                ],
+                explanations: [
+                    { correct: false, text: "O AWS Trusted Advisor fornece recomendações em áreas como segurança, custo e desempenho, mas não identifica diretamente funções IAM não utilizadas." },
+                    { correct: false, text: "O AWS Security Hub consolida achados de segurança de diversos serviços, mas não fornece relatórios sobre funções IAM não utilizadas." },
+                    { correct: false, text: "O Credential Report mostra o status das credenciais (senhas, chaves de acesso, MFA) para usuários IAM, mas não avalia o uso de funções ou políticas em si." },
+                    { correct: true, text: "O IAM Access Analyzer permite identificar permissões não utilizadas com base em logs do AWS CloudTrail, ajudando a detectar funções e permissões IAM que não estão sendo usadas, facilitando a aplicação do princípio do menor privilégio." }
+                ],
+                glossary: [
+                    "IAM Access Analyzer: ferramenta da AWS que analisa <strong>permissões de políticas IAM</strong> com base em logs do CloudTrail para identificar recursos compartilhados e permissões não utilizadas.",
+                    "AWS IAM Credential Report: relatório que apresenta o <strong>status das credenciais</strong> (senhas, chaves de acesso, MFA) dos usuários IAM, mas <strong>não avalia o uso</strong> das funções ou políticas.",
+                    "AWS Trusted Advisor: fornece recomendações em tempo real para otimização de <strong>segurança, desempenho, custo e tolerância a falhas</strong>, mas não identifica funções IAM não utilizadas.",
+                    "AWS Security Hub: consolida e centraliza achados de segurança de múltiplos serviços AWS, <strong>sem foco específico em permissões ou uso de funções IAM</strong>.",
+                    "Princípio do menor privilégio: prática de segurança que concede apenas as permissões estritamente necessárias para que um usuário ou serviço realize suas tarefas."
+                ],
+                generalExplanation: [
+                    "A ferramenta correta para identificar <strong>funções IAM não utilizadas</strong> é o <strong>IAM Access Analyzer</strong>, pois:",
+                    "Utiliza <strong>logs do CloudTrail</strong> para analisar quais permissões e funções IAM estão efetivamente sendo utilizadas.",
+                    "Permite identificar <strong>funções ou permissões não utilizadas</strong>, possibilitando sua remoção <strong>sem impactar serviços em execução</strong>.",
+                    "Facilita a aplicação do <strong>princípio do menor privilégio</strong>, reduzindo riscos de segurança por permissões excessivas."
+                ],
+                realWorld: [
+                    "Em ambientes de desenvolvimento, equipes muitas vezes começam projetos com <strong>permissões amplas</strong> para facilitar testes.",
+                    "Conforme o projeto avança, é fundamental <strong>revisar e ajustar permissões</strong> para evitar riscos de segurança e não conformidade.",
+                    "Um desenvolvedor ou líder de equipe pode usar <strong>IAM Access Analyzer</strong> para identificar funções IAM não utilizadas e <strong>remover ou restringir acessos desnecessários</strong> sem interromper o funcionamento das aplicações.",
+                    "Exemplo: em uma arquitetura <strong>serverless</strong> com <strong>Lambda, API Gateway e DynamoDB</strong>, o IAM Access Analyzer garante que cada função Lambda tenha apenas as permissões mínimas para acessar os recursos necessários, evitando que permissões excessivas fiquem ativas por engano."
+                ]
+            }, {
+                // QUESTÃO 43 do simulado
+                id: 43,
+                title: "Única política baseada em recurso suportada pelo IAM",
+                domain: "Segurança",
+                prompt: "Como parte do seu trabalho de desenvolvimento, um AWS Certified Developer Associate está criando políticas e as vinculando a identidades do IAM. Após criar as políticas baseadas em identidade necessárias, ele agora está criando políticas baseadas em recursos. Qual é a única política baseada em recurso que o serviço IAM suporta?",
+                options: [
+                    { letter: "A", text: "Limite de permissões (Permissions boundary)", correct: false },
+                    { letter: "B", text: "Política de confiança (Trust policy)", correct: true },
+                    { letter: "C", text: "Políticas de controle de serviço da AWS Organizations (SCP)", correct: false },
+                    { letter: "D", text: "Lista de controle de acesso (ACL)", correct: false }
+                ],
+                explanations: [
+                    { correct: false, text: "Limites de permissões são um recurso avançado para definir a permissão máxima que uma política baseada em identidade pode conceder a uma entidade IAM (usuário ou função). Eles não são políticas baseadas em recursos, mas sim restrições aplicadas a políticas baseadas em identidade." },
+                    { correct: true, text: "Políticas de confiança definem quais entidades principais (contas, usuários, funções e usuários federados) podem assumir uma função IAM. A função IAM é tanto uma identidade quanto um recurso que suporta políticas baseadas em recursos. O IAM suporta apenas um tipo de política baseada em recurso, chamada política de confiança da função, que é anexada a uma função IAM." },
+                    { correct: false, text: "SCPs são políticas aplicadas no nível da organização para limitar permissões máximas em contas da AWS. Elas não são políticas baseadas em recursos, nem são gerenciadas pelo serviço IAM diretamente." },
+                    { correct: false, text: "ACLs são políticas específicas de alguns serviços que controlam o acesso a recursos, geralmente entre contas diferentes, mas não são políticas baseadas em recursos suportadas pelo IAM. Serviços como Amazon S3, AWS WAF e Amazon VPC suportam ACLs, mas o IAM não." }
+                ],
+                glossary: [
+                    "Política baseada em identidade: política anexada a usuários, grupos ou funções IAM que define permissões para essas entidades.",
+                    "Política baseada em recurso: política anexada diretamente a um recurso AWS que especifica permissões para esse recurso.",
+                    "Política de confiança (Trust policy): política que define quais entidades (usuários, funções, contas) podem assumir uma função IAM; é a <strong>única política baseada em recurso suportada pelo IAM</strong>.",
+                    "Limite de permissões (Permissions boundary): restrição que define o limite máximo de permissões que uma política baseada em identidade pode conceder a uma entidade IAM.",
+                    "Lista de controle de acesso (ACL): método de controle de acesso usado em alguns serviços AWS para gerenciar permissões entre contas; não é suportado pelo IAM como política baseada em recurso.",
+                    "Política de controle de serviço da AWS Organizations (SCP): políticas aplicadas no nível da organização para limitar permissões máximas em contas da AWS; não são políticas baseadas em recurso e não são gerenciadas diretamente pelo IAM."
+                ],
+                generalExplanation: [
+                    "No <strong>IAM</strong>, a <strong>única política baseada em recurso suportada</strong> é a <strong>política de confiança</strong> associada a funções IAM.",
+                    "Essa política define <strong>quais entidades externas podem assumir a função</strong>, funcionando como se estivesse anexada diretamente ao recurso (a própria função).",
+                    "Outras opções, como <strong>permissions boundaries</strong>, <strong>ACLs</strong> ou <strong>SCPs</strong>, são mecanismos de controle de acesso importantes, mas <strong>não são políticas baseadas em recurso</strong> dentro do IAM.",
+                    "Seguindo essa prática, o IAM garante <strong>segurança e delegação de permissões de forma controlada</strong>, alinhada ao princípio do menor privilégio."
+                ],
+                realWorld: [
+                    "Um desenvolvedor na AWS frequentemente utiliza funções IAM para <strong>delegar permissões temporárias</strong> a serviços ou usuários externos, por exemplo:",
+                    "<strong>Autenticação federada</strong>: usuários de outra conta ou provedor de identidade assumem uma função com permissões específicas.",
+                    "<strong>Funções Lambda</strong>: uma função Lambda assume outra função IAM para acessar recursos como DynamoDB ou S3 com permissões restritas.",
+                    "<strong>Exemplo prático:</strong> Em uma arquitetura serverless, uma função Lambda pode assumir uma função IAM cuja política de confiança permite que apenas o serviço Lambda ou um usuário autenticado específico assuma essa função. Isso garante concessão de permissões <strong>controlada e auditável</strong>, aplicação do <strong>princípio do menor privilégio</strong> e maior segurança em ambientes distribuídos e dinâmicos."
+                ]
+            }, {
+                // QUESTÃO 56 do simulado
+                id: 56,
+                title: "Credenciais que só podem ser criadas pelo usuário root",
+                domain: "Segurança",
+                prompt: "Quais das seguintes credenciais de segurança só podem ser criadas pelo usuário root da conta AWS?",
+                options: [
+                    { letter: "A", text: "Chaves de Par de Chaves do EC2", correct: false },
+                    { letter: "B", text: "Credenciais de Acesso do Usuário Root (senha e chaves de acesso root)", correct: true },
+                    { letter: "C", text: "Senhas de Usuário IAM", correct: false },
+                    { letter: "D", text: "Chaves de Acesso de Usuário IAM", correct: false }
+                ],
+                explanations: [
+                    { correct: false, text: "As chaves de par de chaves do EC2 são usadas para acessar instâncias do Amazon EC2, como via SSH em instâncias Linux. Essas chaves podem ser criadas por usuários IAM e não exigem acesso do usuário root." },
+                    { correct: true, text: "Somente o usuário root da conta AWS pode criar e gerenciar suas próprias credenciais de acesso, incluindo a senha do usuário root e as chaves de acesso root. Essas credenciais concedem permissões totais na conta e não podem ser criadas por usuários IAM." },
+                    { correct: false, text: "Cada usuário IAM tem controle sobre suas próprias credenciais e pode redefinir sua senha a qualquer momento sem a necessidade do usuário root." },
+                    { correct: false, text: "As chaves de acesso, compostas por um ID e uma chave secreta, são usadas para assinar requisições programáticas à AWS. Usuários IAM podem criar suas próprias chaves de acesso sem necessidade do usuário root." }
+                ],
+                glossary: [
+                    "Chaves de Par de Chaves do EC2: pares de chaves públicas e privadas usados para acessar instâncias Amazon EC2 via SSH ou RDP.",
+                    "Senhas de Usuário IAM: senhas usadas para autenticação de usuários IAM no console da AWS.",
+                    "Chaves de Acesso de Usuário IAM: credenciais programáticas (ID de chave + chave secreta) usadas para chamadas de API da AWS.",
+                    "Credenciais de Acesso do Usuário Root: credenciais exclusivas do usuário root da conta AWS, incluindo senha e chaves de acesso, com permissões administrativas completas.",
+                    "Usuário Root: conta principal da AWS criada ao abrir a conta, com acesso irrestrito a todos os recursos e configurações."
+                ],
+                generalExplanation: [
+                    "Somente o <strong>usuário root</strong> pode criar e gerenciar suas próprias credenciais de acesso (senha e chaves de acesso root).",
+                    "Isso ocorre porque essas credenciais conferem <strong>controle total sobre a conta</strong>, incluindo acesso a todos os recursos e alterações críticas de configuração.",
+                    "Outras credenciais (chaves de acesso IAM, senhas de usuários IAM, pares de chaves EC2) <strong>podem ser criadas e gerenciadas por usuários IAM com permissões apropriadas</strong>, respeitando o princípio do menor privilégio e boas práticas de segurança.",
+                    "Limitar a gestão das credenciais root ao próprio usuário root <strong>minimiza riscos</strong> de comprometer a conta inteira."
+                ],
+                realWorld: [
+                    "Em ambientes corporativos, o usuário root deve ser reservado para tarefas críticas, como:",
+                    "Configurar faturamento e informações da conta",
+                    "Recuperar acesso em casos críticos",
+                    "Alterar configurações sensíveis da AWS",
+                    "Para operações diárias, os desenvolvedores usam usuários IAM com <strong>chaves de acesso</strong> para automação e integração, e <strong>pares de chaves EC2</strong> para acesso SSH/RDP às instâncias.",
+                    "Essa separação garante <strong>segurança, rastreabilidade e governança</strong>, evitando o uso indevido do usuário root e promovendo boas práticas de gerenciamento de credenciais na nuvem AWS."
+                ]
+            }, {
+                // QUESTÃO 63 do simulado
+                id: 63,
+                title: "Credencial NÃO suportada pelo IAM para CodeCommit",
+                domain: "Implantação",
+                prompt: "O CodeCommit é um serviço gerenciado de controle de versão que hospeda repositórios Git privados na nuvem AWS. Qual dos seguintes tipos de credenciais NÃO é suportado pelo IAM para acesso ao CodeCommit?",
+                options: [
+                    { letter: "A", text: "Credenciais Git (Git credentials)", correct: false },
+                    { letter: "B", text: "Nome de usuário e senha do IAM (IAM username and password)", correct: true },
+                    { letter: "C", text: "Chaves de acesso AWS (AWS Access Keys)", correct: false },
+                    { letter: "D", text: "Chaves SSH (SSH Keys)", correct: false }
+                ],
+                explanations: [
+                    { correct: false, text: "As credenciais Git são um par de nome de usuário e senha gerados pelo IAM que podem ser usados para acessar repositórios CodeCommit via HTTPS." },
+                    { correct: true, text: "O nome de usuário e senha do IAM não podem ser usados para acessar o CodeCommit, pois o serviço não suporta autenticação direta com essas credenciais." },
+                    { correct: false, text: "As chaves de acesso AWS podem ser usadas com o auxiliar de credenciais incluído no AWS CLI para se comunicar com repositórios CodeCommit via HTTPS." },
+                    { correct: false, text: "As chaves SSH são pares de chaves pública e privada geradas localmente que podem ser associadas ao usuário IAM para comunicação com repositórios CodeCommit via SSH." }
+                ],
+                glossary: [
+                    "CodeCommit: serviço gerenciado da AWS que oferece <strong>repositórios Git privados</strong> na nuvem para controle de versão de código-fonte.",
+                    "Credenciais Git: par de <strong>nome de usuário e senha gerados pelo IAM</strong> especificamente para autenticação via HTTPS em repositórios CodeCommit.",
+                    "Chaves SSH: par de chaves criptográficas (pública e privada) usadas para <strong>autenticação segura via SSH</strong> em repositórios Git, incluindo CodeCommit.",
+                    "Chaves de acesso AWS (AWS Access Keys): credenciais compostas por <strong>chave de acesso e chave secreta</strong> que permitem acesso programático aos serviços AWS, incluindo autenticação via AWS CLI.",
+                    "IAM username and password: credenciais padrão do usuário IAM para login na AWS Management Console, <strong>não suportadas para autenticação direta em CodeCommit</strong>."
+                ],
+                generalExplanation: [
+                    "O <strong>CodeCommit</strong> suporta autenticação segura por meio de:",
+                    "<strong>Chaves de acesso AWS</strong>",
+                    "<strong>Chaves SSH</strong>",
+                    "<strong>Credenciais Git geradas pelo IAM</strong>",
+                    "O <strong>uso direto do nome de usuário e senha do IAM</strong> não é suportado para CodeCommit, pois comprometeria a segurança e o controle granular de acesso.",
+                    "Essa abordagem reforça as <strong>boas práticas da AWS</strong>, priorizando métodos de autenticação <strong>mais seguros e específicos</strong>, garantindo um ambiente gerenciável e protegido."
+                ],
+                realWorld: [
+                    "Times de desenvolvimento podem acessar CodeCommit via <strong>HTTPS com credenciais Git</strong> ou <strong>SSH com chaves SSH</strong>, permitindo <strong>controle refinado de acesso</strong> e fácil rotação de credenciais.",
+                    "Exemplo: um desenvolvedor usa <strong>AWS CLI com chaves de acesso</strong> para operações automatizadas. Outro usa <strong>SSH</strong> para interações manuais com o repositório.",
+                    "Evitar o uso do <strong>nome de usuário e senha do IAM</strong> previne a exposição de credenciais sensíveis, protegendo o código-fonte.",
+                    "Essa prática garante <strong>integridade e confidencialidade</strong> do código em ambientes corporativos ou projetos críticos, alinhada às melhores práticas de segurança da AWS."
+                ]
+            }],
+            "feedback_aws_simulado_2": [
+                {
+                    id: 9,
+                    title: "Permissões IAM para X-Ray no Lambda",
+                    domain: "Solução de problemas e otimização",
+                    prompt: "Recentemente, em sua organização, o SDK do AWS X-Ray foi incorporado em cada função Lambda para registrar chamadas de saída para fins de rastreamento. Quando seu líder de equipe acessa o serviço X-Ray no Console de Gerenciamento da AWS para obter uma visão geral das informações coletadas, ele descobre que nenhum dado está disponível. Qual é a causa mais provável desse problema?",
+                    options: [
+                        { letter: "A", text: "Alterar as regras do grupo de segurança", correct: false },
+                        { letter: "B", text: "Corrigir a função IAM", correct: true },
+                        { letter: "C", text: "Habilitar a amostragem do X-Ray", correct: false },
+                        { letter: "D", text: "O X-Ray funciona apenas com aliases do AWS Lambda", correct: false }
+                    ],
+                    explanations: [
+                        { correct: false, text: "Incorreta. As permissões para que a função Lambda envie dados ao X-Ray são controladas por funções IAM, não por regras de grupos de segurança. Grupos de segurança gerenciam o tráfego de rede, mas não afetam diretamente as permissões para gravação de dados do X-Ray." },
+                        { correct: true, text: "Correta. O AWS X-Ray requer permissões adequadas para que as funções Lambda possam enviar dados de rastreamento. Se a função IAM associada à função Lambda não tiver as permissões necessárias para gravar dados no X-Ray, nenhum dado será coletado ou exibido no console." },
+                        { correct: false, text: "Incorreta. Embora a amostragem do X-Ray controle quais requisições são rastreadas, se as permissões IAM não estiverem configuradas corretamente, a amostragem não funcionará e nenhum dado será enviado." },
+                        { correct: false, text: "Incorreta. O X-Ray não depende exclusivamente de aliases do Lambda para funcionar. Aliases são apenas ponteiros para versões específicas da função Lambda." }
+                    ],
+                    glossary: [
+                        "AWS X-Ray: Serviço da AWS que fornece rastreamento distribuído para aplicações, permitindo visualizar o fluxo de requisições entre serviços.",
+                        "SDK do X-Ray: Biblioteca que pode ser integrada ao código da aplicação para capturar, segmentar e enviar dados de rastreamento ao AWS X-Ray.",
+                        "Função IAM: Entidade de segurança que define permissões para que serviços da AWS possam interagir com outros serviços.",
+                        "Amostragem (Sampling): Mecanismo usado pelo X-Ray para controlar o volume de requisições rastreadas.",
+                        "Grupo de segurança: Firewall virtual que gerencia o tráfego de rede para recursos AWS, não afeta permissões de API ou acesso ao X-Ray.",
+                        "Lambda Alias: Referência lógica para uma versão específica de uma função Lambda."
+                    ],
+                    generalExplanation: [
+                        "Para que o AWS X-Ray funcione corretamente com funções AWS Lambda, é necessário que a função tenha permissões explícitas para enviar dados de rastreamento ao X-Ray.",
+                        "Mesmo que o SDK do X-Ray esteja corretamente incluído no código da função, sem a política IAM adequada, os dados capturados não serão transmitidos ao serviço, resultando em ausência de informações no console do X-Ray.",
+                        "A alternativa correta aponta esse problema com precisão: a função IAM associada à Lambda não possui as permissões necessárias, e por isso o X-Ray não consegue coletar os dados."
+                    ],
+                    realWorld: [
+                        "Em ambientes de desenvolvimento ou produção com arquiteturas serverless, é comum utilizar o AWS X-Ray para monitorar o comportamento de funções Lambda que consomem APIs, bancos de dados como DynamoDB ou interagem com outros serviços internos.",
+                        "A equipe implementa o SDK do X-Ray no código de uma função Lambda para identificar latências. Após o deploy, nenhum dado aparece no console do X-Ray.",
+                        "Ao revisar a função IAM associada à Lambda, percebe-se que faltam permissões como xray:PutTraceSegments e xray:PutTelemetryRecords.",
+                        "Após adicionar essas permissões, o rastreamento passa a funcionar, permitindo análises detalhadas e melhoria contínua."
+                    ]
+                },
+                {
+                    id: 22,
+                    title: "IAM para Upsert no DynamoDB - Menor Privilégio",
+                    domain: "Desenvolvimento com serviços AWS",
+                    prompt: "Uma equipe de desenvolvimento está trabalhando em uma função AWS Lambda que acessa o DynamoDB. A função Lambda deve realizar um upsert, ou seja, deve recuperar um item e atualizar alguns de seus atributos ou criar o item caso ele não exista. Qual das seguintes opções representa a solução com as permissões IAM MÍNIMAS que podem ser usadas pela função Lambda para alcançar essa funcionalidade?",
+                    options: [
+                        { letter: "A", text: "dynamodb:UpdateItem, dynamodb:GetItem", correct: true },
+                        { letter: "B", text: "dynamodb:GetRecords, dynamodb:PutItem, dynamodb:UpdateTable", correct: false },
+                        { letter: "C", text: "dynamodb:AddItem, dynamodb:GetItem", correct: false },
+                        { letter: "D", text: "dynamodb:UpdateItem, dynamodb:GetItem, dynamodb:PutItem", correct: false }
+                    ],
+                    explanations: [
+                        { correct: true, text: "Correta. A ação dynamodb:GetItem permite recuperar o item existente, enquanto dynamodb:UpdateItem permite atualizar atributos de um item existente ou criar um novo item caso ele não exista (upsert). Essas são as permissões mínimas necessárias para a função Lambda realizar o upsert de forma eficiente e segura." },
+                        { correct: false, text: "Incorreta. A ação dynamodb:GetRecords não existe; o correto seria dynamodb:GetItem para recuperar um item. Além disso, dynamodb:UpdateTable é usada para modificar a estrutura da tabela, não para manipular dados. Portanto, essas permissões não são adequadas nem mínimas para realizar um upsert." },
+                        { correct: false, text: "Incorreta. A ação dynamodb:AddItem não existe na API do DynamoDB. A ação correta para inserir ou atualizar um item é dynamodb:PutItem ou dynamodb:UpdateItem. Portanto, essa opção contém uma permissão inválida e está incorreta." },
+                        { correct: false, text: "Incorreta. Embora essa opção funcione, a permissão dynamodb:PutItem não é necessária para realizar um upsert, pois a ação dynamodb:UpdateItem já cobre a criação e atualização do item. Incluir dynamodb:PutItem adiciona permissões desnecessárias, contrariando o princípio do menor privilégio." }
+                    ],
+                    glossary: [
+                        "dynamodb:GetItem: Recupera um item específico de uma tabela DynamoDB.",
+                        "dynamodb:UpdateItem: Atualiza atributos de um item existente ou cria um novo item se ele não existir (upsert).",
+                        "dynamodb:PutItem: Insere um novo item na tabela (não necessário para upsert se UpdateItem for usado).",
+                        "dynamodb:GetRecords: Ação inexistente no DynamoDB, confundida com Kinesis.",
+                        "dynamodb:UpdateTable: Modifica a estrutura da tabela, não manipula dados.",
+                        "IAM (Identity and Access Management): Serviço AWS para gerenciar permissões e acessos.",
+                        "Upsert: Operação que atualiza um registro existente ou insere um novo caso não exista.",
+                        "Princípio do menor privilégio: Conceder apenas as permissões estritamente necessárias para a tarefa."
+                    ],
+                    generalExplanation: [
+                        "Para implementar upsert em uma função Lambda que acessa o DynamoDB, a combinação mínima de permissões é:",
+                        "dynamodb:GetItem: Permite verificar se o item já existe.",
+                        "dynamodb:UpdateItem: Permite atualizar atributos ou criar o item caso não exista.",
+                        "Incluir PutItem seria redundante, pois UpdateItem já cobre inserção.",
+                        "Permissões desnecessárias violam o princípio do menor privilégio, aumentando riscos de segurança.",
+                        "Ações inválidas ou inexistentes, como GetRecords ou AddItem, não permitem realizar o upsert."
+                    ],
+                    realWorld: [
+                        "Em uma aplicação serverless com Lambda e DynamoDB, o desenvolvedor precisa que a função atualize informações de um usuário ou crie um registro novo se ele não existir.",
+                        "Usar apenas GetItem + UpdateItem garante:",
+                        "Segurança, evitando permissões excessivas.",
+                        "Eficiência, permitindo o comportamento de upsert corretamente.",
+                        "Essa abordagem também facilita manutenção e auditoria das políticas IAM, seguindo boas práticas de segurança da AWS e simplificando o controle de acesso em equipes ágeis."
+                    ]
+                },
+                {
+                    id: 30,
+                    title: "Política IAM para KMS - Criptografia de EBS",
+                    domain: "Segurança",
+                    prompt: "Uma empresa de contabilidade utiliza extensivamente volumes Amazon EBS para armazenamento persistente dos dados de aplicações em instâncias Amazon EC2. Os volumes são criptografados para proteger os dados críticos dos clientes. Como parte do gerenciamento das credenciais de segurança, o gerente do projeto encontrou um trecho de política que se apresenta da seguinte forma: [JSON da política]. Quais das seguintes opções estão corretas em relação a essa política?",
+                    options: [
+                        { letter: "A", text: "A primeira declaração concede a um principal IAM especificado a capacidade de gerar uma chave de dados e descriptografar essa chave de dados da CMK quando necessário.", correct: true },
+                        { letter: "B", text: "A segunda declaração nesta política concede ao grupo de segurança (mencionado na primeira declaração da política) a capacidade de criar, listar e revogar concessões para o Amazon EC2.", correct: false },
+                        { letter: "C", text: "A segunda declaração na política menciona que todos os recursos indicados na primeira declaração podem assumir a função especificada, o que proporciona a capacidade de criar, listar e revogar concessões para o Amazon EC2.", correct: false },
+                        { letter: "D", text: "A primeira declaração concede ao grupo de segurança a capacidade de gerar uma chave de dados e descriptografar essa chave de dados da CMK quando necessário.", correct: false }
+                    ],
+                    explanations: [
+                        { correct: true, text: "Correta. A primeira declaração da política concede explicitamente ao principal IAM identificado (role/UserRole) as permissões para gerar uma chave de dados sem o texto simples (GenerateDataKeyWithoutPlaintext) e para descriptografar (Decrypt) usando a CMK, ações essenciais para a criptografia e descriptografia dos volumes EBS." },
+                        { correct: false, text: "Incorreta. A política não menciona grupos de segurança, mas sim um principal IAM específico. Portanto, essa afirmação está incorreta." },
+                        { correct: false, text: "Incorreta. A segunda declaração concede permissões ao mesmo principal IAM para criar, listar e revogar concessões (grants) para o EC2, mas não indica que os recursos da primeira declaração assumem uma função. Além disso, a condição limita o uso dessas permissões ao serviço EC2 via kms:ViaService." },
+                        { correct: false, text: "Incorreta. A política não menciona grupos de segurança (security groups) em nenhum momento; ela especifica um principal IAM (role/UserRole). Portanto, atribuir permissões ao grupo de segurança é incorreto." }
+                    ],
+                    glossary: [
+                        "CMK (Customer Master Key): Chave mestra criada ou gerenciada no AWS KMS, usada para criptografar chaves de dados e controlar acesso criptográfico.",
+                        "GenerateDataKeyWithoutPlaintext: Ação do AWS KMS que gera uma chave de dados criptografada, sem expor sua versão em texto simples, garantindo maior segurança.",
+                        "Decrypt: Ação que permite descriptografar dados previamente cifrados com uma CMK.",
+                        "Grant: Mecanismo de delegação no AWS KMS que permite conceder permissões temporárias e específicas a um principal IAM sobre uma CMK.",
+                        "kms:ViaService: Condição usada em políticas de chave que restringe o uso da CMK a um serviço específico da AWS, como EC2, reforçando o princípio do menor privilégio.",
+                        "Principal IAM: Entidade de segurança na AWS (usuário, grupo ou função IAM) que pode receber permissões para realizar ações com serviços AWS."
+                    ],
+                    generalExplanation: [
+                        "A política descrita concede permissões precisas a um principal IAM (como uma função chamada UserRole) para realizar operações com uma CMK utilizada na criptografia de volumes EBS.",
+                        "A primeira declaração permite que o principal utilize as ações GenerateDataKeyWithoutPlaintext e Decrypt, que são essenciais para gerar chaves de dados criptografadas e posteriormente descriptografar conteúdos protegidos, sem nunca expor a chave em texto claro.",
+                        "A segunda declaração concede ao principal a capacidade de criar, listar e revogar concessões (grants). Essas permissões são necessárias para que o EC2 consiga, por exemplo, anexar volumes criptografados com segurança. A presença da condição kms:ViaService garante que somente o serviço EC2 possa utilizar essa capacidade, evitando usos indevidos por outros serviços."
+                    ],
+                    realWorld: [
+                        "Em ambientes que utilizam criptografia de volumes EBS para dados sensíveis, como em empresas financeiras ou de saúde, as políticas IAM para KMS são fundamentais.",
+                        "A política correta garante que apenas as funções ou usuários autorizados possam gerar chaves de dados e descriptografar informações, mantendo a segurança dos dados.",
+                        "A condição kms:ViaService é especialmente importante para evitar que outros serviços AWS utilizem indevidamente a CMK, restringindo seu uso apenas ao EC2.",
+                        "Essa prática segue as melhores práticas de segurança da AWS para criptografia de dados em repouso e controle de acesso granular."
+                    ]
+                },
+                {
+                    id: 38,
+                    title: "Acesso Cross-Account com IAM - Conta A para Conta B",
+                    domain: "Desenvolvimento com serviços AWS",
+                    prompt: "A equipe de desenvolvimento de uma empresa de saúde implantou instâncias EC2 na Conta AWS A. Essas instâncias precisam acessar dados de pacientes contendo Informações Pessoais Identificáveis (PII) em vários buckets do Amazon S3 em outra Conta AWS B. Como um Associate Developer, qual das seguintes soluções você recomendaria para esse caso de uso?",
+                    options: [
+                        { letter: "A", text: "Criar uma função IAM (perfil de instância) na Conta A e definir a Conta B como entidade confiável. Anexar essa função às instâncias EC2 na Conta A e adicionar uma política inline a essa função para acessar dados do S3 da Conta B.", correct: false },
+                        { letter: "B", text: "Copiar a AMI subjacente das instâncias EC2 da Conta A para a Conta B. Lançar instâncias EC2 na Conta B usando essa AMI e então acessar os dados PII no Amazon S3 da Conta B.", correct: false },
+                        { letter: "C", text: "Criar uma função IAM com acesso ao S3 na Conta B e definir a Conta A como entidade confiável. Criar outra função (perfil de instância) na Conta A, anexá-la às instâncias EC2 da Conta A e adicionar uma política inline a essa função para assumir a função da Conta B.", correct: true },
+                        { letter: "D", text: "Adicionar uma política de bucket em todos os buckets do Amazon S3 na Conta B para permitir o acesso das instâncias EC2 na Conta A.", correct: false }
+                    ],
+                    explanations: [
+                        { correct: false, text: "Incorreta. Essa opção está incorreta porque a confiança deve ser configurada na Conta que possui os recursos (Conta B), permitindo que a Conta A assuma a função. Definir a Conta B como confiável na Conta A inverte a relação de confiança e não funciona para acesso cross-account ao S3." },
+                        { correct: false, text: "Incorreta. Copiar a AMI é um fator distrator e não resolve o problema de acesso entre contas. Essa abordagem é desnecessária e não atende ao requisito de acesso seguro e controlado aos buckets S3 na Conta B." },
+                        { correct: true, text: "Correta. Essa é a abordagem recomendada para acesso entre contas. Criar uma função IAM na Conta B que permita acesso aos buckets S3 e configure a Conta A como confiável permite que as instâncias EC2 na Conta A assumam essa função via uma política inline anexada à função da Conta A, garantindo acesso seguro e controlado aos dados PII." },
+                        { correct: false, text: "Incorreta. Apenas adicionar uma política de bucket na Conta B não é suficiente, pois também é necessário configurar permissões no lado da Conta A para que as instâncias EC2 possam assumir uma função e acessar os objetos do S3 na Conta B." }
+                    ],
+                    glossary: [
+                        "IAM Role: Permissão atribuída a entidades para acessar recursos AWS.",
+                        "Instance Profile: Associação de uma função IAM a uma instância EC2.",
+                        "Bucket Policy: Política de acesso aplicada a um bucket S3.",
+                        "Cross-account Access: Acesso a recursos entre diferentes contas AWS.",
+                        "sts:AssumeRole: Ação que permite assumir uma função IAM em outra conta e obter credenciais temporárias.",
+                        "PII (Personally Identifiable Information): Dados pessoais identificáveis, que exigem proteção e controle rigoroso."
+                    ],
+                    generalExplanation: [
+                        "Para que instâncias EC2 em uma conta (Conta A) acessem buckets S3 em outra conta (Conta B), a prática recomendada é:",
+                        "Criar uma função IAM na Conta B, que possui o bucket S3.",
+                        "Configurar a Conta A como entidade confiável na política de confiança da função IAM.",
+                        "Configurar as instâncias EC2 da Conta A para assumir a função (sts:AssumeRole), obtendo credenciais temporárias com acesso seguro aos recursos na Conta B.",
+                        "Essa abordagem garante: Princípio do menor privilégio, Segurança e auditabilidade, Acesso controlado a dados sensíveis como PII."
+                    ],
+                    realWorld: [
+                        "Em ambientes corporativos, como hospitais ou empresas financeiras, aplicações em diferentes contas AWS precisam acessar dados sensíveis armazenados em buckets S3.",
+                        "Por exemplo, uma aplicação de análise de dados executando em EC2 na Conta A pode assumir uma função IAM na Conta B para acessar buckets que armazenam informações de pacientes (PII).",
+                        "Esse modelo permite segregação de responsabilidades, onde cada equipe gerencia suas contas e políticas sem expor credenciais permanentes.",
+                        "A mesma lógica se aplica a funções Lambda ou outros serviços serverless, garantindo acesso seguro, temporário e auditável a recursos críticos em contas diferentes."
+                    ]
+                },
+                {
+                    id: 53,
+                    title: "Autenticação no API Gateway - STS NÃO é Suportado",
+                    domain: "Segurança",
+                    prompt: "Um desenvolvedor está buscando estabelecer controle de acesso para uma API que se conecta a uma função Lambda downstream. Qual dos seguintes mecanismos NÃO pode ser usado para autenticação com o API Gateway?",
+                    options: [
+                        { letter: "A", text: "Padrões de roles e políticas IAM da AWS", correct: false },
+                        { letter: "B", text: "Cognito User Pools", correct: false },
+                        { letter: "C", text: "AWS Security Token Service (STS)", correct: true },
+                        { letter: "D", text: "Lambda Authorizer", correct: false }
+                    ],
+                    explanations: [
+                        { correct: false, text: "Incorreta. Roles e políticas IAM padrão oferecem controles flexíveis e robustos que podem ser aplicados para controlar quem pode criar, gerenciar e invocar APIs no API Gateway." },
+                        { correct: false, text: "Incorreta. Amazon Cognito User Pools permite criar soluções personalizadas de autenticação e autorização para APIs REST, controlando quem pode invocar os métodos da API." },
+                        { correct: true, text: "Correta. O AWS Security Token Service (STS) fornece credenciais temporárias para usuários IAM ou federados, mas não é suportado diretamente pelo API Gateway como mecanismo de autenticação." },
+                        { correct: false, text: "Incorreta. Lambda Authorizers são funções Lambda que controlam o acesso a métodos REST da API usando autenticação via token bearer ou outros parâmetros da requisição, permitindo controle granular sobre quem pode invocar a API." }
+                    ],
+                    glossary: [
+                        "API Gateway: Serviço gerenciado da AWS que permite criar, proteger e gerenciar APIs REST, HTTP e WebSocket com escalabilidade, autenticação e monitoramento integrados.",
+                        "Cognito User Pools: Serviço de diretório de usuários da AWS que gerencia autenticação e autorização de usuários finais para aplicações web e mobile, com integração nativa com o API Gateway.",
+                        "AWS Security Token Service (STS): Serviço que fornece credenciais temporárias para usuários federados ou funções IAM, permitindo acesso temporário a recursos AWS, mas não é utilizado diretamente para autenticar chamadas a APIs.",
+                        "IAM roles e policies: Componentes centrais do controle de acesso na AWS, usados para definir permissões e autorizações para usuários, funções e serviços.",
+                        "Lambda Authorizer: Função personalizada do AWS Lambda usada pelo API Gateway para aplicar lógica própria de autenticação/autorização."
+                    ],
+                    generalExplanation: [
+                        "O Amazon API Gateway oferece suporte a três mecanismos principais de autenticação e autorização para proteger o acesso às APIs:",
+                        "Cognito User Pools — para autenticação de usuários finais;",
+                        "IAM Roles e Policies — para chamadas autenticadas por identidades AWS (IAM ou federadas);",
+                        "Lambda Authorizers — para lógica customizada de autenticação, como validação de JWTs emitidos por provedores externos.",
+                        "Embora o AWS STS seja um serviço importante dentro da AWS para emitir credenciais temporárias, ele não é um mecanismo de autenticação compatível diretamente com o API Gateway.",
+                        "O STS é usado para assumir papéis temporariamente e permitir que serviços ou usuários tenham acesso controlado a recursos da AWS — não para autenticar requisições de API como o Cognito ou os Lambda Authorizers."
+                    ],
+                    realWorld: [
+                        "Suponha que uma equipe esteja desenvolvendo uma aplicação serverless com API Gateway + AWS Lambda e deseje proteger seus endpoints REST.",
+                        "O time pode utilizar Amazon Cognito User Pools para autenticar os usuários finais da aplicação web ou mobile, garantindo que apenas usuários logados possam invocar determinados endpoints.",
+                        "Pode ainda optar por Lambda Authorizers quando precisar de lógica personalizada para autorizar usuários com base em tokens externos (como Auth0, Firebase ou sistemas corporativos SAML).",
+                        "E, para acessos internos entre serviços AWS, pode aplicar IAM policies que autorizam apenas funções específicas (como uma função ECS ou Lambda) a invocar a API.",
+                        "Por outro lado, o AWS STS pode até ser usado para assumir uma role que contenha permissões de invocar a API (via IAM), mas o STS em si não realiza autenticação de APIs no API Gateway."
+                    ]
+                },
+                {
+                    id: 64,
+                    title: "Gerenciamento de Segredos com Parameter Store vs Secrets Manager",
+                    domain: "Segurança",
+                    prompt: "Um desenvolvedor deseja armazenar e recuperar com segurança diversos tipos de variáveis, como informações de autenticação de APIs remotas, URL da API e credenciais relacionadas, em diferentes ambientes de uma aplicação implantada no Amazon Elastic Container Service (Amazon ECS). Qual seria a melhor abordagem que exige modificações mínimas no código da aplicação?",
+                    options: [
+                        { letter: "A", text: "Configurar a aplicação para buscar as variáveis e credenciais no AWS Systems Manager Parameter Store, utilizando caminhos hierárquicos únicos no Parameter Store para cada variável em cada ambiente.", correct: true },
+                        { letter: "B", text: "Configurar a aplicação para buscar as variáveis no AWS KMS, armazenando a URL da API e as credenciais como chaves únicas no KMS para cada ambiente.", correct: false },
+                        { letter: "C", text: "Configurar a aplicação para buscar as variáveis de cada ambiente implantado definindo as informações de autenticação e a URL da API como nomes únicos na definição da tarefa ECS durante o processo de implantação.", correct: false },
+                        { letter: "D", text: "Configurar a aplicação para buscar as variáveis a partir de um arquivo criptografado armazenado junto com a aplicação, criando arquivos únicos para cada ambiente com a URL da API e as credenciais.", correct: false }
+                    ],
+                    explanations: [
+                        { correct: true, text: "Correta. O AWS Systems Manager Parameter Store oferece um armazenamento seguro e hierárquico para dados de configuração e gerenciamento de segredos. É possível armazenar valores em texto simples ou criptografados, organizando-os em caminhos que facilitam a segregação por ambiente e tipo de dado." },
+                        { correct: false, text: "Incorreta. O AWS Key Management Service (KMS) é um serviço para criação, gerenciamento e controle de chaves criptográficas, mas não é um serviço de armazenamento de valores chave-valor para variáveis de configuração ou credenciais." },
+                        { correct: false, text: "Incorreta. Embora seja possível definir variáveis de ambiente na definição da tarefa ECS, essas variáveis ficam visíveis para qualquer usuário ou função com permissão para descrever a definição da tarefa, o que representa um risco de segurança." },
+                        { correct: false, text: "Incorreta. Armazenar dados sensíveis e credenciais em arquivos criptografados junto com a aplicação não é uma prática recomendada de segurança, pois aumenta o risco de exposição caso o arquivo seja acessado indevidamente." }
+                    ],
+                    glossary: [
+                        "AWS Systems Manager Parameter Store: Serviço que permite armazenar e recuperar parâmetros e segredos de forma segura, com suporte a organização hierárquica, versionamento e criptografia opcional via KMS.",
+                        "AWS KMS (Key Management Service): Serviço de gerenciamento de chaves criptográficas para criptografar dados; não é um repositório de variáveis ou configurações.",
+                        "ECS Task Definition (Definição de Tarefa ECS): Documento JSON que define como containers devem ser executados no Amazon ECS, incluindo variáveis de ambiente.",
+                        "Variáveis de ambiente: Dados passados para containers ou aplicações que contêm configurações ou segredos.",
+                        "Hierarquia de parâmetros: Organização de dados no Parameter Store usando caminhos estruturados (ex: /dev/db/password), facilitando segregação por ambiente."
+                    ],
+                    generalExplanation: [
+                        "A alternativa correta é o uso do AWS Systems Manager Parameter Store, pois ele oferece uma forma segura, centralizada e gerenciável de armazenar parâmetros e segredos utilizados por aplicações.",
+                        "Ele suporta: Criptografia automática com AWS KMS, Controle de acesso granular via IAM, Organização hierárquica para separar dados por ambiente ou aplicação.",
+                        "Essa abordagem permite que aplicações em containers ECS (ou outras arquiteturas) busquem dinamicamente variáveis e segredos, evitando práticas inseguras como:",
+                        "Armazenar credenciais em variáveis de ambiente estáticas na Task Definition, Tentar usar diretamente o KMS como repositório de segredos (o KMS é um serviço de criptografia, não de armazenamento de parâmetros)."
+                    ],
+                    realWorld: [
+                        "Considere uma aplicação containerizada executando no Amazon ECS, onde cada ambiente (desenvolvimento, homologação e produção) precisa acessar: Tokens de API, Senhas de banco de dados, Variáveis de configuração específicas por ambiente.",
+                        "Ao utilizar o AWS Systems Manager Parameter Store, o time pode criar parâmetros como: /dev/app/db/password, /prod/app/db/password, /dev/app/api/token",
+                        "Esses parâmetros podem ser: Criptografados com KMS, Protegidos com políticas IAM, Consultados dinamicamente pela aplicação no momento da execução, via SDK da AWS.",
+                        "Esse modelo: Evita hardcoding de credenciais, Reduz o risco de vazamento de informações sensíveis, Facilita a rotação de segredos e mudanças de configuração sem redeploy, Está alinhado com as melhores práticas de segurança e operação de aplicações em ambientes modernos."
+                    ]
+                }
+            ]
+        };
+
+        // ============================================================
+        // FUNÇÕES RENDERIZADORAS
+        // ============================================================
+
+        function renderHeader() {
+            const container = document.getElementById('headerContainer');
+            const { name, icon, badgeIcon, badgeClass, color, tags } = serviceConfig;
+            const totalCount = Object.values(questionsDatabase).reduce((sum, arr) => sum + arr.length, 0);
+            const simuladoCount = Object.keys(questionsDatabase).length;
+
+            const tagsHtml = tags.map(tag =>
+                `<span class="badge bg-light text-dark border ms-1">${tag}</span>`
+            ).join('');
+
+            container.innerHTML = `
+        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+            <div>
+                <h1 class="main-title display-6 mb-0">
+                    <i class="bi ${icon} text-warning me-2" style="color:${color} !important;"></i>${name} – Questões Diretas
+                </h1>
+                <p class="text-muted mt-2" style="font-size:0.98rem;">
+                    <i class="bi bi-check2-circle text-success me-1"></i> ${totalCount} questões em ${simuladoCount} simulado(s)
+                    ${tagsHtml}
+                </p>
+            </div>
+            <span class="${badgeClass} badge rounded-pill px-4 py-2">
+                <i class="bi ${badgeIcon} me-1"></i> ${name}
+            </span>
+        </div>
+    `;
+        }
+
+        function renderQuestionCard(q, arquivo) {
+            const optionsHtml = q.options.map(opt => {
+                const badge = opt.correct ?
+                    `<span class="badge-correct ms-2"><i class="bi bi-check-circle-fill me-1"></i>Correta</span>` :
+                    `<span class="badge-incorrect ms-2"><i class="bi bi-x-circle-fill me-1"></i>Incorreta</span>`;
+                const optionClass = opt.correct ? 'option-item correct' : 'option-item incorrect';
+                return `<div class="${optionClass}">
+                    <span class="option-letter">${opt.letter}.</span>
+                    <span class="option-text"><strong>${opt.text}</strong> ${badge}</span>
+                </div>`;
+            }).join('');
+
+            const explanationsHtml = q.explanations.map(exp => {
+                const expClass = exp.correct ? 'alt-explication correct-alt' : 'alt-explication incorrect-alt';
+                const icon = exp.correct ? 'bi-check-circle-fill text-success' : 'bi-x-circle-fill text-danger';
+                const label = exp.correct ? 'CORRETA' : 'INCORRETA';
+                return `<div class="${expClass}">
+                    <strong><i class="bi ${icon} me-1"></i> ${label}</strong><br>
+                    ${exp.text}
+                </div>`;
+            }).join('');
+
+            const glossaryHtml = q.glossary.map(item => `<li>${item}</li>`).join('');
+            const generalHtml = q.generalExplanation.map(item => `<li>${item}</li>`).join('');
+            const realWorldHtml = q.realWorld.map(item => `<li>${item}</li>`).join('');
+
+            return `
+        <div class="card card-question mb-5">
+            <div class="card-header-custom">
+                <span class="q-number">Q${q.id}</span>
+                <span class="q-simulado">${arquivo}</span>
+                <span class="q-text flex-grow-1">${q.title}</span>
+                <span class="domain-tag"><i class="bi bi-tag me-1"></i> ${q.domain}</span>
+            </div>
+            <div class="card-body p-4">
+                <p class="fw-semibold text-secondary" style="font-size:0.95rem;">${q.prompt}</p>
+                <div class="mt-3">${optionsHtml}</div>
+
+                <div class="explanation-box">
+                    <h6><i class="bi bi-lightbulb-fill text-warning me-2"></i>Explicação de todas as alternativas</h6>
+                    ${explanationsHtml}
+                </div>
+
+                <div class="glossary-card">
+                    <h6><i class="bi bi-book me-2"></i>💡 GLOSSÁRIO</h6>
+                    <ul>${glossaryHtml}</ul>
+
+                    <div class="general-explanation">
+                        <h6><i class="bi bi-globe2 me-2"></i>🌐 EXPLICAÇÃO GERAL</h6>
+                        <ul>${generalHtml}</ul>
+                    </div>
+
+                    <div class="real-world">
+                        <h6><i class="bi bi-rocket-takeoff me-2"></i>🚀 COMO ISSO SE APLICA NA VIDA REAL</h6>
+                        <ul>${realWorldHtml}</ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+        }
+
+        function renderAnchorNav() {
+            const nav = document.getElementById('anchorNav');
+            const simulados = Object.keys(questionsDatabase);
+            nav.innerHTML = simulados.map(arquivo => {
+                const label = arquivo.replace('feedback_aws_simulado_', 'Simulado ');
+                return `<a href="#${arquivo}"><i class="bi bi-bookmark-fill me-1"></i>${label}</a>`;
+            }).join('');
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questionsContainer');
+            let html = '';
+
+            for (const [arquivo, questoes] of Object.entries(questionsDatabase)) {
+                html += `
+            <div class="simulado-section mb-5" id="${arquivo}">
+                <div class="simulado-section-header d-flex align-items-center gap-3 mb-4 p-3 rounded-3" style="background:#f0f4ff; border-left:5px solid #ff9900;">
+                    <i class="bi bi-journal-bookmark-fill fs-4" style="color:#ff9900;"></i>
+                    <div>
+                        <div class="fw-bold fs-5" style="color:#1a2a4a;">${arquivo}</div>
+                        <div class="text-muted" style="font-size:0.85rem;">
+                            <i class="bi bi-collection me-1"></i>${questoes.length} questão(ões)
+                        </div>
+                    </div>
+                </div>
+                ${questoes.map(q => renderQuestionCard(q, arquivo)).join('')}
+            </div>
+        `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function renderFooter() {
+            const totalCount = Object.values(questionsDatabase).reduce((sum, arr) => sum + arr.length, 0);
+            const simuladoCount = Object.keys(questionsDatabase).length;
+            const { name } = serviceConfig;
+            document.getElementById('footerText').innerHTML = `
+        ${totalCount} questões diretas sobre ${name} – AWS Certified Developer Associate (DVA-C02)
+        <br><span class="text-muted" style="font-size:0.85rem;">${simuladoCount} simulado(s) • Domínios: Segurança e Desenvolvimento • Todas as explicações completas</span>
+    `;
+        }
+
+        // ============================================================
+        // INICIALIZAÇÃO
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHeader();
+            renderAnchorNav();
+            renderQuestions();
+            renderFooter();
+        });
+    </script>
+
+</body>
+
+</html>
